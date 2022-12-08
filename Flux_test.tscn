@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://floorMaterial.tres" type="Material" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=6]
 
 [sub_resource type="CubeMesh" id=3]
 
@@ -60,6 +63,10 @@ transform = Transform( 13.1, 0, 0, 0, 0.5, 0, 0, 0, 14, 21.5, 3.5, -13.6 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../../Ground Floor")
 material/0 = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="First Floor"]
+transform = Transform( 39.3, 0, 0, 0, 0.5, 0, 0, 0, 13.1, 39.3, 3.5, 13.5 )
+shape = SubResource( 6 )
 
 [node name="Outer Walls" type="StaticBody" parent="."]
 
@@ -149,3 +156,6 @@ mesh = SubResource( 5 )
 [node name="MeshInstance4" type="MeshInstance" parent="Boxout"]
 transform = Transform( 13, 0, 0, 0, 12, 0, 0, 0, 1.5, -18, 12, -14.5 )
 mesh = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.3033, 7.85847, 11.7809 )
