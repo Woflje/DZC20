@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://floorMaterial.tres" type="Material" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -156,6 +155,3 @@ mesh = SubResource( 5 )
 [node name="MeshInstance4" type="MeshInstance" parent="Boxout"]
 transform = Transform( 13, 0, 0, 0, 12, 0, 0, 0, 1.5, -18, 12, -14.5 )
 mesh = SubResource( 5 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.3033, 7.85847, 11.7809 )
