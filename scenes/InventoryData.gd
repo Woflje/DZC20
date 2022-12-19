@@ -1,16 +1,31 @@
 extends Control
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var inv_data = {"Wire": 1}
+
+#var inv_data_file = File.new()
+#inv_data_file.open("user://inv_data_file.json", File.READ)
+#var inv_data_json = JSON.parse(inv_data_file.get_as_text())
+#inv_data_file.close()
+#inv_data = inv_data_json.result
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+#extends Control
+#
+#var inv_data = {}
+#export var grid_size = 4
+#
+#var component_data = []
+#
+#func _ready( ):
+#	component_data.resize(grid_size)
+#
+#	for item in component_data:
+#		item = []
+#		item.resize(grid_size)
+#
+#	var inv_data_file = File.new()
+#	inv_data_file.open("user://inv_data_file.json", File.READ)
+#	var inv_data_json = JSON.parse(inv_data_file.get_as_text())
+#	inv_data_file.close()
+#	inv_data = inv_data_json.result

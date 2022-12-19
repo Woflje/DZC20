@@ -1,13 +1,12 @@
 extends TextureRect
-
-
+onready var CircuitData = get_node("../../../../Circuit")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 var label: String
 var dropped_on_target: bool = false
-#var CircuitData = get_node("../../../FixInteraction").get("component_data")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,30 +16,31 @@ func _ready():
 func get_drag_data(_pos):
 	# Retrieve information about the slot we are dragging
 	var equipment_slot = get_parent().get_name()
-#	if CircuitData.component_data[equipment_slot] != null:
-	var data = {}
-#		data["origin_node"] = self
-#		data["origin_panel"] = "CircuitSheet"
-#		data["origin_item_id"] = CircuitData.component_data[equipment_slot]
-#		data["origin_equipment_slot"] = equipment_slot
-#		data["origin_texture"] = texture
+	print(CircuitData)
+	if CircuitData.component_data[equipment_slot] != null:
+		var data = {}
+		data["origin_node"] = self
+		data["origin_panel"] = "CircuitSheet"
+		data["origin_item_id"] = CircuitData.component_data[equipment_slot]
+		data["origin_equipment_slot"] = equipment_slot
+		data["origin_texture"] = texture
 	
-	var drag_texture = TextureRect.new()
-	drag_texture.expand = true
-	drag_texture.texture = texture
-	drag_texture.rect_size = Vector2(100, 100)
+		var drag_texture = TextureRect.new()
+		drag_texture.expand = true
+		drag_texture.texture = texture
+		drag_texture.rect_size = Vector2(100, 100)
 	
-	var control = Control.new()
-	control.add_child(drag_texture)
-	drag_texture.rect_position = -0.5 * drag_texture.rect_size
-	set_drag_preview(control)
+		var control = Control.new()
+		control.add_child(drag_texture)
+		drag_texture.rect_position = -0.5 * drag_texture.rect_size
+		set_drag_preview(control)
 
-	return data
+		return data
 	
 	
-#func can_drop_data(_pos, data):
+func can_drop_data(_pos, data):
 #	# Check if we can drop an item in this slot
-#	var target_equipment_slot = get_parent().get_name()
+	var target_equipment_slot = get_parent().get_name()
 #	if target_equipment_slot == data["origin_equipment_slot"]:
 #		if CircuitData.component_data[target_equipment_slot] == null:
 #			data["target_item_id"] = null
@@ -48,13 +48,13 @@ func get_drag_data(_pos):
 #		else:
 #			data["target_item_id"] = CircuitData.component_data[target_equipment_slot]
 #			data["target_texture"] = texture
-#		return true
+	return true
 #	else:
 #		return false
 	
 	
-#func drop_data(_pos, data):
-#	#What happens when we drop an item in this slot
+func drop_data(_pos, data):
+	#What happens when we drop an item in this slot
 #	var target_equipment_slot =get_parent().get_name()
 #	var origin_slot = data["origin_node"].get_parent().get_name()
 #
@@ -73,7 +73,7 @@ func get_drag_data(_pos):
 		
 	#Update the texture and data of the target
 #	CircuitData.component_data[target_equipment_slot] = data["origin_item_id"]
-#	texture = data["origin_texture"]
+	texture = data["origin_texture"]
 	
 	
 	
