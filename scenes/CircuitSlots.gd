@@ -1,5 +1,6 @@
 extends TextureRect
 onready var CircuitData = get_node("../../../../Circuit")
+onready var blue_rectangle = get_children()[0].texture
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -13,21 +14,26 @@ func _ready():
 	add_to_group("DRAGGABLE")
 	pass
 
+func _blue():
+	get_children()[0].texture = blue_rectangle
+	pass
+
 func get_drag_data(_pos):
 	# Retrieve information about the slot we are dragging
-	var equipment_slot = get_parent().get_name()
+	var equipment_slot = get_name()
 	print(CircuitData)
+	print(CircuitData.component_data[equipment_slot])
 	if CircuitData.component_data[equipment_slot] != null:
 		var data = {}
 		data["origin_node"] = self
 		data["origin_panel"] = "CircuitSheet"
 		data["origin_item_id"] = CircuitData.component_data[equipment_slot]
 		data["origin_equipment_slot"] = equipment_slot
-		data["origin_texture"] = texture
+		data["origin_texture"] = get_children()[0].texture
 	
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = texture
+		drag_texture.texture = get_children()[0].texture
 		drag_texture.rect_size = Vector2(100, 100)
 	
 		var control = Control.new()
@@ -40,40 +46,24 @@ func get_drag_data(_pos):
 	
 func can_drop_data(_pos, data):
 #	# Check if we can drop an item in this slot
-	var target_equipment_slot = get_parent().get_name()
-#	if target_equipment_slot == data["origin_equipment_slot"]:
-#		if CircuitData.component_data[target_equipment_slot] == null:
-#			data["target_item_id"] = null
-#			data["target_texture"] = null
-#		else:
-#			data["target_item_id"] = CircuitData.component_data[target_equipment_slot]
-#			data["target_texture"] = texture
+	var target_equipment_slot = get_name()
+	data["target_item_id"] = CircuitData.component_data[target_equipment_slot]
+	data["target_texture"] = texture
 	return true
-#	else:
-#		return false
 	
 	
 func drop_data(_pos, data):
 	#What happens when we drop an item in this slot
-#	var target_equipment_slot =get_parent().get_name()
-#	var origin_slot = data["origin_node"].get_parent().get_name()
-#
-#	#Update the data of origin
-#	if data["origin_panel"] == "Inventory":
-#		CircuitData.inv_data[origin_slot]["Item"] = data["target_item_id"]
-#	else: #Circuit Sheet
-#		CircuitData.component_data[origin_slot] = data["target_item_id"]
-#
-#	#Update the texture of the origin
-#	if data["origin_panel"] == "CircuitSheet" and data["target_item_id"] == null:
-#		var default_texture = load("res://Assets/UI_Elements/" + origin_slot + "_default_icon.png")
-#		data["origin_node"].texture = default_texture
-#	else:
-#		data["origin_node"].texture = data["target_texture"]
-		
-	#Update the texture and data of the target
-#	CircuitData.component_data[target_equipment_slot] = data["origin_item_id"]
-	texture = data["origin_texture"]
+	print(data)
+	var target_equipment_slot = get_name()
+	
+	if data["origin_panel"] == "CircuitSheet":
+		#then switch
+		data["origin_node"].get_children()[0].texture = get_children()[0].texture
+		CircuitData.component_data[data["origin_equipment_slot"]] = CircuitData.component_data[get_name()]
+	CircuitData.component_data[target_equipment_slot] = data["origin_item_id"]
+	get_children()[0].texture = data["origin_texture"]
+	
 	
 	
 	

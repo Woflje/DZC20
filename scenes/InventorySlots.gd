@@ -22,11 +22,11 @@ func get_drag_data(_pos):
 		data["origin_node"] = self
 		data["origin_panel"] = "Inventory"
 		data["origin_item_id"] = InventoryData.inv_data[inv_slot]
-		data["origin_texture"] = texture
+		data["origin_texture"] = get_children()[0].texture
 
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = texture
+		drag_texture.texture = get_children()[0].texture
 		drag_texture.rect_size = Vector2(100, 100)
 
 		var control = Control.new()
@@ -38,12 +38,12 @@ func get_drag_data(_pos):
 	
 	
 func can_drop_data(_pos, data):
-#	# Check if we can  drop an item in this slot
-	var target_inv_slot = get_parent().get_name()
+#	# Check if we can drop an item in this slot
+	var target_inv_slot = get_name()
 #	if CircuitData.inv_Data[target_inv_slot] == null: #We move an item
 #		data["target_item_id"] = null
 #		data["target_texture"] = null
-#		return true
+	return true
 #	else: #We swap an item
 #		data["target_item_id"] = CircuitData.inv_data[target_inv_slot]["Item"]
 #		data["target_texture"] = texture
@@ -52,11 +52,15 @@ func can_drop_data(_pos, data):
 #			if target_equipment_slot == data["origin_equipment_slot"]:
 #				return true
 #			else:
-	return false
+#				return false
 #		else: #data["origin_panel"] == "Inventory":
 #			return true
-#
+
 func drop_data(_pos, data):
+	if data["origin_panel"] == "CircuitSheet":
+			#remove the original
+			data["origin_node"]._blue()
+			CircuitData.component_data[data["origin_equipment_slot"]] = null
 #	#What happens when we drop an item in this slot
 #	var target_inv_slot =get_parent().get_name()
 #	var origin_slot = data["origin_node"].get_parent().get_name()
@@ -76,4 +80,4 @@ func drop_data(_pos, data):
 #
 #	#Update the texture and data of the target
 #	PlayerData.inv_data[target_inv_slot] = data["origin_item_id"]
-	pass
+	return true
