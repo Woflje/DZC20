@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/InventorySlots.gd" type="Script" id=1]
-[ext_resource path="res://scenes/PlaceHolder.gd" type="Script" id=2]
-[ext_resource path="res://scenes/CircuitSlots.gd" type="Script" id=3]
-[ext_resource path="res://scenes/CircuitData.gd" type="Script" id=4]
-[ext_resource path="res://What-Do-Electrical-Wire-Colors-Mean.jpg" type="Texture" id=5]
-[ext_resource path="res://blue_rectangle.jpg" type="Texture" id=6]
-[ext_resource path="res://scenes/InventoryData.gd" type="Script" id=7]
+[ext_resource path="res://What-Do-Electrical-Wire-Colors-Mean.jpg" type="Texture" id=1]
+[ext_resource path="res://script/MiniGame/CircuitData.gd" type="Script" id=2]
+[ext_resource path="res://script/MiniGame/InventorySlots.gd" type="Script" id=3]
+[ext_resource path="res://script/MiniGame/InventoryData.gd" type="Script" id=4]
+[ext_resource path="res://scenes/PlaceHolder.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.12549, 0.0980392, 0.0980392, 1 )
@@ -31,7 +29,7 @@ margin_right = 733.0
 margin_bottom = 50.0
 rect_rotation = 0.160397
 rect_pivot_offset = Vector2( -1060, 184 )
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="Control/Circuit"]
 margin_left = 444.0
@@ -55,37 +53,11 @@ margin_top = 400.0
 margin_right = 572.0
 margin_bottom = 684.0
 
-[node name="Slot1" type="TextureRect" parent="Control/Circuit/Panel/Slots"]
-margin_bottom = 284.0
-script = ExtResource( 3 )
-
-[node name="Icon" type="TextureRect" parent="Control/Circuit/Panel/Slots/Slot1"]
-margin_left = 45.3815
-margin_top = 161.94
-margin_right = 147.382
-margin_bottom = 250.94
-texture = ExtResource( 6 )
-expand = true
-
-[node name="Slot2" type="TextureRect" parent="Control/Circuit/Panel/Slots"]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 284.0
-script = ExtResource( 3 )
-
-[node name="Icon" type="TextureRect" parent="Control/Circuit/Panel/Slots/Slot2"]
-margin_left = 185.667
-margin_top = 159.205
-margin_right = 287.667
-margin_bottom = 248.205
-texture = ExtResource( 6 )
-expand = true
-
 [node name="Inventory" type="Control" parent="Control"]
 margin_left = -292.0
 margin_right = -229.0
 margin_bottom = 40.0
-script = ExtResource( 7 )
+script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="Control/Inventory"]
 margin_right = 292.0
@@ -108,7 +80,7 @@ custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Fix Machine"
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 
 [node name="Toolbox" type="HBoxContainer" parent="Control/Inventory"]
 margin_left = -2.0
@@ -119,7 +91,7 @@ margin_bottom = 598.0
 [node name="Wire" type="TextureRect" parent="Control/Inventory/Toolbox"]
 margin_bottom = 597.0
 stretch_mode = 1
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="Item" type="TextureRect" parent="Control/Inventory/Toolbox/Wire"]
 anchor_left = 0.181
@@ -131,7 +103,7 @@ margin_top = -8.118
 margin_right = 132.0
 margin_bottom = -162.5
 theme = SubResource( 2 )
-texture = ExtResource( 5 )
+texture = ExtResource( 1 )
 expand = true
 
 [connection signal="pressed" from="Control/Inventory/PlaceHolder" to="Control/Inventory/PlaceHolder" method="_on_PlaceHolder_pressed"]
