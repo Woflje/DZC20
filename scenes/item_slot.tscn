@@ -4,13 +4,8 @@
 [ext_resource path="res://scripts/MiniGame/CircuitSlots.gd" type="Script" id=2]
 
 [node name="Slot" type="TextureRect"]
-margin_bottom = 284.0
-script = ExtResource( 2 )
-
-[node name="Icon" type="TextureRect" parent="."]
-margin_left = 45.3815
-margin_top = 161.94
-margin_right = 147.382
-margin_bottom = 250.94
+margin_right = 1.0
+margin_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
+script = ExtResource( 2 )
