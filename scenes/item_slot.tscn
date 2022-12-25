@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://blue_rectangle.jpg" type="Texture" id=1]
-[ext_resource path="res://scripts/MiniGame/CircuitSlots.gd" type="Script" id=2]
+[ext_resource path="res://scripts/MiniGame/circuit_slots.gd" type="Script" id=2]
 
 [node name="Slot" type="TextureRect"]
 margin_right = 1.0

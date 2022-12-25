@@ -1,12 +1,17 @@
 extends TextureRect
-onready var blank_texture: Texture = texture
 
-# The data slots of each object
-var item_pointer = null #null is used for empty slot
 export(bool) var blocked_item: bool = false  # determens if items are allowed to be placed here
 export(bool) var infinate_sink: bool = false # Determeins if items draged out are coppied or moved. 
-
 export(String) var pannel_name: String = ""
+
+onready var blank_texture: Texture = texture
+var item_pointer = null #null is used for empty slot
+# neighbor pointers are update after mass creation
+# they are left at null if no neighbor exists at that spot
+var neighbor_up: Node = null
+var neighbor_down: Node = null
+var neighbor_left: Node = null
+var neighbor_right: Node = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -69,13 +74,13 @@ func drop_data(_pos, data):
 	
 	if data["origin_node"].infinate_sink == false:
 		data["origin_node"]._update_texture(self._get_texture()) 
-		data["origin_node"].item_pointer = item_pointer
+		data["origin_node"].item_pointer = self.item_pointer
 		if self.infinate_sink == true:
 			data["origin_node"]._Clear_tile()
 			
 		
 	if self.infinate_sink == false:
-		item_pointer = data["origin_item"]
+		self.item_pointer = data["origin_item"]
 		self._update_texture(data["origin_texture"]) 
 	
 	
