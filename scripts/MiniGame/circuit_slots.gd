@@ -6,8 +6,8 @@ export(String) var pannel_name: String = ""
 
 onready var blank_texture: Texture = texture
 var item_pointer = null #null is used for empty slot
-# neighbor pointers are update after mass creation
-# they are left at null if no neighbor exists at that spot
+# neighbor pointers are update after creation
+# they are left at null if no neighbor exists at that direction
 var neighbor_up: Node = null
 var neighbor_down: Node = null
 var neighbor_left: Node = null

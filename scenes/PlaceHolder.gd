@@ -16,4 +16,4 @@ extends Button
 
 
 func _on_PlaceHolder_pressed():
-	get_tree().change_scene("res://Flux_test.tscn")
+	get_tree().change_scene("res://scenes/Main.tscn")

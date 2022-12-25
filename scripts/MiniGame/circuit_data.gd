@@ -8,7 +8,7 @@ export(int) var inner_margin
 
 onready var component_data=[]
 onready var template_scene = preload("res://scenes/item_slot.tscn")
-onready var block_size = canvas_area/grid_size
+onready var block_size:float = canvas_area/grid_size
 
 
 func _ready():
