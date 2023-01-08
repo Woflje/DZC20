@@ -9,7 +9,21 @@ export(int) var inner_margin
 onready var component_data=[]
 onready var template_scene = preload("res://scenes/item_slot.tscn")
 onready var block_size:float = canvas_area/grid_size
+var id:  = 0
 
+var inv_item_list = [
+		["wire","res://assets/Textures/Overlay_components/wire.png"],
+		["LED","res://assets/Textures/Overlay_components/LED.png"],
+		["lamp","res://assets/Textures/Overlay_components/lamp.png"],
+		["diode","res://assets/Textures/Overlay_components/diode.png"],
+		["double_breaker_switch","res://assets/Textures/Overlay_components/double_breaker_switch.png"],
+		["bjt_transistor_pnp","res://assets/Textures/Overlay_components/bjt_transistor_pnp.png"],
+		["relay_full","res://assets/Textures/Overlay_components/relay_full.png"],
+		["resistor","res://assets/Textures/Overlay_components/resistor.png"],
+		["switch_open","res://assets/Textures/Overlay_components/switch_open.png"],
+		["switch_closed","res://assets/Textures/Overlay_components/switch_closed.png"],
+		["transformator","res://assets/Textures/Overlay_components/transformator.png"],
+		]
 
 func _ready():
 	component_data.resize(grid_size)
@@ -36,15 +50,24 @@ func update_block_visuals(node: Node, x:int, y:int):
 func update_block_information(node: Node, pannel_name:String, x:int, y:int):
 	# Put down the correct information in each node
 	# This is where loading in levels could / should take place
+
+	
 	node.pannel_name = pannel_name
-	if pannel_name =="Inventory" :
+	if pannel_name =="Inventory" and  id < inv_item_list.size() :
 		node.infinate_sink = true
-		if y == 0:
-			node._update_texture("res://icon.png")
-			node.item_pointer = "Icon"
-		else:
-			node.item_pointer = "Wire"
-			node._update_texture("res://What-Do-Electrical-Wire-Colors-Mean.jpg")
+		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
+		node.item_pointer = inv_item_list[id][0]
+		node._update_texture(inv_item_list[id][1])
+		id += 1
+	elif pannel_name =="Inventory":
+		node.infinate_sink = true
+		node.item_pointer = null
+		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
+	else:
+		node.infinate_sink = false
+		node.item_pointer = null
+		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
+		
 		 
 func update_neighbor_pointer(node: Node, array:Array, x:int, y:int):
 	if x != 0:

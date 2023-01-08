@@ -30,6 +30,13 @@ func _update_texture(new_texture):
 	else:
 			texture = new_texture
 	
+func _set_default_texture(new_texture):
+	if typeof(new_texture) == TYPE_STRING:
+		blank_texture = load(new_texture)
+	else:
+			blank_texture = new_texture
+	_update_texture(new_texture)
+
 func _get_texture():
 	return texture
 	
