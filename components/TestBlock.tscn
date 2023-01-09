@@ -17,5 +17,6 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 
 [node name="Interactable" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.85244, 0.522826, 0, -0.522826, 0.85244, -0.0363277, 1.49587, 0.071129 )
 
 [connection signal="interact" from="Interactable" to="." method="_interact"]

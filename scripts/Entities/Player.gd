@@ -9,8 +9,6 @@ export var fall_acceleration: float = 75
 export var jump_impulse: float = 20
 # there is no max fall speed at this point in time
 
-const ray_length = 1000
-
 # Camara variables look
 var minLookAngle: float = -90.0
 var maxLookAngle: float = 90.0
@@ -21,6 +19,10 @@ onready var raycast = $"Camera/RayCast"
 # Global variables
 var mouseDelta: Vector2 = Vector2()
 var velocity = Vector3.ZERO
+
+
+# Interactable variables
+var last_interactable: Node = null
 
 
 func _ready():
@@ -70,6 +72,26 @@ func _physics_process(delta):
 	velocity = velocity.rotated(Vector3(0, 1, 0), camera.rotation.y)
 	#No clue what this bottom line does.
 	velocity = move_and_slide(velocity, Vector3.UP)
+
+	# When hovering over an interactable object, show the interact popup
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		var interactable = collider.get_node("Interactable")
+		# When hovering over a new interactable object, stop hovering over the last one
+		if interactable != null && interactable != last_interactable:
+			if last_interactable != null:
+				last_interactable._end_hover()
+			interactable._start_hover()
+			last_interactable = interactable
+		# When hovering over nothing, stop hovering over the last interactable object
+		elif interactable == null && last_interactable != null:
+			last_interactable._end_hover()
+			last_interactable = null
+	# When not hovering over anything, stop hovering over the last interactable object
+	elif last_interactable != null:
+		last_interactable._end_hover()
+		last_interactable = null
+
 
 
 func _process(delta):
