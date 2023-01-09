@@ -1,12 +1,16 @@
 extends Node
 
 
-# we can make the puzzle a array of puzzle that are instaned with a specific puzzle in them. 
-var puzzles= [preload("res://scenes/drag_drop.tscn").instance()]
-var enviorment = ["./Overworld/Lamp"]
+
 var overworld = preload("res://scenes/Main.tscn").instance()
 var last_id_enterd = null
 
+# we can make the puzzle a array of puzzle that are instaned with a specific puzzle in them.
+# enviorment contains the hard references to each object on wich the _toggle should be called. 
+# Until we have a way to load in a specific puzzle just duplicate the puzzles
+
+var puzzles= [preload("res://scenes/drag_drop.tscn").instance()]
+var enviorment = ["./Overworld/Lamp"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,13 +28,10 @@ func _load_overworld(unload=true, toggle=false):
 	# Unload the puzzle by default unles it is defined that it should happen
 	# like on the first load when it would crash
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		# emite signal here to trigger state change in objects
-		# this can be done with the last_id_enterd variable to figue out what object to change
-
 	self.add_child(overworld)
 	if unload:
 		self.remove_child(self.get_node("Puzzle"))
-	if toggle:
+	if toggle: #
 		self.get_node(enviorment[last_id_enterd])._toggle()
 		
 	
