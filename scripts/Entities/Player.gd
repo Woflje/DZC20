@@ -9,30 +9,43 @@ export var fall_acceleration: float = 75
 export var jump_impulse: float = 20
 # there is no max fall speed at this point in time
 
+const ray_length = 1000
+
 # Camara variables look
-var minLookAngle : float = -90.0
-var maxLookAngle : float = 90.0
-export var lookSensitivity : float = 10.0
-onready var camera : Camera = get_node("Camera")
+var minLookAngle: float = -90.0
+var maxLookAngle: float = 90.0
+export var lookSensitivity: float = 10.0
+onready var camera: Camera = get_node("Camera")
+onready var raycast = $"Camera/RayCast"
 
 # Global variables
-var mouseDelta : Vector2 = Vector2()
+var mouseDelta: Vector2 = Vector2()
 var velocity = Vector3.ZERO
 
+
 func _ready():
-	#Disable the mouse for propper FPS controlls
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)  
+	# Disable the mouse for propper FPS controlls
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
 
+	if event.is_action_released("interact"):
+		if raycast.is_colliding():
+			var collider = raycast.get_collider()
+			var interactable = collider.get_node("Interactable")
+			if interactable != null:
+				interactable._interact()
+
+
 func _physics_process(delta):
 	# The player movement is done by creating a vector, storing the direction the keys are pressed, and normalizing its direction.
 	# Two oposite keys cancel each other and going sideways only generates a single velocity.
-	
+
 	var direction = Vector3.ZERO
-	
+
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -43,11 +56,11 @@ func _physics_process(delta):
 		direction.z -= 1
 	if is_on_floor() and Input.is_action_pressed("jump"):
 		velocity.y += jump_impulse
-		
+
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.look_at(translation + direction, Vector3.UP)
-	
+
 	# Direction is replacement this gives direct stoping
 	# jumping is addative to keep momentum
 	velocity.x = direction.x * speed
@@ -57,7 +70,8 @@ func _physics_process(delta):
 	velocity = velocity.rotated(Vector3(0, 1, 0), camera.rotation.y)
 	#No clue what this bottom line does.
 	velocity = move_and_slide(velocity, Vector3.UP)
-	
+
+
 func _process(delta):
 	camera.rotation_degrees.y -= mouseDelta.x * lookSensitivity * delta
 	camera.rotation_degrees.x -= mouseDelta.y * lookSensitivity * delta
@@ -67,6 +81,3 @@ func _process(delta):
 
 	# reset the mouseDelta vector, so that next frame delta isn't mudied by previous delta
 	mouseDelta = Vector2()
-	
-
-
