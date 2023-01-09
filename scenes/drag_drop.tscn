@@ -14,7 +14,7 @@ corner_radius_bottom_left = 20
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.117647, 0.247059, 0.262745, 1 )
 
-[node name="DragDrop" type="Node2D"]
+[node name="Puzzle" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="."]
@@ -61,15 +61,28 @@ margin_right = 819.0
 margin_bottom = 750.0
 custom_styles/panel = SubResource( 2 )
 
-[node name="PlaceHolder" type="Button" parent="Control/Inventory"]
-margin_left = 29.0
-margin_top = 970.0
-margin_right = 206.0
-margin_bottom = 1049.0
+[node name="Complete_Level" type="Button" parent="Control"]
+margin_left = 49.0
+margin_top = 973.0
+margin_right = 226.0
+margin_bottom = 1052.0
 custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
-text = "Complete level"
+text = "Complete puzzle"
+script = ExtResource( 5 )
+completeLevel = true
+
+[node name="Quit_level" type="Button" parent="Control"]
+margin_left = 268.0
+margin_top = 973.0
+margin_right = 445.0
+margin_bottom = 1052.0
+custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
+text = "Quit Puzzle"
 script = ExtResource( 5 )
 
-[connection signal="pressed" from="Control/Inventory/PlaceHolder" to="Control/Inventory/PlaceHolder" method="_on_PlaceHolder_pressed"]
+[connection signal="pressed" from="Control/Complete_Level" to="Control/Complete_Level" method="_on_PlaceHolder_pressed"]
+[connection signal="pressed" from="Control/Quit_level" to="Control/Quit_level" method="_on_PlaceHolder_pressed"]

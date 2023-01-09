@@ -26,8 +26,7 @@ var last_interactable: Node = null
 
 
 func _ready():
-	# Disable the mouse for propper FPS controlls
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass	
 
 
 func _input(event):

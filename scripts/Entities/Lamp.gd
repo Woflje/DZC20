@@ -4,6 +4,11 @@ onready var mesh = $MeshInstance
 
 var is_on = false
 
+func _ready():
+	# connect the _toggle function with the singnale "switch lamp, when emited by the root node"
+	var root = get_node("../../")
+	root.connect("switch_lamp", self, "_toggle")
+	
 
 func _toggle():
 	# Change the albedo of the mesh to amber

@@ -1,4 +1,5 @@
 extends Button
+export(bool) var completeLevel
 
 
 # Declare member variables here. Examples:
@@ -16,6 +17,7 @@ extends Button
 
 
 func _on_PlaceHolder_pressed():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	get_tree().change_scene("res://scenes/Main.tscn")
+	# get the root node and load the overworld
+	get_node("../../../")._load_overworld(true, completeLevel)
+
 	
