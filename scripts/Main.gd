@@ -3,7 +3,6 @@ extends Node
 var intro_bool = true
 var outro_bool = false
 var intro_scene = preload("res://scenes/Intro.tscn").instance()
-# var intro = preload().instance()
 var overworld = preload("res://scenes/Overworld.tscn").instance()
 var last_id_enterd = null
 

@@ -1,13 +1,16 @@
 extends TextureRect
 
+
 export(bool) var blocked_item: bool = false  # determens if items are allowed to be placed here
 export(bool) var infinate_sink: bool = false # Determeins if items draged out are coppied or moved. 
 export(String) var pannel_name: String = ""
 
 onready var blank_texture: Texture = texture
-var item_pointer = null #null is used for empty slot
+var item_id = null #null is used for empty slot, strings used for names
+var powerd = false
 # neighbor pointers are update after creation
 # they are left at null if no neighbor exists at that direction
+
 var neighbor_up: Node = null
 var neighbor_down: Node = null
 var neighbor_left: Node = null
@@ -44,13 +47,13 @@ func _get_texture():
 func get_drag_data(_pos):
 	# Retrieve information about the slot we are dragging from
 	# Activated when the draggin starts
-	if item_pointer != null:
+	if item_id != null:
 		
 		# the dict data is the information passed to the node when we drag it on to them
 		var data = {}
 		data["origin_node"] = self
 		data["origin_panel"] = self.pannel_name
-		data["origin_item"] = self.item_pointer
+		data["item_id"] = self.item_id
 		data["origin_texture"] = texture
 		
 		# Information for the sprite when dragging
@@ -81,15 +84,18 @@ func drop_data(_pos, data):
 	
 	if data["origin_node"].infinate_sink == false:
 		data["origin_node"]._update_texture(self._get_texture()) 
-		data["origin_node"].item_pointer = self.item_pointer
+		data["origin_node"].item_id = self.item_id
 		if self.infinate_sink == true:
 			data["origin_node"]._Clear_tile()
 			
 		
 	if self.infinate_sink == false:
-		self.item_pointer = data["origin_item"]
+		self.item_id = data["item_id"]
+		print(item_id)
 		self._update_texture(data["origin_texture"]) 
 	
+func _neighbors():
+	return [neighbor_up,neighbor_down , neighbor_left, neighbor_right]
 	
 	
 	

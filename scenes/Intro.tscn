@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Theme" id=1]
 
 [node name="Intro" type="Node2D"]
 
@@ -10,6 +12,13 @@ color = Color( 0.501961, 0.619608, 0.635294, 1 )
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
+theme = SubResource( 1 )
+bbcode_text = "
+
+
+                   GO FIX FLUX
+				Press Space to continue
+"
 text = "
 
 

@@ -23,6 +23,8 @@ var inv_item_list = [
 		["switch_open","res://assets/Textures/Overlay_components/switch_open.png"],
 		["switch_closed","res://assets/Textures/Overlay_components/switch_closed.png"],
 		["transformator","res://assets/Textures/Overlay_components/transformator.png"],
+		["power_scource_pos","res://icon.png"],
+		#["power_scource_neg","res://What-Do-Electrical-Wire-Colors-Mean.jpg"],
 		]
 
 func _ready():
@@ -56,16 +58,16 @@ func update_block_information(node: Node, pannel_name:String, x:int, y:int):
 	if pannel_name =="Inventory" and  id < inv_item_list.size() :
 		node.infinate_sink = true
 		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
-		node.item_pointer = inv_item_list[id][0]
+		node.item_id = inv_item_list[id][0]
 		node._update_texture(inv_item_list[id][1])
 		id += 1
 	elif pannel_name =="Inventory":
 		node.infinate_sink = true
-		node.item_pointer = null
+		node.item_id = null
 		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
 	else:
 		node.infinate_sink = false
-		node.item_pointer = null
+		node.item_id = null
 		node._set_default_texture("res://assets/Textures/Overlay_components/grid block_1.png")
 		
 		 
