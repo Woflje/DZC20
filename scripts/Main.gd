@@ -1,7 +1,5 @@
 extends Node
 
-
-
 var overworld = preload("res://scenes/Overworld.tscn").instance()
 var last_id_enterd = null
 
