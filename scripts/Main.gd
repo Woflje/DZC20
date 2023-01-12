@@ -2,7 +2,7 @@ extends Node
 
 
 
-var overworld = preload("res://scenes/Main.tscn").instance()
+var overworld = preload("res://scenes/Overworld.tscn").instance()
 var last_id_enterd = null
 
 # we can make the puzzle a array of puzzle that are instaned with a specific puzzle in them.
