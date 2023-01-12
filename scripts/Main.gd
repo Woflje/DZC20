@@ -1,5 +1,9 @@
 extends Node
 
+var intro_bool = true
+var outro_bool = false
+var intro_scene = preload("res://scenes/Intro.tscn").instance()
+# var intro = preload().instance()
 var overworld = preload("res://scenes/Overworld.tscn").instance()
 var last_id_enterd = null
 
@@ -12,7 +16,7 @@ var enviorment = ["./Overworld/Lamp"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_load_overworld(false, false)
+	self.add_child(intro_scene)
 	
 	
 func _input(event):
@@ -20,6 +24,10 @@ func _input(event):
 	# from any non frozen state
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit() 
+	if Input.is_action_pressed("jump") and intro_bool == true:
+		intro_bool = false
+		self.remove_child(self.get_node("Intro"))
+		_load_overworld(false, false)
 
 func _load_overworld(unload=true, toggle=false):
 	# Swithc to captued mouse mode and load in the overworld
