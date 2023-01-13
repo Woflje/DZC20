@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/MiniGame/Puzzle.gd" type="Script" id=1]
 [ext_resource path="res://scripts/MiniGame/Validate.gd" type="Script" id=2]
-[ext_resource path="res://scenes/PlaceHolder.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Return_to_overworld.gd" type="Script" id=3]
 [ext_resource path="res://scripts/MiniGame/circuit_data.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -70,6 +70,7 @@ margin_bottom = 1052.0
 custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
+disabled = true
 text = "Complete puzzle"
 script = ExtResource( 3 )
 completeLevel = true

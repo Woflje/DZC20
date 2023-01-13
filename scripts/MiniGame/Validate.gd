@@ -27,10 +27,8 @@ func start_sim():
 	for node in grid.values():
 		if node._has_tag("power_scource_pos"):
 			flow_energie(grid, node, ["powerd", "shorted"])
-	print(requirements_cheking([0], {}))
-	print(requirements_cheking([1], {}))
-	print(requirements_cheking([0,1], {}))
-			
+	if requirements_cheking([0,1], {}):
+		get_node("./../Complete_Level").disabled = false
 
 func flow_energie(grid:Dictionary, start_node:TextureRect, propogate:Array):
 	start_node._add_tag(propogate)
