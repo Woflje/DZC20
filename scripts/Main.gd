@@ -10,7 +10,7 @@ var last_id_enterd = null
 # enviorment contains the hard references to each object on wich the _toggle should be called. 
 # Until we have a way to load in a specific puzzle just duplicate the puzzles
 
-var puzzles= [preload("res://scenes/drag_drop.tscn").instance()]
+var puzzles= [preload("res://scenes/Puzzle.tscn").instance()]
 var enviorment = ["./Overworld/Lamp"]
 
 # Called when the node enters the scene tree for the first time.

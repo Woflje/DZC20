@@ -6,8 +6,7 @@ export(bool) var infinate_sink: bool = false # Determeins if items draged out ar
 export(String) var pannel_name: String = ""
 
 onready var blank_texture: Texture = texture
-var item_id = null #null is used for empty slot, strings used for names
-var powerd = false
+var item_tags = [] # a empty array is used for empty slots
 # neighbor pointers are update after creation
 # they are left at null if no neighbor exists at that direction
 
@@ -47,13 +46,13 @@ func _get_texture():
 func get_drag_data(_pos):
 	# Retrieve information about the slot we are dragging from
 	# Activated when the draggin starts
-	if item_id != null:
+	if get_node("./../../..").edit_mode and not item_tags.empty():
 		
 		# the dict data is the information passed to the node when we drag it on to them
 		var data = {}
 		data["origin_node"] = self
 		data["origin_panel"] = self.pannel_name
-		data["item_id"] = self.item_id
+		data["item_tags"] = self.item_tags
 		data["origin_texture"] = texture
 		
 		# Information for the sprite when dragging
@@ -84,21 +83,64 @@ func drop_data(_pos, data):
 	
 	if data["origin_node"].infinate_sink == false:
 		data["origin_node"]._update_texture(self._get_texture()) 
-		data["origin_node"].item_id = self.item_id
+		data["origin_node"].item_tags = self.item_tags.duplicate()
 		if self.infinate_sink == true:
 			data["origin_node"]._Clear_tile()
 			
 		
 	if self.infinate_sink == false:
-		self.item_id = data["item_id"]
-		print(item_id)
+		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"]) 
 	
 func _neighbors():
 	return [neighbor_up,neighbor_down , neighbor_left, neighbor_right]
 	
 	
+func _add_tag(item):
 	
+	if typeof(item) == TYPE_STRING:
+		if not item_tags.has(item):
+			item_tags.append(item)
+		return true
+	elif typeof(item) == TYPE_ARRAY:
+		for i in item:
+			if not item_tags.has(i):
+				item_tags.append(i)
+		return true
+	return false
+
+	
+func _remove_tag(item):
+	if typeof(item) == TYPE_STRING:
+		
+		if item_tags.has(item):
+			item_tags.erase(item)
+		return true
+	elif typeof(item) == TYPE_ARRAY:
+		for i in item:
+			if item_tags.has(i):
+				item_tags.erase (i)
+		return true
+	return false
+	
+func _has_tag(item):
+	if typeof(item) == TYPE_STRING:
+		if item_tags.has(item):
+			return true
+	elif typeof(item) == TYPE_ARRAY:
+		for i in item:
+			if not item_tags.has(i):
+				return false
+		return true
+	else:
+		return false
+		
+func _clear_tags():
+	item_tags = []
+	
+
+
+			
 	
 	
 	
