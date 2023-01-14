@@ -16,18 +16,24 @@ export var lookSensitivity: float = 10.0
 onready var camera: Camera = get_node("Camera")
 onready var raycast = $"Camera/RayCast"
 
+onready var step_interval = 0
+onready var step_interval_ticks = 20
+onready var audio_step_files = []
+
 # Global variables
 var mouseDelta: Vector2 = Vector2()
 var velocity = Vector3.ZERO
-
 
 # Interactable variables
 var last_interactable: Node = null
 
 
 func _ready():
-	pass	
-
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_1.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_2.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_3.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_4.wav"))
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -66,6 +72,16 @@ func _physics_process(delta):
 	# jumping is addative to keep momentum
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
+	
+	if step_interval > step_interval_ticks and (velocity.z != 0 or velocity.x != 0) and is_on_floor():
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		$AudioStreamPlayer.stream = audio_step_files[rng.randi_range(0,3)]
+		$AudioStreamPlayer.play()
+		step_interval = 0
+	else:
+		step_interval += 1
+	
 	velocity.y -= fall_acceleration * delta
 	# Rotate the axis so that forward is relative to the look direaction
 	velocity = velocity.rotated(Vector3(0, 1, 0), camera.rotation.y)
