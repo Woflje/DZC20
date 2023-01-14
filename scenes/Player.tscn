@@ -23,3 +23,5 @@ transform = Transform( 1, 0, 0, 0, 0.999915, -0.0130198, 0, 0.0130198, 0.999915,
 [node name="RayCast" type="RayCast" parent="Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -10 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
