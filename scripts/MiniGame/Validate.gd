@@ -1,7 +1,9 @@
 extends Node
 
 # reference aren't top down so I can debug puzzle without opening the game
-onready var puzzle = get_node("./../..")
+onready var puzzle = get_tree().get_root().find_node("Puzzle", true, false)
+onready var circuit_node = get_tree().get_root().find_node("Circuit", true, false)
+onready var inventory_node =  get_tree().get_root().find_node("Inventory", true, false)
 var grid:Dictionary = {}
 var inventory:Dictionary = {}
 
@@ -21,13 +23,13 @@ func _on_PlaceHolder_pressed():
 	update_tile_colours()
 
 func start_sim():
-	grid = get_node("./../Circuit").component_data
-	inventory = get_node("./../Inventory").component_data
+	grid = circuit_node.component_data
+	inventory = inventory_node.component_data
 	for node in grid.values():
 		if node._has_tag("power_scource_pos"):
 			flow_energie(grid, node, ["powerd", "shorted"], ["powerd", "shorted"])
 	if requirements_cheking([0,1], {}):
-		get_node("./../Complete_Level").disabled = false
+		get_tree().get_root().find_node("Complete_Level", true, false).disabled = false
 
 func flow_energie(grid:Dictionary, start_node:TextureRect, update_self:Array, propogate:Array):
 	start_node._add_tag(update_self)	

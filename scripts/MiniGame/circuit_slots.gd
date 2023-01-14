@@ -5,6 +5,7 @@ export(bool) var blocked_item: bool = false  # determens if items are allowed to
 export(bool) var infinate_sink: bool = false # Determeins if items draged out are coppied or moved. 
 export(String) var pannel_name: String = ""
 
+var puzzle: Control = null
 onready var blank_texture: Texture = texture
 var item_tags = [] # a empty array is used for empty slots
 # neighbor pointers are update after creation
@@ -22,6 +23,8 @@ var MouseOver = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	puzzle = get_tree().get_root().find_node("Puzzle", true, false)
+
 	add_to_group("DRAGGABLE")
 	pass
 
@@ -50,7 +53,7 @@ func _get_texture():
 func get_drag_data(_pos):
 	# Retrieve information about the slot we are dragging from
 	# Activated when the draggin starts
-	if get_node("./../../..").edit_mode and not item_tags.empty():
+	if puzzle.edit_mode and not item_tags.empty():
 		
 		# the dict data is the information passed to the node when we drag it on to them
 		var data = {}
@@ -96,8 +99,21 @@ func drop_data(_pos, data):
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"]) 
 	self.hint_tooltip = str(item_tags)
+
 func _neighbors():
 	return [neighbor_up,neighbor_down , neighbor_left, neighbor_right]
+
+func _set_neighbor(direction, neighbor):
+	if direction == "up":
+		neighbor_up = neighbor
+	elif direction == "down":
+		neighbor_down = neighbor
+	elif direction == "left":
+		neighbor_left = neighbor
+	elif direction == "right":
+		neighbor_right = neighbor
+	else:
+		print("ERROR: Invalid direction in _set_neighbor")
 	
 	
 func _add_tag(item):
@@ -142,28 +158,28 @@ func _clear_tags():
 	
 
 
-func _gui_input(event):
-	# Only consider these keyboard interactions if they tile is hovering over the tile
-	#if MouseOver == true:
-	var edit_mode = get_node("./../../..").edit_mode
-	if pannel_name == "Circuit" and event is InputEventMouseButton:
-		if edit_mode:
-			#MAKE WIRE
-			pass
-		else: #Input.is_action_pressed("interact") and not edit_mode : # (Either E or a mouse click)
-			# flip the switch state
-			if self._has_tag(["Switch", "open"]):
-				self._remove_tag("open")
-				self._add_tag("closed")
-			elif self._has_tag(["Switch", "closed"]):
-				self._remove_tag("closed")
-				self._add_tag("open")
+# func _gui_input(event):
+# 	# Only consider these keyboard interactions if they tile is hovering over the tile
+# 	#if MouseOver == true:
+# 	var edit_mode = puzzle.edit_mode
+# 	if pannel_name == "Circuit" and event is InputEventMouseButton:
+# 		if edit_mode:
+# 			#MAKE WIRE
+# 			pass
+# 		else: #Input.is_action_pressed("interact") and not edit_mode : # (Either E or a mouse click)
+# 			# flip the switch state
+# 			if self._has_tag(["Switch", "open"]):
+# 				self._remove_tag("open")
+# 				self._add_tag("closed")
+# 			elif self._has_tag(["Switch", "closed"]):
+# 				self._remove_tag("closed")
+# 				self._add_tag("open")
 			
-#	if Input.is_action_pressed("interact") or Input.is_action_pressed("forward") and edit_mode : 
-#		if self.item_tags == []: # The tile has no tags
-#			pass #updat the 
-#	if Input.is_action_pressed("rotate") and edit_mode: 
-#		pass # for now
+# #	if Input.is_action_pressed("interact") or Input.is_action_pressed("forward") and edit_mode : 
+# #		if self.item_tags == []: # The tile has no tags
+# #			pass #updat the 
+# #	if Input.is_action_pressed("rotate") and edit_mode: 
+# #		pass # for now
 	
 
 
