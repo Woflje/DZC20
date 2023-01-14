@@ -17,7 +17,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.1537, 7.65087, 8.13872 )
 transform = Transform( -0.34138, 0, 0.939925, 0, 1, 0, -0.939925, 0, -0.34138, 23.6497, 5.05176, 11.7601 )
 
 [node name="Lamp" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 12, 17 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6.99518, 17 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
