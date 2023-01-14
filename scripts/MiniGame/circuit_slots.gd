@@ -15,6 +15,10 @@ var neighbor_down: Node = null
 var neighbor_left: Node = null
 var neighbor_right: Node = null
 
+# This is to keep track if the mouse is hovering over this tile
+# If it is only then is some code exectued. 
+var MouseOver = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -91,23 +95,22 @@ func drop_data(_pos, data):
 	if self.infinate_sink == false:
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"]) 
-	
+	self.hint_tooltip = str(item_tags)
 func _neighbors():
 	return [neighbor_up,neighbor_down , neighbor_left, neighbor_right]
 	
 	
 func _add_tag(item):
-	
 	if typeof(item) == TYPE_STRING:
 		if not item_tags.has(item):
 			item_tags.append(item)
-		return true
+
 	elif typeof(item) == TYPE_ARRAY:
 		for i in item:
 			if not item_tags.has(i):
 				item_tags.append(i)
-		return true
-	return false
+
+	self.hint_tooltip = str(item_tags)
 
 	
 func _remove_tag(item):
@@ -115,13 +118,11 @@ func _remove_tag(item):
 		
 		if item_tags.has(item):
 			item_tags.erase(item)
-		return true
 	elif typeof(item) == TYPE_ARRAY:
 		for i in item:
 			if item_tags.has(i):
 				item_tags.erase (i)
-		return true
-	return false
+	self.hint_tooltip = str(item_tags)
 	
 func _has_tag(item):
 	if typeof(item) == TYPE_STRING:
@@ -137,11 +138,36 @@ func _has_tag(item):
 		
 func _clear_tags():
 	item_tags = []
+	self.hint_tooltip = ""
 	
 
 
+func _gui_input(event):
+	# Only consider these keyboard interactions if they tile is hovering over the tile
+	#if MouseOver == true:
+	var edit_mode = get_node("./../../..").edit_mode
+	if pannel_name == "Circuit" and event is InputEventMouseButton:
+		if edit_mode:
+			#MAKE WIRE
+			pass
+		else: #Input.is_action_pressed("interact") and not edit_mode : # (Either E or a mouse click)
+			# flip the switch state
+			if self._has_tag(["Switch", "open"]):
+				self._remove_tag("open")
+				self._add_tag("closed")
+			elif self._has_tag(["Switch", "closed"]):
+				self._remove_tag("closed")
+				self._add_tag("open")
 			
+#	if Input.is_action_pressed("interact") or Input.is_action_pressed("forward") and edit_mode : 
+#		if self.item_tags == []: # The tile has no tags
+#			pass #updat the 
+#	if Input.is_action_pressed("rotate") and edit_mode: 
+#		pass # for now
 	
+
+
 	
+
 	
 	
