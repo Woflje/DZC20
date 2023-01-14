@@ -11,7 +11,7 @@ var inv_item_list = [
 		["bjt_transistor_pnp","res://assets/Textures/Overlay_components/bjt_transistor_pnp.png"],
 		# ["relay_full","res://assets/Textures/Overlay_components/relay_full.png"],
 		["resistor","res://assets/Textures/Overlay_components/resistor.png"],
-		["switch_open","res://assets/Textures/Overlay_components/switch_open.png"],
+		["switch","res://assets/Textures/Overlay_components/switch_open.png"],
 		# ["switch_closed","res://assets/Textures/Overlay_components/switch_closed.png"],
 		["transformator","res://assets/Textures/Overlay_components/transformator.png"],
 		# ["power_scource_pos","res://icon.png"],
@@ -35,6 +35,7 @@ func create_item(name: String, icon: String, size: float):
 	item._add_tag(name)
 	item._update_texture(icon)
 	item.infinate_sink = true
+	item._panel_components()
 	
 	item.rect_min_size = Vector2(size,size)
 

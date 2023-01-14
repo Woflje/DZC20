@@ -20,6 +20,7 @@ func create_item(size: float):
 	var item = template_scene.instance()
 
 	item._set_default_texture(default_texture)
+	item._panel_circuit()
 	
 	item.rect_min_size = Vector2(size,size)
 
