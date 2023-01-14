@@ -76,7 +76,6 @@ func _physics_process(delta):
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		var interactable = collider.get_node("Interactable")
-		print("WORKING")
 		# When hovering over a new interactable object, stop hovering over the last one
 		if interactable != null && interactable != last_interactable:
 			if last_interactable != null:

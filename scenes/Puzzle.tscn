@@ -1,102 +1,119 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/MiniGame/Puzzle.gd" type="Script" id=1]
-[ext_resource path="res://scripts/MiniGame/Validate.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Return_to_overworld.gd" type="Script" id=3]
-[ext_resource path="res://scripts/MiniGame/circuit_data.gd" type="Script" id=4]
+[ext_resource path="res://assets/Textures/Overlay_components/components_background.png" type="Texture" id=5]
+[ext_resource path="res://scripts/MiniGame/Components.gd" type="Script" id=6]
+[ext_resource path="res://assets/Textures/Overlay_components/circuit_background.png" type="Texture" id=7]
+[ext_resource path="res://scripts/MiniGame/Grid.gd" type="Script" id=8]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.117647, 0.247059, 0.262745, 1 )
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.117647, 0.247059, 0.262745, 1 )
-
-[node name="Puzzle" type="Node2D"]
+[node name="Puzzle" type="Control"]
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="Circuit" type="Control" parent="Control"]
-margin_left = 840.0
-margin_right = 840.0
-script = ExtResource( 4 )
-pannel_name = "Circuit"
-grid_size = 5
-canvas_area = 1000
-outer_margin = 40
-
-[node name="ColorRect" type="ColorRect" parent="Control/Circuit"]
-margin_right = 1080.0
+margin_right = 1920.0
 margin_bottom = 1080.0
-color = Color( 0.501961, 0.619608, 0.635294, 1 )
 
-[node name="Panel" type="Panel" parent="Control/Circuit"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1060.0
-margin_bottom = 1060.0
-custom_styles/panel = SubResource( 1 )
+[node name="Background" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.141176, 0.14902, 0.137255, 1 )
 
-[node name="Inventory" type="Control" parent="Control"]
-script = ExtResource( 4 )
-pannel_name = "Inventory"
-grid_size = 4
-canvas_area = 700
-outer_margin = 40
+[node name="Margin" type="MarginContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 560.0
+margin_bottom = 1075.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
 
-[node name="ColorRect" type="ColorRect" parent="Control/Inventory"]
-margin_right = 840.0
-margin_bottom = 1080.0
-color = Color( 0.501961, 0.619608, 0.635294, 1 )
+[node name="HFlow" type="HFlowContainer" parent="Control/Margin"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 2455.0
+margin_bottom = 2130.0
 
-[node name="Panel" type="Panel" parent="Control/Inventory"]
-margin_left = 30.0
-margin_top = 19.0
-margin_right = 819.0
-margin_bottom = 750.0
-custom_styles/panel = SubResource( 2 )
+[node name="Components" type="MarginContainer" parent="Control/Margin/HFlow"]
+margin_right = 510.0
+margin_bottom = 1025.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
 
-[node name="Complete_Level" type="Button" parent="Control"]
-margin_left = 49.0
-margin_top = 973.0
-margin_right = 226.0
-margin_bottom = 1052.0
-custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
-custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
-disabled = true
-text = "Complete puzzle"
-script = ExtResource( 3 )
-completeLevel = true
+[node name="TextureRect" type="TextureRect" parent="Control/Margin/HFlow/Components"]
+margin_right = 510.0
+margin_bottom = 1025.0
+rect_min_size = Vector2( 510, 1025 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
 
-[node name="Quit_level" type="Button" parent="Control"]
-margin_left = 268.0
-margin_top = 973.0
-margin_right = 445.0
-margin_bottom = 1052.0
-custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
-custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
-text = "Quit Puzzle"
-script = ExtResource( 3 )
+[node name="Margin" type="MarginContainer" parent="Control/Margin/HFlow/Components"]
+margin_right = 510.0
+margin_bottom = 1025.0
+custom_constants/margin_right = 25
+custom_constants/margin_top = 191
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
 
-[node name="Validate" type="Button" parent="Control"]
-margin_left = 503.0
-margin_top = 974.0
-margin_right = 680.0
-margin_bottom = 1053.0
-custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.0392157, 1 )
-custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
-text = "Validate"
-script = ExtResource( 2 )
+[node name="Inventory" type="GridContainer" parent="Control/Margin/HFlow/Components/Margin"]
+margin_left = 25.0
+margin_top = 191.0
+margin_right = 485.0
+margin_bottom = 1000.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+columns = 3
+script = ExtResource( 6 )
 
-[connection signal="pressed" from="Control/Complete_Level" to="Control/Complete_Level" method="_on_PlaceHolder_pressed"]
-[connection signal="pressed" from="Control/Quit_level" to="Control/Quit_level" method="_on_PlaceHolder_pressed"]
-[connection signal="pressed" from="Control/Validate" to="Control/Validate" method="_on_PlaceHolder_pressed"]
+[node name="Second" type="VFlowContainer" parent="Control/Margin/HFlow"]
+margin_left = 514.0
+margin_right = 514.0
+margin_bottom = 1025.0
+
+[node name="Run Panel" type="Control" parent="Control/Margin/HFlow/Second"]
+
+[node name="Run Background" type="TextureRect" parent="Control/Margin/HFlow/Second/Run Panel"]
+margin_right = 1350.0
+margin_bottom = 900.0
+rect_min_size = Vector2( 1350, 900 )
+texture = ExtResource( 7 )
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Margin/HFlow/Second/Run Panel"]
+margin_right = 1350.0
+margin_bottom = 900.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 57
+custom_constants/margin_left = 57
+custom_constants/margin_bottom = 57
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer"]
+margin_left = 57.0
+margin_top = 57.0
+margin_right = 1291.0
+margin_bottom = 843.0
+custom_constants/separation = 0
+
+[node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
+margin_right = 398.0
+margin_bottom = 786.0
+rect_min_size = Vector2( 398, 0 )
+
+[node name="Energy" type="Control" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
+margin_left = 398.0
+margin_right = 448.0
+margin_bottom = 786.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="Grid" type="GridContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
+margin_left = 448.0
+margin_right = 1234.0
+margin_bottom = 786.0
+rect_min_size = Vector2( 786, 0 )
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 8
+script = ExtResource( 8 )
