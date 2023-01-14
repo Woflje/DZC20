@@ -99,8 +99,21 @@ func drop_data(_pos, data):
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"]) 
 	self.hint_tooltip = str(item_tags)
+
 func _neighbors():
 	return [neighbor_up,neighbor_down , neighbor_left, neighbor_right]
+
+func _set_neighbor(direction, neighbor):
+	if direction == "up":
+		neighbor_up = neighbor
+	elif direction == "down":
+		neighbor_down = neighbor
+	elif direction == "left":
+		neighbor_left = neighbor
+	elif direction == "right":
+		neighbor_right = neighbor
+	else:
+		print("ERROR: Invalid direction in _set_neighbor")
 	
 	
 func _add_tag(item):
