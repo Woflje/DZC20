@@ -41,7 +41,13 @@ func _ready():
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_2.wav"))
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_3.wav"))
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_4.wav"))
-	
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_5.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_6.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_7.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_8.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_9.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_10.wav"))
+	audio_step_files.append(preload("res://assets/Audio/sfx/step_11.wav"))
 
 func _input(event):
 	if event is InputEventMouseMotion:
