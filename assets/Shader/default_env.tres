@@ -10,6 +10,7 @@ sun_color = Color( 1, 0.721569, 0.721569, 1 )
 sun_energy = 7.22
 
 [resource]
+background_mode = 2
 background_sky = SubResource( 1 )
 background_color = Color( 0.796078, 0.780392, 0.780392, 0.317647 )
 ssao_radius = 3.26
