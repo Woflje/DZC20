@@ -59,7 +59,7 @@ func _audio_process():
 	if step_interval > step_interval_ticks and (velocity.z != 0 or velocity.x != 0) and now_on_floor:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		audio_step_players[player_number].stream = audio_step_files[rng.randi_range(0,3)]
+		audio_step_players[player_number].stream = audio_step_files[rng.randi_range(0,len(audio_step_files)-1)]
 		audio_step_players[player_number].play()
 		step_interval = 0
 		if player_number == 1:
@@ -117,17 +117,18 @@ func _physics_process(delta):
 	# When hovering over an interactable object, show the interact popup
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		var interactable = collider.get_node("Interactable")
-		# When hovering over a new interactable object, stop hovering over the last one
-		if interactable != null && interactable != last_interactable:
-			if last_interactable != null:
+		if collider.has_node("Interactable"):
+			var interactable = collider.get_node("Interactable")
+			# When hovering over a new interactable object, stop hovering over the last one
+			if interactable != null && interactable != last_interactable:
+				if last_interactable != null:
+					last_interactable._end_hover()
+				interactable._start_hover()
+				last_interactable = interactable
+			# When hovering over nothing, stop hovering over the last interactable object
+			elif interactable == null && last_interactable != null:
 				last_interactable._end_hover()
-			interactable._start_hover()
-			last_interactable = interactable
-		# When hovering over nothing, stop hovering over the last interactable object
-		elif interactable == null && last_interactable != null:
-			last_interactable._end_hover()
-			last_interactable = null
+				last_interactable = null
 	# When not hovering over anything, stop hovering over the last interactable object
 	elif last_interactable != null:
 		last_interactable._end_hover()
