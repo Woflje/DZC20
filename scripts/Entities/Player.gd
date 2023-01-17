@@ -17,7 +17,7 @@ onready var camera: Camera = get_node("Camera")
 onready var raycast = $"Camera/RayCast"
 
 onready var step_interval = 0
-onready var step_interval_ticks = 20
+export var step_interval_ticks = 30
 onready var audio_step_files = []
 
 # Global variables
