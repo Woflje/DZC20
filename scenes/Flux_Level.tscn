@@ -6,5 +6,8 @@
 [node name="Flux_Level" type="Spatial"]
 
 [node name="Flux_Level" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0028801, 0, -0.193432 )
 
 [node name="Flux_Level_limitation_collision" parent="." instance=ExtResource( 1 )]
+
+[node name="Props" type="Node" parent="."]

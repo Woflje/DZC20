@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Models/Entities/Player/player.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Entities/Player.gd" type="Script" id=2]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -20,6 +21,7 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.999915, -0.0130198, 0, 0.0130198, 0.999915, 0, 4.07007, 0.709931 )
+environment = ExtResource( 3 )
 far = 400.0
 
 [node name="RayCast" type="RayCast" parent="Camera"]
