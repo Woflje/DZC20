@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 [node name="Pivot" type="Spatial" parent="."]
 
 [node name="player" parent="Pivot" instance=ExtResource( 1 )]
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.137342, 0.404524, 0.00482845 )
@@ -19,6 +20,7 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.999915, -0.0130198, 0, 0.0130198, 0.999915, 0, 4.07007, 0.709931 )
+far = 400.0
 
 [node name="RayCast" type="RayCast" parent="Camera"]
 enabled = true
