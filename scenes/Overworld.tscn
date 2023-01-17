@@ -1,28 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Flux_test.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Models/Entities/light_and_switch_off.fbx" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
 [ext_resource path="res://components/TestBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://components/Lamp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://components/UI/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Overworld" type="Node"]
 
-[node name="Flux_test" parent="." instance=ExtResource( 2 )]
+[node name="Flux_Level" parent="." instance=ExtResource( 2 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.355, 7.65087, 27.437 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 13.0273, 85.7865 )
 
 [node name="TestBlock" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.34138, 0, 0.939925, 0, 1, 0, -0.939925, 0, -0.34138, 16.1653, 5.05176, 7.18324 )
+transform = Transform( -0.34138, 0, 0.939925, 0, 1, 0, -0.939925, 0, -0.34138, 49.0654, 13.0431, 17.8015 )
 
 [node name="Lamp" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6.99518, 17 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5606, 23.9463, 6.27578 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-
-[node name="light_and_switch_off" parent="." instance=ExtResource( 3 )]
-transform = Transform( 3.93403e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.93403e-08, 13.8146, 5.43571, 21.7704 )
 
 [connection signal="interact" from="TestBlock" to="Lamp" method="_toggle"]

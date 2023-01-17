@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Models/Static/Level/Flux_Level_limitation_collision.dae" type="PackedScene" id=1]
+[ext_resource path="res://assets/Models/Static/Level/Flux_Level.dae" type="PackedScene" id=2]
+
+[node name="Flux_Level" type="Spatial"]
+
+[node name="Flux_Level" parent="." instance=ExtResource( 2 )]
+
+[node name="Flux_Level_limitation_collision" parent="." instance=ExtResource( 1 )]
