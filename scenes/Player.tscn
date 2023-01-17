@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Models/Entities/Player/player.glb" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Entities/Player.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
+[ext_resource path="res://assets/Audio/sfx/jump.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Audio/sfx/landing.wav" type="AudioStream" id=5]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -28,4 +30,16 @@ far = 400.0
 enabled = true
 cast_to = Vector3( 0, 0, -10 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="Node" parent="."]
+
+[node name="Step_Sound_Player_1" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Step_Sound_Player_2" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Jump_Sound_Player" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 4 )
+
+[node name="Landing_Sound_Player" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 5 )
+volume_db = -2.477
+pitch_scale = 0.9
