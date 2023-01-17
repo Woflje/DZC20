@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/bgm.gd" type="Script" id=1]
-[ext_resource path="res://assets/Audio/bgm/bgm_2.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/Audio/bgm/bgm_1.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/Audio/bgm/bgm_3.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/Audio/bgm/bgm_5.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/Audio/bgm/bgm_4.wav" type="AudioStream" id=6]
+[ext_resource path="res://scripts/bgm.gd" type="Script" id=1]
+[ext_resource path="res://assets/Audio/bgm/bgm1.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/Audio/bgm/bgm0.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/Audio/bgm/bgm2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Audio/bgm/bgm4.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/Audio/bgm/bgm3.wav" type="AudioStream" id=6]
 
 [node name="BGM" type="Node"]
 script = ExtResource( 1 )

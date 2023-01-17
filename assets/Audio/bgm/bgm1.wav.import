@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/bgm_3.wav-a574664e368557e46ee7c91342d6957d.sample"
+path="res://.import/bgm1.wav-335087a9f9a857bf20b6bdb54fefac4d.sample"
 
 [deps]
 
-source_file="res://assets/Audio/bgm/bgm_3.wav"
-dest_files=[ "res://.import/bgm_3.wav-a574664e368557e46ee7c91342d6957d.sample" ]
+source_file="res://assets/Audio/bgm/bgm1.wav"
+dest_files=[ "res://.import/bgm1.wav-335087a9f9a857bf20b6bdb54fefac4d.sample" ]
 
 [params]
 
@@ -17,7 +17,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=0
+edit/loop_mode=2
 edit/loop_begin=0
 edit/loop_end=-1
 compress/mode=0
