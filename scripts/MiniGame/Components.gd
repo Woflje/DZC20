@@ -41,3 +41,13 @@ func create_item(name: String, icon: String, size: float):
 	item.rect_min_size = Vector2(size, size)
 
 	return item
+
+
+# If the simulation is running, change the opacity of the children
+func _on_toggle_simulation(is_simulating: bool):
+	for child in get_children():
+		if is_simulating:
+			child.modulate = Color(1, 1, 1, 0.5)
+		else:
+			child.modulate = Color(1, 1, 1, 1)
+	

@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Puzzle",
+"language": "GDScript",
+"path": "res://scripts/MiniGame/Puzzle.gd"
+} ]
+_global_script_class_icons={
+"Puzzle": ""
+}
+
 [application]
 
 config/name="DZC20"
