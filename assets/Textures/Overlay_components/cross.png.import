@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goal_cross.png-55c3218eff519696d1d9af3e143d0b3a.stex"
+path="res://.import/cross.png-d9c0eafed306cdc679cba05569d4cbbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/Overlay_components/goal_cross.png"
-dest_files=[ "res://.import/goal_cross.png-55c3218eff519696d1d9af3e143d0b3a.stex" ]
+source_file="res://assets/Textures/Overlay_components/cross.png"
+dest_files=[ "res://.import/cross.png-d9c0eafed306cdc679cba05569d4cbbf.stex" ]
 
 [params]
 

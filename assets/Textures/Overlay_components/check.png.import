@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bjt_transistor_pnp.png-5e79db9486c5aeccaecb6cb23f3f7009.stex"
+path="res://.import/check.png-c1d5c8237e4c943f72aa6e31e80b9540.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/Overlay_components/bjt_transistor_pnp.png"
-dest_files=[ "res://.import/bjt_transistor_pnp.png-5e79db9486c5aeccaecb6cb23f3f7009.stex" ]
+source_file="res://assets/Textures/Overlay_components/check.png"
+dest_files=[ "res://.import/check.png-c1d5c8237e4c943f72aa6e31e80b9540.stex" ]
 
 [params]
 

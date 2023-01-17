@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid block_1.png-267df080f55bce226376cd9493230157.stex"
+path="res://.import/complete_button_on.png-dfb5d32e277539633ead88bbcab6e2c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/Overlay_components/grid block_1.png"
-dest_files=[ "res://.import/grid block_1.png-267df080f55bce226376cd9493230157.stex" ]
+source_file="res://assets/Textures/Overlay_components/complete_button_on.png"
+dest_files=[ "res://.import/complete_button_on.png-dfb5d32e277539633ead88bbcab6e2c4.stex" ]
 
 [params]
 

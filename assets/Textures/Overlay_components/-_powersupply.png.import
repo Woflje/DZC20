@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goal_check.png-c9c481bb65cbd7d8116be911b36fde7e.stex"
+path="res://.import/-_powersupply.png-ee04a10b42e3ffdf549ab8b92c072b6b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/Overlay_components/goal_check.png"
-dest_files=[ "res://.import/goal_check.png-c9c481bb65cbd7d8116be911b36fde7e.stex" ]
+source_file="res://assets/Textures/Overlay_components/-_powersupply.png"
+dest_files=[ "res://.import/-_powersupply.png-ee04a10b42e3ffdf549ab8b92c072b6b.stex" ]
 
 [params]
 

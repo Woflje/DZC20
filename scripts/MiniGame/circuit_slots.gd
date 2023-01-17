@@ -17,10 +17,6 @@ var neighbor_down: Node = null
 var neighbor_left: Node = null
 var neighbor_right: Node = null
 
-# This is to keep track if the mouse is hovering over this tile
-# If it is only then is some code exectued. 
-var MouseOver = false
-
 func _panel_components():
 	panel_type = PanelType.Components
 
@@ -97,7 +93,7 @@ func _update_texture(new_texture):
 	if typeof(new_texture) == TYPE_STRING:
 		texture = load(new_texture)
 	else:
-			texture = new_texture
+		texture = new_texture
 	
 func _set_default_texture(new_texture):
 	if typeof(new_texture) == TYPE_STRING:
@@ -111,6 +107,8 @@ func _get_texture():
 	
 
 func get_drag_data(_pos):
+	if blocked_item:
+		return null
 	# Retrieve information about the slot we are dragging from
 	# Activated when the draggin starts
 	if puzzle.edit_mode and not item_tags.empty():
@@ -179,7 +177,7 @@ func _gui_input(event):
 func handle_edit_mode_input(event):
 	# If the mouse clicks on this tile and the tile is empty then change it to a wire
 	if event is InputEventMouseButton:
-		if !event.pressed:
+		if event.pressed:
 			return
 		# If the button doesnt have any tags then it is empty
 		# We want to toggle between empty and wire

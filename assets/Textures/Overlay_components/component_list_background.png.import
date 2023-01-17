@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/relay_full.png-801b14310b123d06d21f47c7c5c29d56.stex"
+path="res://.import/component_list_background.png-e17a2fcb07f72023a1fb675e3e5ceb82.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/Overlay_components/relay_full.png"
-dest_files=[ "res://.import/relay_full.png-801b14310b123d06d21f47c7c5c29d56.stex" ]
+source_file="res://assets/Textures/Overlay_components/component_list_background.png"
+dest_files=[ "res://.import/component_list_background.png-e17a2fcb07f72023a1fb675e3e5ceb82.stex" ]
 
 [params]
 
