@@ -22,4 +22,26 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5606, 23.9463, 6.27578 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
+[node name="Lighting" type="Node" parent="."]
+
+[node name="Lights_0" type="Node" parent="Lighting"]
+
+[node name="OmniLight" type="OmniLight" parent="Lighting/Lights_0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6809, 15.3658, 92.2083 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.086
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 10.982
+omni_attenuation = 4.14105
+
+[node name="Lights_1" type="Node" parent="Lighting"]
+
+[node name="Lights_2" type="Node" parent="Lighting"]
+
+[node name="Lights_3_all" type="Node" parent="Lighting"]
+
+[node name="Props" type="Node" parent="."]
+
 [connection signal="interact" from="TestBlock" to="Lamp" method="_toggle"]

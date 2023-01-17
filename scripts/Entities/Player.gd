@@ -2,7 +2,7 @@ extends KinematicBody
 
 # STATIC VARIABLES
 # How fast the player moves in meters per second.
-export var speed: float = 14
+export var speed: float = 8
 onready var run = 1
 # The downward acceleration when in the air, in meters per second squared.
 export var fall_acceleration: float = 75
@@ -41,8 +41,6 @@ func _ready():
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_2.wav"))
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_3.wav"))
 	audio_step_files.append(preload("res://assets/Audio/sfx/step_4.wav"))
-	audio_step_files.append(preload("res://assets/Audio/sfx/jump.wav"))
-	audio_step_files.append(preload("res://assets/Audio/sfx/landing.wav"))
 	
 
 func _input(event):
@@ -95,7 +93,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("run"):
 		step_interval += 0.5
-		run = 1.3
+		run = 1.5
 	else:
 		run = 1
 
