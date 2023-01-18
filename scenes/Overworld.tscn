@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://assets/Models/Static/Props/flux_square_table/flux_square_table.dae" type="PackedScene" id=17]
 [ext_resource path="res://assets/Models/Static/Props/flux_bin/flux_bin.dae" type="PackedScene" id=18]
 [ext_resource path="res://assets/Models/Static/Props/flux_0_stairs/flux_0_stairs.dae" type="PackedScene" id=19]
+[ext_resource path="res://scenes/orbs/animated_orb_2.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/orbs/animated_orb_3.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/orbs/animated_orb_1.tscn" type="PackedScene" id=22]
 
 [node name="Overworld" type="Node"]
 
@@ -95,6 +98,7 @@ omni_range = 8.0
 omni_attenuation = 2.82842
 
 [node name="Boothlights" type="Spatial" parent="Lighting/Lights_3_all"]
+visible = false
 
 [node name="BoothLight1" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 87.9789, 0.166207, -20.7829 )
@@ -268,5 +272,25 @@ transform = Transform( -9.61651e-08, 0, 2, 0, 3, 0, -2.2, 0, -8.74228e-08, 123.7
 
 [node name="flux_0_stairs2" parent="Props/Static/Flux_0" instance=ExtResource( 19 )]
 transform = Transform( -9.61651e-08, 0, -2, 0, 3, 0, 2.2, 0, -8.74228e-08, 44.4113, 0, 10.1527 )
+
+[node name="Orbs" type="Spatial" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
+
+[node name="animated_orb" parent="Orbs" instance=ExtResource( 22 )]
+
+[node name="animated_orb2" parent="Orbs" instance=ExtResource( 20 )]
+transform = Transform( 0.89661, 0, -1.78776, 0, 2, 0, 1.78776, 0, 0.89661, 0, 0, 9.53674e-07 )
+
+[node name="animated_orb3" parent="Orbs" instance=ExtResource( 21 )]
+transform = Transform( -0.85809, 0, -1.23032, 0, 1.5, 0, 1.23032, 0, -0.85809, -1.90735e-06, 0, 0 )
+
+[node name="animated_orb4" parent="Orbs" instance=ExtResource( 22 )]
+transform = Transform( 0.403449, 0, -0.915002, 0, 1, 0, 0.915002, 0, 0.403449, 0.257627, 0.0965557, 0.645164 )
+
+[node name="animated_orb5" parent="Orbs" instance=ExtResource( 20 )]
+transform = Transform( -1.27407, 0, -1.54167, 0, 2, 0, 1.54167, 0, -1.27407, 0.257627, 0.0965557, 0.645164 )
+
+[node name="animated_orb6" parent="Orbs" instance=ExtResource( 21 )]
+transform = Transform( -1.47194, 0, 0.288783, 0, 1.5, 0, -0.288783, 0, -1.47194, 0.257627, 0.0965557, 0.645163 )
 
 [connection signal="interact" from="TestBlock" to="Lamp" method="_toggle"]
