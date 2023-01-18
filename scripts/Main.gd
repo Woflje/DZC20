@@ -15,7 +15,7 @@ var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
 onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3]
-onready var enviorment = ["./Overworld/Lighting/Lights_1", "./Overworld/Lighting/Lights_2", "./Overworld/Lighting/Lights_3"]
+onready var enviorment = ["./Overworld/ToggleGroups/Group1", "./Overworld/ToggleGroups/Group2", "./Overworld/ToggleGroups/Group3"]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,9 +23,9 @@ func _ready():
 	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
 	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
 	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "	led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
-	blank_puzzle_1.help_texst = ""
-	blank_puzzle_2.help_texst = ""
-	blank_puzzle_3.help_texst = ""
+	blank_puzzle_1.help_text = "When simulating you can click on a switch to toggle its state"
+	blank_puzzle_2.help_text = "You can click on a empty tile to create a wire"
+	blank_puzzle_3.help_text = "A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
 	self.add_child(intro_scene)
 	
 		
