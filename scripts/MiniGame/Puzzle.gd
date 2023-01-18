@@ -32,12 +32,59 @@ func simulate_flow():
 	var positive_source = grid.get_component(pos.x, pos.y)
 	var component = PositivePowerSource.new(pos, positive_source)
 	grid_components[serialize_position(pos)] = component
-	component.simulate(self)
+	discover_nodes(component)
+	simulate_power([component.pos])
+	update_components()
+
+	
+func discover_nodes(current: Component):
+	var directions = current.get_possible_neighbour_directions()
+	for direction in directions:
+		var pos = get_position_by_direction(current.pos, direction)
+		var component = create_component_if_new(pos)
+		if component == null:
+			continue
+		if not component.can_connect_from(opisite_direction(direction)):
+			continue
+		current.update_neighbour(component)
+		discover_nodes(component)
+
+
+func simulate_power(path: Array = []):
+	# Find all possible paths from the positive power source to the negative power source
+	var current_pos = path[path.size() - 1]
+	var current = get_component(current_pos)
+	var directions = current.get_flow_directions()
+	for direction in directions:
+		var pos = get_position_by_direction(current.pos, direction)
+		var component = get_component(pos)
+		if component == null:
+			continue
+		if not component.can_connect_from(opisite_direction(direction)):
+			continue
+		if path.find(component.pos) != -1:
+			continue
+		var new_path = path.duplicate()
+		new_path.append(component.pos)
+		if component is NegativePowerSource:
+			complete_path(new_path)
+			continue
+		simulate_power(new_path)
+		
+func complete_path(path: Array):
+	for component_pos in path:
+		var component = get_component(component_pos)
+		component.powered = true
+
+
+func update_components():
+	for component in grid_components.values():
+		component.update_self(self)
 
 
 func reset_simulation(close: bool = false):
 	for component in grid_components.values():
-		component._reset(close)
+		component.reset(close)
 	grid_components.clear()
 
 
@@ -127,45 +174,30 @@ func opisite_direction(direction: int) -> int:
 class Component:
 	var pos: Vector2
 	var node: TextureRect
-	var positive_current: bool
+	var positive_current: bool = false
+	var powered: bool = false
 
 	func _init(pos: Vector2, node: TextureRect):
 		self.pos = pos
 		self.node = node
-		self.positive_current = false
 
-	func simulate(puzzle: Puzzle):
-		_update_self(puzzle)
+	func update_self(_puzzle: Puzzle):
+		node.hint_tooltip = "Powered: %s" % powered
 
-		var directions = _get_possible_neighbour_directions()
-		for direction in directions:
-			var next_pos = puzzle.get_position_by_direction(pos, direction)
-			var component = puzzle.create_component_if_new(next_pos)
-			if component == null:  # Already exists, so no need to index it again
-				continue
-
-			# If a component can't connect from a direction, then it's not a valid neighbour
-			if not component._can_connect_from(puzzle.opisite_direction(direction)):
-				puzzle.remove_component(next_pos)  # Remove the component from the cache. So it can be re-indexed later
-				continue
-
-			_update_neighbour(component)
-			component.simulate(puzzle)
-
-	func _update_self(puzzle: Puzzle):
-		node.hint_tooltip = "Positive current: %s" % positive_current
-
-	func _update_neighbour(component: Component):
+	func update_neighbour(component: Component):
 		if positive_current:  # Only propagate the current if it's positive
 			component.positive_current = positive_current
 
-	func _get_possible_neighbour_directions() -> Array:
+	func get_possible_neighbour_directions() -> Array:
 		return [0, 1, 2, 3]
 
-	func _can_connect_from(direction: int) -> bool:
-		return _get_possible_neighbour_directions().find(direction) != -1
+	func get_flow_directions() -> Array:
+		return get_possible_neighbour_directions()
 
-	func _reset(close: bool):
+	func can_connect_from(direction: int) -> bool:
+		return get_possible_neighbour_directions().find(direction) != -1
+
+	func reset(close: bool):
 		node.hint_tooltip = str(node.item_tags)
 		node.modulate = Color(1, 1, 1)
 
@@ -183,9 +215,14 @@ class NegativePowerSource:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func _get_possible_neighbour_directions() -> Array:
+	func get_possible_neighbour_directions() -> Array:
 		return []
 
+	func get_flow_directions() -> Array:
+		return [0, 1, 2, 3]
+
+	func can_connect_from(direction: int) -> bool:
+		return true
 
 class Wire:
 	extends Component
@@ -193,9 +230,11 @@ class Wire:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func _update_self(puzzle: Puzzle):
-		._update_self(puzzle)
-		if positive_current:
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
 			node.modulate = Color(0.41, 1, 0.69)
 		else:
 			node.modulate = Color(1, 0.41, 0.42)
@@ -207,15 +246,18 @@ class Lamp:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func _update_self(puzzle: Puzzle):
-		._update_self(puzzle)
-		node.modulate = Color(0.98, 1, 0.41)
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		else: 
+			node.modulate = Color(0.98, 1, 0.41)
 
-	func _update_neighbour(component: Component):
-		._update_neighbour(component)
+	func update_neighbour(component: Component):
+		.update_neighbour(component)
 		component.positive_current = false
 
-	func _get_possible_neighbour_directions() -> Array:
+	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
 
 
@@ -227,9 +269,11 @@ class Switch:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		self.is_open = !node._has_tag("closed")
 
-	func _update_self(puzzle: Puzzle):
-		._update_self(puzzle)
-		if positive_current:
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
 			node.modulate = Color(0.41, 1, 0.69)
 		else:
 			node.modulate = Color(1, 0.41, 0.42)
@@ -241,23 +285,23 @@ class Switch:
 
 		node.connect("simulated_item_clicked", self, "_on_simulated_item_clicked", [puzzle])
 
-	func _on_simulated_item_clicked(puzzle: Puzzle):
+	func on_simulated_item_clicked(puzzle: Puzzle):
 		if is_open:
 			node._add_tag("closed")
 		else:
 			node._remove_tag("closed")
 		puzzle.simulate_flow()
 
-	func _get_possible_neighbour_directions() -> Array:
-		if is_open:
-			return [0]  # Only up
+	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
 
-	func _can_connect_from(direction: int) -> bool:
-		return direction == 2 or direction == 3
+	func get_flow_directions() -> Array:
+		if is_open:
+			return []
+		return get_possible_neighbour_directions()
 
-	func _reset(close: bool):
-		._reset(close)
+	func reset(close: bool):
+		.reset(close)
 		if close:
 			node._remove_tag("closed")
 		node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
