@@ -94,4 +94,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/subsurface_scattering/quality=2
 environment/default_environment="res://assets/Shader/default_env.tres"
