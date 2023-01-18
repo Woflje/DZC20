@@ -59,6 +59,7 @@ func _load_overworld(unload = true, toggle = false):
 	if unload:
 		self.remove_child(self.get_node("Puzzle"))
 	if toggle:  #
+		$SFX_Channel1.play()
 		self.get_node("./BGM").next_bgm = true
 		self.get_node(groupe_enable[last_id_enterd]).visible  = true
 		self.get_node(groupe_enable_2[last_id_enterd]).visible  = true
