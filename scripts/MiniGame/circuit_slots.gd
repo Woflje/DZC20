@@ -57,6 +57,7 @@ func _has_tag(item):
 	if typeof(item) == TYPE_STRING:
 		if item_tags.has(item):
 			return true
+		return false
 	elif typeof(item) == TYPE_ARRAY:
 		for i in item:
 			if not item_tags.has(i):

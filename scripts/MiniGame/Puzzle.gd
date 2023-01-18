@@ -391,7 +391,7 @@ class Double_Switch_L:
 	var is_down: bool
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
-		self.is_down = !node._has_tag("is_down")
+		self.is_down = node._has_tag("is_down")
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
@@ -411,13 +411,17 @@ class Double_Switch_L:
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
 		if is_down:
-			node._add_tag("is_down")
-		else:
 			node._remove_tag("is_down")
+		else:
+			node._add_tag("is_down")
 		puzzle.simulate_flow()
 
 	func get_possible_neighbour_directions() -> Array:
-		return [0, 2, 3]
+		#return [0, 2, 3]
+		if is_down:
+			return [0, 3]
+		else:
+			return [0, 2]	
 
 	func get_flow_directions() -> Array:
 		if is_down:
@@ -439,7 +443,7 @@ class Double_Switch_R:
 	var is_down: bool
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
-		self.is_down = !node._has_tag("is_down")
+		self.is_down = node._has_tag("is_down")
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
@@ -459,13 +463,17 @@ class Double_Switch_R:
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
 		if is_down:
-			node._add_tag("is_down")
-		else:
 			node._remove_tag("is_down")
+		else:
+			node._add_tag("is_down")
 		puzzle.simulate_flow()
 
 	func get_possible_neighbour_directions() -> Array:
-		return [1, 2, 3]
+		#return [0, 2, 3]
+		if is_down:
+			return [1, 3]
+		else:
+			return [1, 2]	
 
 	func get_flow_directions() -> Array:
 		if is_down:
