@@ -22,7 +22,10 @@ onready var enviorment = ["./Overworld/Lighting/Lights_1", "./Overworld/Lighting
 func _ready():
 	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
 	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
-	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
+	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "	led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
+	blank_puzzle_1.help_texst = ""
+	blank_puzzle_2.help_texst = ""
+	blank_puzzle_3.help_texst = ""
 	self.add_child(intro_scene)
 	
 		

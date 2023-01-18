@@ -10,7 +10,7 @@ var edit_mode:bool = true
 
 var grid_components = {}
 var valid_paths = []
-
+var help_text = "HELLO WORLD"
 var validators = [SafeCiruitValidator.new(), HasACompleteCircuitValidator.new()]
 
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
