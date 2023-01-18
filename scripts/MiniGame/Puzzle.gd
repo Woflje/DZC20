@@ -9,15 +9,16 @@ signal puzzle_completed()
 var edit_mode:bool = true
 
 var grid_components = {}
+var valid_paths = []
 
-var validators = [SafeCiruitValidator.new()]
+var validators = [SafeCiruitValidator.new(), HasACompleteCircuitValidator.new()]
 
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
 
 
 func _ready():
 	# Testing things
-	var validator_ids = ["HasACompleteCircuitValidator"]
+	var validator_ids = ["all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"]
 	include_validators(validator_ids)
 
 func _input(_event):
@@ -34,8 +35,29 @@ func include_validator(validator_id: String):
 		validators.append(SafeCiruitValidator.new())
 	if validator_id == "at_least_one_lamp_present":
 		validators.append(AtLeastOneLampPresentValidator.new())
-	if validator_id == "HasACompleteCircuitValidator":
+	if validator_id == "has_a_complete_circuit":
 		validators.append(HasACompleteCircuitValidator.new())
+	if validator_id == "at_most_one_lamp_present":
+		validators.append(AtMostOneLampPresentValidator.new())
+	if validator_id == "lamps_are_off":
+		validators.append(LampsAreOffValidator.new())
+	if validator_id == "lamps_are_on":
+		validators.append(LampsAreOnValidator.new())
+	if validator_id == "at_least_one_led_present":
+		validators.append(AtLeastOneLEDPresentValidator.new())
+	if validator_id == "at_most_one_led_present":
+		validators.append(AtMostOneLEDPresentValidator.new())
+	if validator_id == "led_is_in_safe_circuit":
+		validators.append(LEDIsInSafeCircuitValidator.new())
+	if validator_id == "at_least_two_breaker_switcheds":
+		validators.append(AtLeastTwoBreakerSwitchedsValidator.new())
+	if validator_id == "at_most_two_breaker_switcheds":
+		validators.append(AtMostTwoBreakerSwitchedsValidator.new())
+	if validator_id == "all_breakers_in_the_same_circuit":
+		validators.append(AllBreakersInTheSameCircuitValidator.new())
+	if validator_id == "pressing_either_breaker_changes_condition":
+		validators.append(PressingEitherBreakerChangesConditionValidator.new())
+	
 		
 
 func _toggle_simulate_mode():
@@ -56,9 +78,23 @@ func simulate_flow():
 	grid_components[serialize_position(pos)] = component
 	discover_nodes(component)
 	simulate_power([component.pos])
-	update_components()
+	if has_short_circuit():
+		display_short_circuit()
+	else:
+		update_components()
 	validate()
 
+func has_short_circuit():
+	var negative_power_source_pos = Vector2(0, 5)
+	var negative_power_source = get_component(negative_power_source_pos)
+	if negative_power_source == null:
+		return false
+	print("Has positive current: ", negative_power_source.positive_current)
+	return negative_power_source.positive_current
+
+func display_short_circuit():
+	for component in grid_components.values():
+		component.display_short_circuit()
 	
 func discover_nodes(current: Component):
 	var directions = current.get_possible_neighbour_directions()
@@ -68,6 +104,7 @@ func discover_nodes(current: Component):
 		if component == null:
 			continue
 		if component.get_possible_neighbour_directions().find(opisite_direction(direction)) == -1:
+			remove_component(pos) # Allow for re-indexing
 			continue
 		current.update_neighbour(component)
 		discover_nodes(component)
@@ -98,6 +135,7 @@ func complete_path(path: Array):
 	for component_pos in path:
 		var component = get_component(component_pos)
 		component.powered = true
+	valid_paths.append(path)
 
 
 func update_components():
@@ -121,6 +159,7 @@ func reset_simulation(close: bool = false):
 	for component in grid_components.values():
 		component.reset(close)
 	grid_components.clear()
+	valid_paths.clear()
 	if close:
 		for validator in validators:
 			validator.reset()
@@ -230,13 +269,22 @@ class Component:
 
 	func update_self(_puzzle: Puzzle):
 		node.hint_tooltip = "Powered: %s" % powered
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		else:
+			node.modulate = Color(0.52,0.77,0.83)
+
+	func display_short_circuit():
+		node.modulate = Color(1, 0.41, 0.42)
+		node.hint_tooltip = "Short circuit!"
 
 	func update_neighbour(component: Component):
+		print("Updating neighbour %s with postive current: %s" % [component, positive_current])
 		if positive_current:  # Only propagate the current if it's positive
 			component.positive_current = positive_current
 
 	func get_possible_neighbour_directions() -> Array:
-		return [0, 1, 2, 3]
+		return [3,0,1,2] # First down, then left, right, up
 
 	func get_flow_directions() -> Array:
 		return get_possible_neighbour_directions()
@@ -245,7 +293,7 @@ class Component:
 		return get_possible_neighbour_directions().find(direction) != -1
 
 	func reset(close: bool):
-		node.hint_tooltip = str(node.item_tags)
+		node._update_tooltip()
 		node.modulate = Color(1, 1, 1)
 
 
@@ -260,11 +308,11 @@ class NegativePowerSource:
 	extends Component
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
-		self.positive_current = false
 		pass
 
-	func get_possible_neighbour_directions() -> Array:
-		return []
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		node.hint_tooltip = "Positive current: %s" % positive_current
 
 	func get_flow_directions() -> Array:
 		return [0, 1, 2, 3]
@@ -278,29 +326,15 @@ class Wire:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func update_self(puzzle: Puzzle):
-		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
-
 class Resistor:
 	extends Component
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func update_self(puzzle: Puzzle):
-		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
+	func update_neighbour(component: Component):
+		.update_neighbour(component)
+		component.positive_current = false
 			
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
@@ -358,15 +392,6 @@ class Diode:
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
 
-	func update_self(puzzle: Puzzle):
-		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
-
 	func update_neighbour(component: Component):
 		.update_neighbour(component)
 		component.positive_current = false
@@ -388,12 +413,6 @@ class Switch:
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
 
 		if is_open:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
@@ -434,12 +453,6 @@ class Double_Switch_L:
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
 		
 		if is_down:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png")
@@ -484,12 +497,6 @@ class Double_Switch_R:
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
-		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		elif positive_current:
-			node.modulate = Color(0.41, 1, 0.69)
-		else:
-			node.modulate = Color(1, 0.41, 0.42)
 		
 		if is_down:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png")
@@ -561,17 +568,14 @@ class SafeCiruitValidator:
 		self.display_text_failed = "This circuit has a short circuit"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
-		# Check that the negative power source has a negative current
+		if puzzle.has_short_circuit():
+			return false
 		var negative_power_source_pos = Vector2(0, 5)
 		var negative_power_source = puzzle.get_component(negative_power_source_pos)
 		if negative_power_source == null:
 			return true
 		return not negative_power_source.positive_current
 	
-
-
-
-
 class HasACompleteCircuitValidator:
 	extends Validator
 
@@ -581,8 +585,10 @@ class HasACompleteCircuitValidator:
 		self.display_text_failed = "This circuit is not complete"
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
-		return true
-	#TODO!
+		var negative_power_source_pos = Vector2(0, 5)
+		var negative_power_source = puzzle.get_component(negative_power_source_pos)
+		return negative_power_source != null
+	
 		
 class AtLeastOneLampPresentValidator:
 	extends Validator
@@ -609,43 +615,46 @@ class AtMostOneLampPresentValidator:
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var lamp_count: int = 0
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if component is Lamp:
 				lamp_count += 1
 		
-		if lamp_count > 1:
-			return true
-		else:
-			return false
+		return lamp_count <= 1
 
 		
-class LampsStartOfValidator:
+class LampsAreOffValidator:
 	extends Validator
 
 	func _init():
-		self.is_hidden = true
-		self.display_text_failed = "The Lamp Starts On"
+		self.display_text_working_on_it = "The lamp can be turned off"
+		self.display_text_achieved = "The lamp has been turned off"
+		self.display_text_failed = "The lamp needs to be turned off"
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if component is Lamp:
-				# TODO!
-				#if component == on
+				if component.powered:
 					return false
 		return true
 
 
-class LampsHaveBeenTurnedOnValidator:
+class LampsAreOnValidator:
 	extends Validator
 
 	func _init():
-		self.is_hidden = false
+		self.display_text_working_on_it = "The lamp can be turned on"
 		self.display_text_achieved = "The lamp has been turned on"
-		self.display_text_failed = "The lamp has not been turned on yet"
-		self.display_text_working_on_it = "Lamps must be able to change state"
+		self.display_text_failed = "The lamp needs to be turned on"
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		
+		for component in puzzle.grid_components.values():
+			if component is Lamp:
+				if not component.powered:
+					return false
+		return true
 
-	# TODO!
 class AtLeastOneLEDPresentValidator:
 	extends Validator
 
@@ -656,7 +665,7 @@ class AtLeastOneLEDPresentValidator:
 		self.display_text_working_on_it = "The circuit requires one LED"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if component is LED:
 				return true
 		return false
@@ -672,16 +681,13 @@ class AtMostOneLEDPresentValidator:
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var LED_count: int = 0
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if component is LED:
 				LED_count += 1
 		
-		if LED_count > 1:
-			return false
-		else:
-			return true
+		return LED_count <= 1
 
-class LedIsInSafeCircuitValidator:
+class LEDIsInSafeCircuitValidator:
 	extends Validator
 
 	func _init():
@@ -690,7 +696,19 @@ class LedIsInSafeCircuitValidator:
 		self.display_text_failed ="The Circuit is not safe (try adding a ristor before the LED)"
 		self.display_text_working_on_it = "The Circuit needs to be safe"
 
-	#TODO
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for path in puzzle.valid_paths:
+			var has_resistor = false
+			var has_LED = false
+			for component_pos in path:
+				var component = puzzle.get_component(component_pos)
+				if component is LED:
+					has_LED = true
+				if component is Resistor:
+					has_resistor = true
+			if has_LED and has_resistor:
+				return true
+		return false
 
 class AtLeastTwoBreakerSwitchedsValidator:
 	extends Validator
@@ -703,14 +721,12 @@ class AtLeastTwoBreakerSwitchedsValidator:
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var breaker_count: int = 0
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if (component is Double_Switch_L) or (component is Double_Switch_R):
 				breaker_count += 1
 		
-		if breaker_count >= 2:
-			return true
-		else:
-			return false
+		return breaker_count >= 2
+
 class AtMostTwoBreakerSwitchedsValidator:
 	extends Validator
 
@@ -721,14 +737,11 @@ class AtMostTwoBreakerSwitchedsValidator:
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var breaker_count: int = 0
-		for component in puzzle.grid_components:
+		for component in puzzle.grid_components.values():
 			if (component is Double_Switch_L) or (component is Double_Switch_R):
 				breaker_count += 1
 		
-		if breaker_count > 2:
-			return false
-		else:
-			return true
+		return breaker_count <= 2
 
 
 class AllBreakersInTheSameCircuitValidator:
@@ -739,7 +752,16 @@ class AllBreakersInTheSameCircuitValidator:
 		#self.display_text_achieved = "The Circuit is safe"
 		self.display_text_failed = "The breaker switches are not part of the same circuit"
 
-	#TODO
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for path in puzzle.valid_paths:
+			var breakers = 0
+			for component_pos in path:
+				var component = puzzle.get_component(component_pos)
+				if (component is Double_Switch_L) or (component is Double_Switch_R):
+					breakers += 1
+			if breakers > 1:
+				return true
+		return false
 
 class PressingEitherBreakerChangesConditionValidator:
 	extends Validator

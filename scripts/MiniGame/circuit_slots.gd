@@ -33,7 +33,7 @@ func _add_tag(item):
 			if not item_tags.has(i):
 				item_tags.append(i)
 
-	self.hint_tooltip = str(item_tags)
+	_update_tooltip()
 
 
 func _remove_tag(item):
@@ -44,7 +44,7 @@ func _remove_tag(item):
 		for i in item:
 			if item_tags.has(i):
 				item_tags.erase(i)
-	self.hint_tooltip = str(item_tags)
+	_update_tooltip()
 
 
 func _get_first_tag():
@@ -69,8 +69,14 @@ func _has_tag(item):
 
 func _clear_tags():
 	item_tags = []
-	self.hint_tooltip = ""
+	_update_tooltip()
 
+func _update_tooltip():
+	var first_tag = _get_first_tag()
+	if first_tag == null:
+		self.hint_tooltip = ""
+	else:
+		self.hint_tooltip = first_tag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -152,7 +158,7 @@ func drop_data(_pos, data):
 	if self.infinate_sink == false:
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"])
-	self.hint_tooltip = str(item_tags)
+	_update_tooltip()
 
 
 func _gui_input(event):
