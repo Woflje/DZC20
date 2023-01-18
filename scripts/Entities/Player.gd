@@ -109,7 +109,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("run"):
 		step_interval += 0.5
-		run = 4
+		run = 1.3
 	else:
 		run = 1
 
