@@ -42,10 +42,30 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 13.0273, 85.7865 )
 
-[node name="TestBlock" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 17.5383 )
+[node name="Puzzle_one_Pedestal" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 48.5139, 13.0431, 16.6614 )
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="TestBlock"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_one_Pedestal"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
+stream = ExtResource( 33 )
+unit_db = 19.297
+autoplay = true
+
+[node name="Puzzle_two_Pedestal" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 12.6052 )
+puzzle_to_load = 1
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_two_Pedestal"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
+stream = ExtResource( 33 )
+unit_db = 19.297
+autoplay = true
+
+[node name="Puzzle_three_Pedestal" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 8.2842 )
+puzzle_to_load = 2
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_three_Pedestal"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
 stream = ExtResource( 33 )
 unit_db = 19.297
@@ -450,4 +470,6 @@ transform = Transform( -1.27407, 0, -1.54167, 0, 2, 0, 1.54167, 0, -1.27407, 0.2
 [node name="animated_orb6" parent="Orbs" instance=ExtResource( 21 )]
 transform = Transform( -1.47194, 0, 0.288783, 0, 1.5, 0, -0.288783, 0, -1.47194, 0.257627, 0.0965557, 0.645163 )
 
-[connection signal="interact" from="TestBlock" to="Lamp" method="_toggle"]
+[connection signal="interact" from="Puzzle_one_Pedestal" to="Lamp" method="_toggle"]
+[connection signal="interact" from="Puzzle_two_Pedestal" to="Lamp" method="_toggle"]
+[connection signal="interact" from="Puzzle_three_Pedestal" to="Lamp" method="_toggle"]
