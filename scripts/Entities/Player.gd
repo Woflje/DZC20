@@ -22,6 +22,7 @@ export var step_interval_ticks = 30
 onready var audio_step_files = []
 onready var now_on_floor = true
 onready var previous_on_floor = true
+onready var falling = false
 onready var player_number = 0
 onready var audio_step_players = [
 	$SFX/Step_Sound_Player_1,
@@ -74,10 +75,11 @@ func _audio_process():
 			player_number = 1
 	else:
 		step_interval += 1
-	if now_on_floor and !previous_on_floor:
+	if velocity.y < -15:
+		falling = true
+	if now_on_floor and !previous_on_floor and falling:
+		falling = false
 		$SFX/Landing_Sound_Player.play()
-	if !now_on_floor and previous_on_floor:
-		$SFX/Jump_Sound_Player.play()
 	previous_on_floor = now_on_floor
 
 func _physics_process(delta):
@@ -95,6 +97,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 	if is_on_floor() and Input.is_action_pressed("jump"):
+		$SFX/Jump_Sound_Player.play()
 		velocity.y += jump_impulse
 
 	if Input.is_action_pressed("run"):
