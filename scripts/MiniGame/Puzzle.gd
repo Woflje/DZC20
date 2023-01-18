@@ -3,18 +3,38 @@ extends Node
 class_name Puzzle
 
 signal toggle_simulation(is_simulating)
+signal validators_updated()
+signal puzzle_completed()
 
 var edit_mode = true
 
 var grid_components = {}
 
+var validators = []
+
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
 
+
+func _ready():
+	# Testing things
+	var validator_ids = ["safe_circuit", "at_least_one_lamp_present"]
+	include_validators(validator_ids)
 
 func _input(_event):
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()  # quit the game with a single key press
 
+func include_validators(validator_ids: Array):
+	for validator_id in validator_ids:
+		include_validator(validator_id)
+	emit_signal("validators_updated")
+
+func include_validator(validator_id: String):
+	if validator_id == "safe_circuit":
+		validators.append(SafeCiruitValidator.new())
+	if validator_id == "at_least_one_lamp_present":
+		validators.append(AtLeastOneLampPresentValidator.new())
+		
 
 func _toggle_simulate_mode():
 	edit_mode = !edit_mode
@@ -35,6 +55,7 @@ func simulate_flow():
 	discover_nodes(component)
 	simulate_power([component.pos])
 	update_components()
+	validate()
 
 	
 func discover_nodes(current: Component):
@@ -81,11 +102,26 @@ func update_components():
 	for component in grid_components.values():
 		component.update_self(self)
 
+func validate():
+	for validator in validators:
+		validator.update_completed(self)
+
+	emit_signal("validators_updated")
+	
+	# If all validators are completed, we can complete the puzzle
+	for validator in validators:
+		if not validator.has_completed:
+			return
+	print("All validators completed")
+	emit_signal("puzzle_completed")
 
 func reset_simulation(close: bool = false):
 	for component in grid_components.values():
 		component.reset(close)
 	grid_components.clear()
+	if close:
+		for validator in validators:
+			validator.reset()
 
 
 # Serialized position
@@ -222,6 +258,7 @@ class NegativePowerSource:
 	extends Component
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		self.positive_current = false
 		pass
 
 	func get_possible_neighbour_directions() -> Array:
@@ -480,3 +517,220 @@ class Double_Switch_R:
 			node._remove_tag("is_down")
 		node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
 		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
+
+
+
+class Validator:
+	var is_hidden: bool
+	var has_completed: bool
+
+	var display_text_achieved: String
+	var display_text_failed: String
+
+	func get_label():
+		if has_completed:
+			return display_text_achieved
+		else:
+			return display_text_failed
+
+	func update_completed(puzzle: Puzzle):
+		if not has_completed:
+			has_completed = verify_completed(puzzle)
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		return false
+
+	func reset():
+		has_completed = false
+
+class SafeCiruitValidator:
+	extends Validator
+
+	func _init(): 
+		self.is_hidden = true
+		# If it is hidden no completed messag is needed.
+		self.display_text_failed = "This circuit has a short circuit"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		# Check that the negative power source has a negative current
+		var negative_power_source_pos = Vector2(0, 5)
+		var negative_power_source = puzzle.get_component(negative_power_source_pos)
+		if negative_power_source == null:
+			return true
+		return not negative_power_source.positive_current
+	
+
+
+
+
+class HasACompleteCircuitValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		# If it is hidden no completed messag is needed.
+		self.display_text_failed = "This circuit is not complete"
+
+	#TODO!
+		
+class AtLeastOneLampPresentValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "A lamp is included in the circuit"
+		self.display_text_failed = "This circuit does not have any lamps"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		# Check that in the grid_components there is one component with type Lamp
+		for component in puzzle.grid_components.values():
+			if component is Lamp:
+				return true
+		return false
+		
+class AtMostOneLampPresentValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		self.display_text_failed = "This circuit has to many any lamps"
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		var lamp_count: int = 0
+		for component in puzzle.grid_components:
+			if component is Lamp:
+				lamp_count += 1
+		
+		if lamp_count > 1:
+			return true
+		else:
+			return false
+
+		
+class LampsStartOfValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		self.display_text_failed = "The Lamp Starts On"
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		
+		for component in puzzle.grid_components:
+			if component is Lamp:
+				# TODO!
+				#if component == on
+					return false
+		return true
+
+
+class LampsHaveBeenTurnedOnValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "The lamp has been turned on"
+		self.display_text_failed = "The lamp has not been turned on yet"
+
+	# TODO!
+class AtLeastOneLEDPresentValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "There is a LED present in the circuit"
+		self.display_text_failed = "There are no LED present in the circuit"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for component in puzzle.grid_components:
+			if component is LED:
+				return true
+		return false
+
+class AtMostOneLEDPresentValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		#self.display_text_achieved = "There is a LED present in the circuit"
+		self.display_text_failed = "There are too many LEDs present in the circuit"
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		var LED_count: int = 0
+		for component in puzzle.grid_components:
+			if component is LED:
+				LED_count += 1
+		
+		if LED_count > 1:
+			return false
+		else:
+			return true
+
+class LedIsInSafeCircuitValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "The Circuit is safe"
+		self.display_text_failed ="The Circuit is not safe (try adding a ristor before the LED)"
+
+	#TODO
+
+class AtLeastTwoBreakerSwitchedsValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "Two breaker switches are present in the circuit"
+		self.display_text_failed = "There are less than two breakers switches present in the circuit"
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		var breaker_count: int = 0
+		for component in puzzle.grid_components:
+			if (component is Double_Switch_L) or (component is Double_Switch_R):
+				breaker_count += 1
+		
+		if breaker_count >= 2:
+			return true
+		else:
+			return false
+class AtMostTwoBreakerSwitchedsValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		#self.display_text_achieved = "The Circuit is safe"
+		self.display_text_failed = "There are to many Breakers switches present in the circuit"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		var breaker_count: int = 0
+		for component in puzzle.grid_components:
+			if (component is Double_Switch_L) or (component is Double_Switch_R):
+				breaker_count += 1
+		
+		if breaker_count > 2:
+			return false
+		else:
+			return true
+
+
+class AllBreakersInTheSameCircuitValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = true
+		#self.display_text_achieved = "The Circuit is safe"
+		self.display_text_failed = "The breaker switches are not part of the same circuit"
+
+	#TODO
+
+class PressingEitherBreakerChangesConditionValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "You have made a hotel Switch!"
+		self.display_text_failed = "Press both breakers to proof that they effect the LED"
+
+
+	# TODO

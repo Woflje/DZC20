@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/MiniGame/Puzzle.gd" type="Script" id=1]
 [ext_resource path="res://assets/Textures/Overlay_components/close_button.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://scripts/MiniGame/Grid.gd" type="Script" id=8]
 [ext_resource path="res://scripts/MiniGame/Components_Button.gd" type="Script" id=9]
 [ext_resource path="res://assets/Textures/Overlay_components/background_dark.png" type="Texture" id=10]
+[ext_resource path="res://scenes/Requirement.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/MiniGame/RequirementsList.gd" type="Script" id=12]
 
 [node name="Puzzle" type="Control"]
 script = ExtResource( 1 )
@@ -113,23 +115,23 @@ margin_right = 1350.0
 margin_bottom = 900.0
 custom_constants/margin_right = 60
 custom_constants/margin_top = 57
-custom_constants/margin_left = 57
+custom_constants/margin_left = 25
 custom_constants/margin_bottom = 57
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer"]
-margin_left = 57.0
+margin_left = 25.0
 margin_top = 57.0
 margin_right = 1290.0
 margin_bottom = 843.0
 custom_constants/separation = 0
 
 [node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
-margin_right = 446.0
+margin_right = 478.0
 margin_bottom = 786.0
-rect_min_size = Vector2( 446, 0 )
+rect_min_size = Vector2( 478, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run"]
-margin_right = 446.0
+margin_right = 478.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 texture = ExtResource( 3 )
@@ -138,8 +140,8 @@ script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run"]
 margin_top = 104.0
-margin_right = 446.0
-margin_bottom = 154.0
+margin_right = 478.0
+margin_bottom = 754.0
 custom_constants/margin_right = 25
 custom_constants/margin_top = 25
 custom_constants/margin_left = 25
@@ -148,14 +150,28 @@ custom_constants/margin_bottom = 25
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer"]
 margin_left = 25.0
 margin_top = 25.0
-margin_right = 421.0
-margin_bottom = 25.0
+margin_right = 453.0
+margin_bottom = 625.0
+rect_min_size = Vector2( 0, 600 )
+scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer"]
+[node name="RequirementsList" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer"]
+margin_right = 428.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( -313, 190 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource( 12 )
+
+[node name="Requirement" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 428.0
+margin_bottom = 140.0
 
 [node name="Grid" type="GridContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
-margin_left = 446.0
-margin_right = 1232.0
+margin_left = 478.0
+margin_right = 1264.0
 margin_bottom = 786.0
 rect_min_size = Vector2( 786, 0 )
 custom_constants/vseparation = 0
@@ -165,4 +181,6 @@ script = ExtResource( 8 )
 
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Components/Margin/Inventory" method="_on_toggle_simulation"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/MarginContainer/Button" method="_on_toggle_simulation"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" method="_on_toggle_simulation"]
+[connection signal="validators_updated" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" method="_on_validators_updated"]
 [connection signal="clicked" from="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/TextureRect" to="." method="_toggle_simulate_mode"]
