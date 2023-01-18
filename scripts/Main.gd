@@ -14,13 +14,15 @@ var blank_puzzle_2 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
-onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3, blank_puzzle_4]
+onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3]
 onready var enviorment = ["./Overworld/Lamp"]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	blank_puzzle_1.include_validators(["at_least_one_lamp_present"])
+	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
+	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
+	blank_puzzle_3.include_validators(["at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
 	self.add_child(intro_scene)
 
 

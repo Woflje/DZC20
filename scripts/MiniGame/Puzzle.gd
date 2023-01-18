@@ -18,7 +18,7 @@ onready var grid = get_tree().get_root().find_node("Grid", true, false)
 
 func _ready():
 	# Testing things
-	var validator_ids = ["all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"]
+	var validator_ids = []
 	include_validators(validator_ids)
 
 func _input(_event):

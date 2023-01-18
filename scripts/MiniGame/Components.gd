@@ -14,7 +14,7 @@ var inv_item_list = [
 	["LED", "res://assets/Textures/Overlay_components/LED.png"],
 	#["double_breaker_switch", "res://assets/Textures/Overlay_components/double_breaker_switch.png"],
 	# ["switch_closed","res://assets/Textures/Overlay_components/switch_closed.png"],
-	["transformator", "res://assets/Textures/Overlay_components/transformator.png"],
+	# ["transformator", "res://assets/Textures/Overlay_components/transformator.png"],
 	# ["power_scource_pos","res://icon.png"],
 	#["power_scource_neg","res://What-Do-Electrical-Wire-Colors-Mean.jpg"],
 ]

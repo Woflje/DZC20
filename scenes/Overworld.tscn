@@ -43,7 +43,7 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 13.0273, 85.7865 )
 
 [node name="TestBlock" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.34138, 0, 0.939925, 0, 1, 0, -0.939925, 0, -0.34138, 49.0654, 13.0431, 17.8015 )
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 17.5383 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="TestBlock"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
@@ -52,7 +52,7 @@ unit_db = 19.297
 autoplay = true
 
 [node name="Lamp" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5606, 14.3338, 6.27578 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.8852, 16.0726, 6.27578 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
