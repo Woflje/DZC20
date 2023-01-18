@@ -511,7 +511,6 @@ class Double_Switch_R:
 			return [1, 3]
 		else:
 			return [1, 2]
-			return [1, 2]
 			
 	func can_connect_from(direction: int) -> bool:
 		return direction in get_flow_directions()
