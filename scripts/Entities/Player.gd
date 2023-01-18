@@ -23,6 +23,7 @@ onready var audio_step_files = []
 onready var now_on_floor = true
 onready var previous_on_floor = true
 onready var falling = false
+onready var walking = false
 onready var player_number = 0
 onready var audio_step_players = [
 	$SFX/Step_Sound_Player_1,
@@ -63,7 +64,7 @@ func _input(event):
 
 func _audio_process():
 	now_on_floor = is_on_floor()
-	if step_interval > step_interval_ticks and (velocity.z != 0 or velocity.x != 0) and now_on_floor:
+	if step_interval > step_interval_ticks and walking and now_on_floor:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		audio_step_players[player_number].stream = audio_step_files[rng.randi_range(0,len(audio_step_files)-1)]
@@ -87,14 +88,19 @@ func _physics_process(delta):
 	# Two oposite keys cancel each other and going sideways only generates a single velocity.
 
 	var direction = Vector3.ZERO
-
+	
+	walking = false
 	if Input.is_action_pressed("move_right"):
+		walking = true
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
+		walking = true
 		direction.x -= 1
 	if Input.is_action_pressed("move_back"):
+		walking = true
 		direction.z += 1
 	if Input.is_action_pressed("move_forward"):
+		walking = true
 		direction.z -= 1
 	if is_on_floor() and Input.is_action_pressed("jump"):
 		$SFX/Jump_Sound_Player.play()
