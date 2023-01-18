@@ -126,7 +126,16 @@ func create_component(pos: Vector2, node: TextureRect):
 		return Lamp.new(pos, node)
 	if tag == "switch":
 		return Switch.new(pos, node)
-
+	if tag == "LED":
+		return LED.new(pos, node)
+	if tag == "diode":
+		return Diode.new(pos, node)
+	if tag == "resistor":
+		return Resistor.new(pos, node)
+	if tag == "breaker_right":
+		return Double_Switch_R.new(pos, node)
+	if tag == "breaker_left":
+		return Double_Switch_L.new(pos, node)
 	return null
 
 
@@ -239,6 +248,27 @@ class Wire:
 		else:
 			node.modulate = Color(1, 0.41, 0.42)
 
+class Resistor:
+	extends Component
+
+	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		pass
+
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
+			node.modulate = Color(0.41, 1, 0.69)
+		else:
+			node.modulate = Color(1, 0.41, 0.42)
+			
+	func get_possible_neighbour_directions() -> Array:
+		return [2, 3]
+
+	func get_flow_directions() -> Array:
+		return [2, 3]
+
 
 class Lamp:
 	extends Component
@@ -259,6 +289,54 @@ class Lamp:
 
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
+		
+class LED:
+	extends Component
+
+	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		pass
+
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		else: 
+			node.modulate = Color(0.98, 1, 0.41)
+
+	func update_neighbour(component: Component):
+		.update_neighbour(component)
+		component.positive_current = false
+
+	func get_possible_neighbour_directions() -> Array:
+		return [2, 3]
+		
+	func get_flow_directions() -> Array:
+		return [3]
+
+class Diode:
+	extends Component
+
+	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		pass
+
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
+			node.modulate = Color(0.41, 1, 0.69)
+		else:
+			node.modulate = Color(1, 0.41, 0.42)
+
+	func update_neighbour(component: Component):
+		.update_neighbour(component)
+		component.positive_current = false
+
+	func get_possible_neighbour_directions() -> Array:
+		return [2, 3]
+		
+	func get_flow_directions() -> Array:
+		return [3]
 
 
 class Switch:
@@ -283,7 +361,7 @@ class Switch:
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_closed.png")
 
-		node.connect("simulated_item_clicked", self, "_on_simulated_item_clicked", [puzzle])
+		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
 		if is_open:
@@ -305,4 +383,100 @@ class Switch:
 		if close:
 			node._remove_tag("closed")
 		node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
-		node.disconnect("simulated_item_clicked", self, "_on_simulated_item_clicked")
+		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
+		
+class Double_Switch_L:
+	extends Component
+
+	var is_down: bool
+
+	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		self.is_down = !node._has_tag("is_down")
+
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
+			node.modulate = Color(0.41, 1, 0.69)
+		else:
+			node.modulate = Color(1, 0.41, 0.42)
+		
+		if is_down:
+			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png")
+		else:
+			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
+
+		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
+
+	func on_simulated_item_clicked(puzzle: Puzzle):
+		if is_down:
+			node._add_tag("is_down")
+		else:
+			node._remove_tag("is_down")
+		puzzle.simulate_flow()
+
+	func get_possible_neighbour_directions() -> Array:
+		return [0, 2, 3]
+
+	func get_flow_directions() -> Array:
+		if is_down:
+			return [0, 3]
+		else:
+			return [0, 2]	
+		
+
+	func reset(close: bool):
+		.reset(close)
+		if close:
+			node._remove_tag("is_down")
+		node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
+		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
+
+class Double_Switch_R:
+	extends Component
+
+	var is_down: bool
+
+	func _init(pos: Vector2, node: TextureRect).(pos, node):
+		self.is_down = !node._has_tag("is_down")
+
+	func update_self(puzzle: Puzzle):
+		.update_self(puzzle)
+		if not powered:
+			node.modulate = Color(0.51,0.51,0.51)
+		elif positive_current:
+			node.modulate = Color(0.41, 1, 0.69)
+		else:
+			node.modulate = Color(1, 0.41, 0.42)
+		
+		if is_down:
+			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png")
+		else:
+			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
+
+		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
+
+	func on_simulated_item_clicked(puzzle: Puzzle):
+		if is_down:
+			node._add_tag("is_down")
+		else:
+			node._remove_tag("is_down")
+		puzzle.simulate_flow()
+
+	func get_possible_neighbour_directions() -> Array:
+		return [1, 2, 3]
+
+	func get_flow_directions() -> Array:
+		if is_down:
+			return [1, 3]
+		else:
+			return [1, 2]	
+		
+
+	func reset(close: bool):
+		.reset(close)
+		if close:
+			node._remove_tag("is_down")
+		node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
+		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
