@@ -6,18 +6,18 @@ signal toggle_simulation(is_simulating)
 signal validators_updated()
 signal puzzle_completed()
 
-var edit_mode = true
+var edit_mode:bool = true
 
 var grid_components = {}
 
-var validators = []
+var validators = [SafeCiruitValidator.new()]
 
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
 
 
 func _ready():
 	# Testing things
-	var validator_ids = ["safe_circuit", "at_least_one_lamp_present"]
+	var validator_ids = ["HasACompleteCircuitValidator"]
 	include_validators(validator_ids)
 
 func _input(_event):
@@ -34,6 +34,8 @@ func include_validator(validator_id: String):
 		validators.append(SafeCiruitValidator.new())
 	if validator_id == "at_least_one_lamp_present":
 		validators.append(AtLeastOneLampPresentValidator.new())
+	if validator_id == "HasACompleteCircuitValidator":
+		validators.append(HasACompleteCircuitValidator.new())
 		
 
 func _toggle_simulate_mode():
@@ -530,12 +532,15 @@ class Validator:
 
 	var display_text_achieved: String
 	var display_text_failed: String
+	var display_text_working_on_it:String
 
-	func get_label():
+	func get_label(simulating):
 		if has_completed:
 			return display_text_achieved
-		else:
+		elif simulating:
 			return display_text_failed
+		else:
+			return display_text_working_on_it
 
 	func update_completed(puzzle: Puzzle):
 		if not has_completed:
@@ -574,7 +579,9 @@ class HasACompleteCircuitValidator:
 		self.is_hidden = true
 		# If it is hidden no completed messag is needed.
 		self.display_text_failed = "This circuit is not complete"
-
+	
+	func verify_completed(puzzle: Puzzle) -> bool:
+		return true
 	#TODO!
 		
 class AtLeastOneLampPresentValidator:
@@ -584,6 +591,7 @@ class AtLeastOneLampPresentValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "A lamp is included in the circuit"
 		self.display_text_failed = "This circuit does not have any lamps"
+		self.display_text_working_on_it = "One lamp is required in the circuit"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		# Check that in the grid_components there is one component with type Lamp
@@ -635,6 +643,7 @@ class LampsHaveBeenTurnedOnValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "The lamp has been turned on"
 		self.display_text_failed = "The lamp has not been turned on yet"
+		self.display_text_working_on_it = "Lamps must be able to change state"
 
 	# TODO!
 class AtLeastOneLEDPresentValidator:
@@ -644,6 +653,7 @@ class AtLeastOneLEDPresentValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "There is a LED present in the circuit"
 		self.display_text_failed = "There are no LED present in the circuit"
+		self.display_text_working_on_it = "The circuit requires one LED"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		for component in puzzle.grid_components:
@@ -658,6 +668,7 @@ class AtMostOneLEDPresentValidator:
 		self.is_hidden = true
 		#self.display_text_achieved = "There is a LED present in the circuit"
 		self.display_text_failed = "There are too many LEDs present in the circuit"
+		
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var LED_count: int = 0
@@ -677,6 +688,7 @@ class LedIsInSafeCircuitValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "The Circuit is safe"
 		self.display_text_failed ="The Circuit is not safe (try adding a ristor before the LED)"
+		self.display_text_working_on_it = "The Circuit needs to be safe"
 
 	#TODO
 
@@ -687,6 +699,7 @@ class AtLeastTwoBreakerSwitchedsValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "Two breaker switches are present in the circuit"
 		self.display_text_failed = "There are less than two breakers switches present in the circuit"
+		self.display_text_working_on_it = "This circuit requires two breakers"
 	
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var breaker_count: int = 0
@@ -735,6 +748,7 @@ class PressingEitherBreakerChangesConditionValidator:
 		self.is_hidden = false
 		self.display_text_achieved = "You have made a hotel Switch!"
 		self.display_text_failed = "Press both breakers to proof that they effect the LED"
+		self.display_text_working_on_it = "Each breaker must influance the LED"
 
 
 	# TODO

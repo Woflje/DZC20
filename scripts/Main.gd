@@ -9,13 +9,18 @@ var last_id_enterd = null
 # we can make the puzzle a array of puzzle that are instaned with a specific puzzle in them.
 # enviorment contains the hard references to each object on wich the _toggle should be called.
 # Until we have a way to load in a specific puzzle just duplicate the puzzles
+var blank_puzzle_1 = preload("res://scenes/Puzzle.tscn").instance()
+var blank_puzzle_2 = preload("res://scenes/Puzzle.tscn").instance()
+var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
+var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
-var puzzles = [preload("res://scenes/Puzzle.tscn").instance()]
-var enviorment = ["./Overworld/Lamp"]
+onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3, blank_puzzle_4]
+onready var enviorment = ["./Overworld/Lamp"]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	blank_puzzle_1.include_validators(["at_least_one_lamp_present"])
 	self.add_child(intro_scene)
 
 
