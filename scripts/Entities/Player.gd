@@ -55,12 +55,13 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
 
-	if event.is_action_released("interact"):
+	if event.is_action_pressed("interact"):
 		if raycast.is_colliding():
 			var collider = raycast.get_collider()
 			var interactable = collider.get_node("Interactable")
 			if interactable != null:
-				interactable._interact()	
+				interactable._interact()
+				print("test")	
 
 func _audio_process():
 	now_on_floor = is_on_floor()

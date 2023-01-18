@@ -1,23 +1,19 @@
-extends Button
-export(bool) var completeLevel
+extends TextureButton
+
+var close_button_texture = "res://assets/Textures/Overlay_components/close_button.png"
+var complete_button_off_texture = "res://assets/Textures/Overlay_components/complete_button_off.png"
+var complete_button_on_texture = "res://assets/Textures/Overlay_components/complete_button_on.png"
+var is_level_complete
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-# Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+#func _on_toggle_simulation(is_simulating: bool, level_comple:bool):
+#	if is_simulating:
+#		texture = load(complete_button_off_texture)
+#	else:
+#		texture = load(close_button_texture)
+#	is_level_complete = level_comple
 
 func _on_PlaceHolder_pressed():
 	# get the root node and load the overworld
-	get_node("../../../")._load_overworld(true, completeLevel)
-
-	
+	var main = get_tree().get_root().find_node("Main", true, false)
+	main._load_overworld(true, is_level_complete)
