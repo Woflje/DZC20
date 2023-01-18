@@ -2,7 +2,7 @@ extends Node
 
 
 onready var audio_bgm_players = []
-var bgm_stage = 0
+var bgm_stage = 1
 var bgm_fade_iterator = 0
 var bgm_fade_step = 0
 var miles = 0
@@ -37,8 +37,3 @@ func _process(delta):
 			if bgm_fade_iterator > bgm_fade_steps:
 				bgm_fade_step += 1
 				bgm_fade_iterator = 0
-	else:
-		if miles > 200 and bgm_stage < 4:
-			next_bgm = true
-	miles += 1
-	

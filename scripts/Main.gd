@@ -56,10 +56,10 @@ func _load_overworld(unload = true, toggle = false):
 	if unload:
 		self.remove_child(self.get_node("Puzzle"))
 	if toggle:  #
+		self.get_node("./BGM").next_bgm = true
 		self.get_node(groupe_enable[last_id_enterd]).visible  = true
 		self.get_node(groupe_enable_2[last_id_enterd]).visible  = true
-		
-
+		self.get_node(groupe_disable[last_id_enterd]).get_parent().remove_child(self.get_node(groupe_disable[last_id_enterd]))
 
 func _load_level(id):
 	# switch to "Normal" mouse mode
