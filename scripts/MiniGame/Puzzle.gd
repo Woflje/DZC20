@@ -700,9 +700,9 @@ class LEDIsInSafeCircuitValidator:
 					has_LED = true
 				if component is Resistor or component is Lamp:
 					has_resistor = true
-			if has_LED and has_resistor:
-				return true
-		return false
+			if has_LED and not has_resistor:
+				return false
+		return true
 
 class AtLeastTwoBreakerSwitchedsValidator:
 	extends Validator
