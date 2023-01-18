@@ -9,3 +9,9 @@ margin_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Channel1" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Channel2" type="AudioStreamPlayer" parent="SFX"]

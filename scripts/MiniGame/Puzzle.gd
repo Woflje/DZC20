@@ -17,12 +17,27 @@ var validators = [SafeCiruitValidator.new(), HasACompleteCircuitValidator.new()]
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
 onready var hint_label = get_tree().get_root().find_node("HintLabel", true, false)
 
+onready var sfx_dict = {}
+onready var sfx_val = $SFX/Validator
+onready var sfx_bg = $SFX/Background
+onready var sfx_c1 = $SFX/Channel1
+onready var sfx_c2 = $SFX/Channel2
+onready var sfx_c3 = $SFX/Channel3
+onready var sfx_c4 = $SFX/Channel4
+
 func _ready():
 	# Testing things
 	var validator_ids = []
 	include_validators(validator_ids)
 	hint_label.text = help_text_nom
 	
+	sfx_dict["short_circuit"] = preload("res://assets/Audio/sfx/circuit_editor_short_circuit.wav")
+	sfx_dict["sim_start"] = preload("res://assets/Audio/sfx/circuit_editor_simulation_start.wav")
+	sfx_dict["button_on"] = preload("res://assets/Audio/sfx/menu_button_on.wav")
+	sfx_dict["button_off"] = preload("res://assets/Audio/sfx/menu_button_off.wav")
+	sfx_dict["validated_one"] = preload("res://assets/Audio/sfx/circuit_editor_validated_one.wav")
+	sfx_dict["validated_all"] = preload("res://assets/Audio/sfx/circuit_editor_validated_all.wav")
+	sfx_dict["switch"] = preload("res://assets/Audio/sfx/circuit_editor_switch.wav")
 	
 func _input(_event):
 	if Input.is_action_pressed("ui_cancel"):
@@ -68,11 +83,19 @@ func _toggle_simulate_mode():
 	if edit_mode:
 		hint_label.text = help_text_nom
 		reset_simulation(true)
-		# sfx stop sim
+		sfx_c1.stream = sfx_dict["button_off"]
+		sfx_c1.play()
+		sfx_bg.stop()
 	else:
 		hint_label.text = help_text_sim
 		simulate_flow()
-		# sfx run sim
+		sfx_c1.stream = sfx_dict["button_off"]
+		sfx_c2.stream = sfx_dict["sim_start"]
+		sfx_c4.stream = sfx_dict["button_on"]
+		sfx_c1.play()
+		sfx_c2.play()
+		sfx_c4.play()
+		sfx_bg.play()
 	emit_signal("toggle_simulation", !edit_mode)
 
 
@@ -101,7 +124,8 @@ func has_short_circuit():
 func display_short_circuit():
 	for component in grid_components.values():
 		component.display_short_circuit()
-	# sfx short circuit nuke sound ear rape
+	sfx_c3.stream = sfx_dict["short_circuit"]
+	sfx_c3.play()
 	
 func discover_nodes(current: Component):
 	var directions = current.get_possible_neighbour_directions()
@@ -161,11 +185,13 @@ func validate():
 	for validator in validators:
 		if not validator.has_completed:
 			if one_validated:
-				#sfx_one_validated
+				sfx_val.stream = sfx_dict["validated_one"]
+				sfx_val.play()
 				pass
 			return
 	print("All validators completed")
-	#sfx all complete
+	sfx_val.stream = sfx_dict["validated_all"]
+	sfx_val.play()
 	emit_signal("puzzle_completed")
 
 func reset_simulation(close: bool = false):
@@ -426,7 +452,8 @@ class Switch:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_closed.png")
-		#sfx switch
+		puzzle.sfx_c1.stream = puzzle.sfx_dict["switch"]
+		puzzle.sfx_c1.play()
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -466,7 +493,8 @@ class Double_Switch_L:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
-		#sfx switch
+		puzzle.sfx_c1.stream = puzzle.sfx_dict["switch"]
+		puzzle.sfx_c1.play()
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -510,7 +538,8 @@ class Double_Switch_R:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
-		#sfx switch
+		puzzle.sfx_c1.stream = puzzle.sfx_dict["switch"]
+		puzzle.sfx_c1.play()
 		
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
