@@ -462,6 +462,8 @@ class Double_Switch_L:
 		else:
 			return [0, 2]	
 		
+	func can_connect_from(direction: int) -> bool:
+		return direction in get_flow_directions()
 
 	func reset(close: bool):
 		.reset(close)
@@ -509,7 +511,9 @@ class Double_Switch_R:
 			return [1, 3]
 		else:
 			return [1, 2]	
-		
+			
+	func can_connect_from(direction: int) -> bool:
+		return direction in get_flow_directions()
 
 	func reset(close: bool):
 		.reset(close)
