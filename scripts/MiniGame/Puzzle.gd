@@ -194,8 +194,9 @@ func validate():
 				pass
 			return
 	print("All validators completed")
-	sfx_val.stream = sfx_dict["validated_all"]
-	sfx_val.play()
+	if one_validated:
+		sfx_val.stream = sfx_dict["validated_all"]
+		sfx_val.play()
 	emit_signal("puzzle_completed")
 
 func reset_simulation(close: bool = false):

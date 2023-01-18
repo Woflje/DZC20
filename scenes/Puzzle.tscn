@@ -125,7 +125,7 @@ texture = ExtResource( 2 )
 stretch_mode = 6
 script = ExtResource( 9 )
 
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="Control/Margin/HFlow/VFlow/Run/Button"]
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="Control/Margin/HFlow/Control/VFlow/Run/Button"]
 stream = ExtResource( 15 )
 
 [node name="Second" type="VBoxContainer" parent="Control/Margin/HFlow"]
