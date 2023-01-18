@@ -25,9 +25,12 @@ func _ready():
 	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
 	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
 	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "	led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
-	blank_puzzle_1.help_text = "When simulating you can click on a switch to toggle its state"
-	blank_puzzle_2.help_text = "You can click on a empty tile to create a wire"
-	blank_puzzle_3.help_text = "A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
+	blank_puzzle_1.help_text_nom = "You can left click on a empty tile to create a wire"
+	blank_puzzle_2.help_text_nom = "SECOND HINT NOR"
+	blank_puzzle_3.help_text_nom = "A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
+	blank_puzzle_1.help_text_sim = "Left click on a switch to change it state"
+	blank_puzzle_2.help_text_sim = "SECOND HINT SIM "
+	blank_puzzle_3.help_text_sim = "THIRD HINT SIM"
 	self.add_child(intro_scene)
 	
 		

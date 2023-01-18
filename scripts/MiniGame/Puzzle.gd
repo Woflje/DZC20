@@ -10,17 +10,20 @@ var edit_mode:bool = true
 
 var grid_components = {}
 var valid_paths = []
-var help_text = "HELLO WORLD"
+var help_text_nom = "PUZZLE"
+var help_text_sim = "SIMULATION"
 var validators = [SafeCiruitValidator.new(), HasACompleteCircuitValidator.new()]
 
 onready var grid = get_tree().get_root().find_node("Grid", true, false)
-
+onready var hint_label = get_tree().get_root().find_node("HintLabel", true, false)
 
 func _ready():
 	# Testing things
 	var validator_ids = []
 	include_validators(validator_ids)
-
+	hint_label.text = help_text_nom
+	
+	
 func _input(_event):
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()  # quit the game with a single key press
@@ -63,8 +66,10 @@ func include_validator(validator_id: String):
 func _toggle_simulate_mode():
 	edit_mode = !edit_mode
 	if edit_mode:
+		hint_label.text = help_text_nom
 		reset_simulation(true)
 	else:
+		hint_label.text = help_text_sim
 		simulate_flow()
 	emit_signal("toggle_simulation", !edit_mode)
 
