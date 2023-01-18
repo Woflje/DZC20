@@ -33,7 +33,7 @@ tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 0.0780615, 0.0780615, 
 [node name="animated_orb" type="Spatial"]
 
 [node name="Sphere" type="MeshInstance" parent="."]
-transform = Transform( 0.0780615, 0, 0, 0, 0.0780615, 0, 0, 0, 0.0780615, 0, 0, 0 )
+transform = Transform( 0.0306113, 0, -0.0718091, 0, 0.0780615, 0, 0.0718091, 0, 0.0306113, 0.0030454, 0.0395414, 0.00714625 )
 mesh = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

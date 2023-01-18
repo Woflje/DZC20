@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/lights/fairylights_a/light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Models/Static/Props/fairylights_a/fairlylights_a_single_small.dae" type="PackedScene" id=2]
+
+[node name="fairylights_a_single_small" type="Spatial"]
+
+[node name="fairlylights_a_single_small" parent="." instance=ExtResource( 2 )]
+
+[node name="Spatial" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0267277, -5.97609, 0.137284 )

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/lights/fairylights_a/light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Models/Static/Props/fairylights_a/fairylights_a_arch_half.dae" type="PackedScene" id=2]
+
+[node name="fairylights_a_arch_half" type="Spatial"]
+
+[node name="fairylights_a_arch_half" parent="." instance=ExtResource( 2 )]
+
+[node name="Spatial" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48532, -18.2473, 0 )
+
+[node name="Spatial2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99395, -14.3654, 0 )

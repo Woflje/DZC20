@@ -94,5 +94,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+threads/thread_model=2
+limits/rendering/max_lights_per_object=256
 quality/subsurface_scattering/quality=2
 environment/default_environment="res://assets/Shader/default_env.tres"

@@ -4,12 +4,16 @@
 
 [node name="Intro" type="Node2D"]
 
+[node name="Spatial" type="Spatial" parent="."]
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0.501961, 0.619608, 0.635294, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_right = 1920.0
 margin_bottom = 1080.0
 theme = SubResource( 1 )

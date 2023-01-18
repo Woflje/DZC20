@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Light" type="Spatial"]
+
+[node name="OmniLight" type="OmniLight" parent="."]
+light_color = Color( 0.941176, 0.945098, 0.815686, 1 )
+light_energy = 4.953
+light_indirect_energy = 1.007
+light_bake_mode = 2
+omni_range = 2.415
+omni_attenuation = 3.86374
