@@ -147,7 +147,7 @@ func drop_data(_pos, data):
 		data["origin_node"]._update_texture(self._get_texture())
 		data["origin_node"].item_tags = self.item_tags.duplicate()
 		if self.infinate_sink == true:
-			data["origin_node"]._Clear_tile()
+			data["origin_node"]._clear_tile()
 
 	if self.infinate_sink == false:
 		self.item_tags = data["item_tags"].duplicate()

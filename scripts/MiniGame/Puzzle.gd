@@ -67,7 +67,7 @@ func discover_nodes(current: Component):
 		var component = create_component_if_new(pos)
 		if component == null:
 			continue
-		if not component.can_connect_from(opisite_direction(direction)):
+		if component.get_possible_neighbour_directions().find(opisite_direction(direction)) == -1:
 			continue
 		current.update_neighbour(component)
 		discover_nodes(component)
