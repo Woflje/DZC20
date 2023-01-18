@@ -6,19 +6,22 @@
 [ext_resource path="res://assets/Audio/sfx/jump.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Audio/sfx/landing.wav" type="AudioStream" id=5]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="CapsuleShape" id=1]
+radius = 1.1
+height = 2.0
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.282846 )
 script = ExtResource( 2 )
 
 [node name="Pivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00732565, 0.0067997, -0.000525475 )
 
 [node name="player" parent="Pivot" instance=ExtResource( 1 )]
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.137342, 0.404524, 0.00482845 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.103, 0.005 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
