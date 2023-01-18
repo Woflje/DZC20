@@ -73,6 +73,7 @@ autoplay = true
 
 [node name="Lamp" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.8852, 16.0726, 6.27578 )
+visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 

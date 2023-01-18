@@ -15,16 +15,17 @@ var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
 onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3]
-onready var enviorment = ["./Overworld/Lamp"]
+onready var enviorment = ["./Overworld/Lighting/Lights_1", "./Overworld/Lighting/Lights_2", "./Overworld/Lighting/Lights_3"]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
 	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
-	blank_puzzle_3.include_validators(["at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
+	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
 	self.add_child(intro_scene)
-
+	
+		
 
 func _input(_event):
 	# quit the game with a single key press
@@ -35,7 +36,8 @@ func _input(_event):
 		intro_bool = false
 		self.remove_child(self.get_node("Intro"))
 		_load_overworld(false, false)
-
+		for each in enviorment:
+			self.get_node(each).visible  = false
 
 func _load_overworld(unload = true, toggle = false):
 	# Swithc to captued mouse mode and load in the overworld
@@ -46,7 +48,8 @@ func _load_overworld(unload = true, toggle = false):
 	if unload:
 		self.remove_child(self.get_node("Puzzle"))
 	if toggle:  #
-		self.get_node(enviorment[last_id_enterd])._toggle()
+		self.get_node(enviorment[last_id_enterd]).visible  = true
+		
 
 
 func _load_level(id):
