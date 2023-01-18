@@ -89,7 +89,6 @@ func has_short_circuit():
 	var negative_power_source = get_component(negative_power_source_pos)
 	if negative_power_source == null:
 		return false
-	print("Has positive current: ", negative_power_source.positive_current)
 	return negative_power_source.positive_current
 
 func display_short_circuit():
@@ -279,7 +278,6 @@ class Component:
 		node.hint_tooltip = "Short circuit!"
 
 	func update_neighbour(component: Component):
-		print("Updating neighbour %s with postive current: %s" % [component, positive_current])
 		if positive_current:  # Only propagate the current if it's positive
 			component.positive_current = positive_current
 
@@ -375,10 +373,6 @@ class LED:
 			node.modulate = Color(0.51,0.51,0.51)
 		else: 
 			node.modulate = Color(0.98, 1, 0.41)
-
-	func update_neighbour(component: Component):
-		.update_neighbour(component)
-		component.positive_current = false
 
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
@@ -702,9 +696,9 @@ class LEDIsInSafeCircuitValidator:
 			var has_LED = false
 			for component_pos in path:
 				var component = puzzle.get_component(component_pos)
-				if component is LED:
+				if component is LED :
 					has_LED = true
-				if component is Resistor:
+				if component is Resistor or component is Lamp:
 					has_resistor = true
 			if has_LED and has_resistor:
 				return true
@@ -766,6 +760,8 @@ class AllBreakersInTheSameCircuitValidator:
 class PressingEitherBreakerChangesConditionValidator:
 	extends Validator
 
+	var functioning_loops: Array = []
+
 	func _init():
 		self.is_hidden = false
 		self.display_text_achieved = "You have made a hotel Switch!"
@@ -773,4 +769,22 @@ class PressingEitherBreakerChangesConditionValidator:
 		self.display_text_working_on_it = "Each breaker must influance the LED"
 
 
-	# TODO
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for path in puzzle.valid_paths:
+			var states = []
+
+			for component_pos in path:
+				var component = puzzle.get_component(component_pos)
+				if (component is Double_Switch_L) or (component is Double_Switch_R):
+					states.append(component.is_down)
+			
+			if states.size() > 0:
+				if not states in functioning_loops:
+					functioning_loops.append(states)
+
+		return functioning_loops.size() >= 2
+	
+	func reset():
+		.reset()
+		functioning_loops = []
+
