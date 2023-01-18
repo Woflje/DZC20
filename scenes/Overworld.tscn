@@ -412,6 +412,8 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
 
 [node name="3Dsounds3" type="Spatial" parent="ToggleGroups/Group3"]
 
+[node name="Group3_only" type="Spatial" parent="ToggleGroups"]
+
 [connection signal="interact" from="Puzzle_one_Pedestal" to="Lamp" method="_toggle"]
 [connection signal="interact" from="Puzzle_two_Pedestal" to="Lamp" method="_toggle"]
 [connection signal="interact" from="Puzzle_three_Pedestal" to="Lamp" method="_toggle"]

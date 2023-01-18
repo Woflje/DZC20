@@ -15,7 +15,9 @@ var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
 onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3]
-onready var enviorment = ["./Overworld/ToggleGroups/Group1", "./Overworld/ToggleGroups/Group2", "./Overworld/ToggleGroups/Group3"]
+onready var groupe_enable = ["./Overworld/ToggleGroups/Group1", "./Overworld/ToggleGroups/Group2", "./Overworld/ToggleGroups/Group3"]
+onready var groupe_enable_2 = ["./Overworld/ToggleGroups/Group1_only", "./Overworld/ToggleGroups/Group2_only", "./Overworld/ToggleGroups/Group3_only"]
+onready var groupe_disable = ["./Overworld/ToggleGroups/Group0_only", "./Overworld/ToggleGroups/Group1_only", "./Overworld/ToggleGroups/Group2_only"]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,8 +41,11 @@ func _input(_event):
 		intro_bool = false
 		self.remove_child(self.get_node("Intro"))
 		_load_overworld(false, false)
-		for each in enviorment:
+		for each in groupe_enable:
 			self.get_node(each).visible  = false
+		for each in groupe_enable_2:
+			self.get_node(each).visible  = false
+		self.get_node("./Overworld/ToggleGroups/Group0_only").visible = true
 
 func _load_overworld(unload = true, toggle = false):
 	# Swithc to captued mouse mode and load in the overworld
@@ -51,7 +56,8 @@ func _load_overworld(unload = true, toggle = false):
 	if unload:
 		self.remove_child(self.get_node("Puzzle"))
 	if toggle:  #
-		self.get_node(enviorment[last_id_enterd]).visible  = true
+		self.get_node(groupe_enable[last_id_enterd]).visible  = true
+		self.get_node(groupe_enable_2[last_id_enterd]).visible  = true
 		
 
 
