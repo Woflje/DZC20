@@ -417,11 +417,7 @@ class Double_Switch_L:
 		puzzle.simulate_flow()
 
 	func get_possible_neighbour_directions() -> Array:
-		#return [0, 2, 3]
-		if is_down:
-			return [0, 3]
-		else:
-			return [0, 2]	
+		return [0, 2, 3]
 
 	func get_flow_directions() -> Array:
 		if is_down:
@@ -469,11 +465,7 @@ class Double_Switch_R:
 		puzzle.simulate_flow()
 
 	func get_possible_neighbour_directions() -> Array:
-		#return [0, 2, 3]
-		if is_down:
-			return [1, 3]
-		else:
-			return [1, 2]	
+		return [1, 2, 3]
 
 	func get_flow_directions() -> Array:
 		if is_down:
