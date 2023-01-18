@@ -68,9 +68,11 @@ func _toggle_simulate_mode():
 	if edit_mode:
 		hint_label.text = help_text_nom
 		reset_simulation(true)
+		# sfx stop sim
 	else:
 		hint_label.text = help_text_sim
 		simulate_flow()
+		# sfx run sim
 	emit_signal("toggle_simulation", !edit_mode)
 
 
@@ -99,6 +101,7 @@ func has_short_circuit():
 func display_short_circuit():
 	for component in grid_components.values():
 		component.display_short_circuit()
+	# sfx short circuit nuke sound ear rape
 	
 func discover_nodes(current: Component):
 	var directions = current.get_possible_neighbour_directions()
@@ -147,16 +150,22 @@ func update_components():
 		component.update_self(self)
 
 func validate():
+	var one_validated = false
 	for validator in validators:
-		validator.update_completed(self)
+		if validator.update_completed(self):
+			one_validated = true
 
 	emit_signal("validators_updated")
 	
 	# If all validators are completed, we can complete the puzzle
 	for validator in validators:
 		if not validator.has_completed:
+			if one_validated:
+				#sfx_one_validated
+				pass
 			return
 	print("All validators completed")
+	#sfx all complete
 	emit_signal("puzzle_completed")
 
 func reset_simulation(close: bool = false):
@@ -417,7 +426,7 @@ class Switch:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/switch_closed.png")
-
+		#sfx switch
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -457,7 +466,7 @@ class Double_Switch_L:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
-
+		#sfx switch
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -501,7 +510,8 @@ class Double_Switch_R:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png")
 		else:
 			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
-
+		#sfx switch
+		
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -548,9 +558,11 @@ class Validator:
 		else:
 			return display_text_working_on_it
 
-	func update_completed(puzzle: Puzzle):
+	func update_completed(puzzle: Puzzle) -> bool:
 		if not has_completed:
 			has_completed = verify_completed(puzzle)
+			return has_completed and not is_hidden
+		return false
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		return false

@@ -157,6 +157,7 @@ transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 3
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToggleGroups/Group0_only/Puzzle_one_Pedestal"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
 stream = ExtResource( 33 )
+unit_db = 8.951
 autoplay = true
 
 [node name="orb_hint" parent="ToggleGroups/Group0_only/Puzzle_one_Pedestal" instance=ExtResource( 22 )]

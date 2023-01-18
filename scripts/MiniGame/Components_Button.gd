@@ -17,6 +17,7 @@ func _on_toggle_simulation(is_simulating: bool):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == BUTTON_LEFT:
+		# sfx buttonpress close/complete
 		var main = get_tree().get_root().find_node("Main", true, false)
 		main._load_overworld(true, is_level_complete)
 

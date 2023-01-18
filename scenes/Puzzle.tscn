@@ -207,6 +207,10 @@ bbcode_enabled = true
 bbcode_text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
 text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
 
+[node name="Validator" type="AudioStreamPlayer" parent="."]
+
+[node name="Editor" type="AudioStreamPlayer" parent="."]
+
 [connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_puzzle_completed"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Components/Margin/Inventory" method="_on_toggle_simulation"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_toggle_simulation"]

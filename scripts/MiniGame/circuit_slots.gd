@@ -134,7 +134,7 @@ func get_drag_data(_pos):
 		control.add_child(drag_texture)
 		drag_texture.rect_position = -0.5 * drag_texture.rect_size
 		set_drag_preview(control)
-
+		# sfx drag
 		return data
 
 
@@ -159,6 +159,7 @@ func drop_data(_pos, data):
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"])
 	_update_tooltip()
+	# sfx drop
 
 
 func _gui_input(event):
@@ -183,7 +184,9 @@ func handle_edit_mode_input(event):
 		if item_tags.empty():
 			_add_tag("wire")
 			_update_texture("res://assets/Textures/Overlay_components/wire.png")
+			# sfx drop
 		elif _has_tag("wire"):
+			# sfx pop
 			_clear_tile()
 
 
