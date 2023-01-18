@@ -15,7 +15,7 @@ var blank_puzzle_3 = preload("res://scenes/Puzzle.tscn").instance()
 var blank_puzzle_4 = preload("res://scenes/Puzzle.tscn").instance()
 
 onready var puzzles = [blank_puzzle_1, blank_puzzle_2, blank_puzzle_3]
-onready var enviorment = ["./Overworld/Lighting/Lights_1", "./Overworld/Lighting/Lights_2", "./Overworld/Lighting/Lights_3"]
+onready var enviorment = ["./Overworld/ToggleGroups/Group1", "./Overworld/ToggleGroups/Group2", "./Overworld/ToggleGroups/Group3"]
 
 
 # Called when the node enters the scene tree for the first time.

@@ -9,6 +9,3 @@
 
 [node name="Spatial" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48532, -18.2473, 0 )
-
-[node name="Spatial2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99395, -14.3654, 0 )

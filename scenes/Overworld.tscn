@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -19,9 +19,8 @@
 [ext_resource path="res://assets/Models/Static/Props/flux_square_table/flux_square_table.dae" type="PackedScene" id=17]
 [ext_resource path="res://assets/Models/Static/Props/flux_bin/flux_bin.dae" type="PackedScene" id=18]
 [ext_resource path="res://assets/Models/Static/Props/flux_0_stairs/flux_0_stairs.dae" type="PackedScene" id=19]
-[ext_resource path="res://scenes/lights/orbs/animated_orb_2.tscn" type="PackedScene" id=20]
-[ext_resource path="res://scenes/lights/orbs/animated_orb_3.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/lights/orbs/animated_orb_1.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/Models/Static/Level/group1collider.dae" type="PackedScene" id=20]
+[ext_resource path="res://assets/Models/Static/Level/group0collider.dae" type="PackedScene" id=21]
 [ext_resource path="res://scenes/lights/fairylights_a/fairylights_a_arch_small.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/lights/fairylights_a/fairylights_a_hills.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/lights/fairylights_a/fairylights_a_single_long.tscn" type="PackedScene" id=25]
@@ -43,7 +42,7 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 13.0273, 85.7865 )
 
 [node name="Puzzle_one_Pedestal" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 48.5139, 13.0431, 16.6614 )
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 37.6769, 13.0431, 74.295 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_one_Pedestal"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
@@ -52,7 +51,7 @@ unit_db = 19.297
 autoplay = true
 
 [node name="Puzzle_two_Pedestal" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 12.6052 )
+transform = Transform( 0.913276, 0, -0.407343, 0, 1, 0, 0.407343, 0, 0.913276, 49.0654, 13.0431, 8.39653 )
 puzzle_to_load = 1
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_two_Pedestal"]
@@ -62,7 +61,7 @@ unit_db = 19.297
 autoplay = true
 
 [node name="Puzzle_three_Pedestal" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 49.0654, 13.0431, 8.2842 )
+transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 103.337, 0.961171, -25.0142 )
 puzzle_to_load = 2
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Puzzle_three_Pedestal"]
@@ -77,309 +76,9 @@ visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
-[node name="Lighting" type="Node" parent="."]
-
-[node name="Lights_0" type="Spatial" parent="Lighting"]
-
-[node name="Lights_1" type="Spatial" parent="Lighting"]
-
-[node name="Lights_2" type="Spatial" parent="Lighting"]
-
-[node name="Lights_3" type="Spatial" parent="Lighting"]
-
-[node name="Cylinderlamps" type="Spatial" parent="Lighting/Lights_3"]
-
-[node name="cylinder_lamp" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.729, 31.1152, -74.5433 )
-
-[node name="cylinder_lamp2" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117.119, 25.3427, -74.1441 )
-
-[node name="cylinder_lamp3" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131.653, 26.7474, -72.4183 )
-
-[node name="cylinder_lamp4" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 118.792, 39.9518, -41.9212 )
-
-[node name="cylinder_lamp5" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 112.93, 34.1794, -48.2408 )
-
-[node name="cylinder_lamp6" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 120.992, 35.5841, -36.0247 )
-
-[node name="cylinder_lamp7" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 128.204, 76.1334, -40.4592 )
-
-[node name="cylinder_lamp8" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 130.549, 70.361, -48.7539 )
-
-[node name="cylinder_lamp9" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 124.314, 71.7657, -35.5116 )
-
-[node name="cylinder_lamp10" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 106.049, 85.5484, -39.8758 )
-
-[node name="cylinder_lamp11" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 113.901, 79.7759, -43.4334 )
-
-[node name="cylinder_lamp12" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 99.7593, 81.1806, -39.6575 )
-
-[node name="cylinder_lamp13" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 119.939, 33.3605, -19.1395 )
-
-[node name="cylinder_lamp14" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 113.077, 27.588, -24.3566 )
-
-[node name="cylinder_lamp15" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 123.121, 28.9927, -13.7093 )
-
-[node name="cylinder_lamp16" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 95.8414, 29.3784, -38.2494 )
-
-[node name="cylinder_lamp17" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 91.9857, 23.6059, -45.9588 )
-
-[node name="cylinder_lamp18" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 96.3007, 25.0106, -31.9726 )
-
-[node name="cylinder_lamp19" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 119.939, 22.7171, -36.676 )
-
-[node name="cylinder_lamp20" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 113.077, 16.9447, -41.8931 )
-
-[node name="cylinder_lamp21" parent="Lighting/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
-transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 123.121, 18.3494, -31.2458 )
-
-[node name="Boothlights" type="Spatial" parent="Lighting/Lights_3"]
-visible = false
-
-[node name="BoothLight1" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 87.9789, 0.166207, -20.7829 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight2" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.5326, 0.166207, -11.2088 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight3" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.1676, 0.166207, -13.2253 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight4" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.879, 0.166207, -17.9565 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight5" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.0436, 0.166207, -19.6243 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight6" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86.2672, 0.166207, -20.7829 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight7" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.0188, 0.166207, -16.392 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight8" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85.0435, 0.166207, -20.5894 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="BoothLight9" type="OmniLight" parent="Lighting/Lights_3/Boothlights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.6101, 0.166207, -20.2052 )
-light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
-light_energy = 0.686
-light_specular = 0.078
-light_bake_mode = 2
-shadow_enabled = true
-omni_range = 4.308
-omni_attenuation = 4.14105
-
-[node name="fairylights" type="Spatial" parent="Lighting/Lights_3"]
-
-[node name="fairylights_a_arch_big" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 30 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 88.9017, 22.5743, -59.4188 )
-
-[node name="fairylights_a_arch_half" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 26 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 97.695, 22.5503, -59.9646 )
-
-[node name="fairylights_a_arch_small" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 23 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 110.568, 10.2888, -56.4317 )
-
-[node name="fairylights_a_hills" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 24 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 127.36, 8.82624, -43.7804 )
-
-[node name="fairylights_a_single_long" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 25 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 93.3559, 22.5758, -60.3605 )
-
-[node name="fairylights_a_single_medium" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 28 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 112.716, 10.2888, -56.4317 )
-
-[node name="fairylights_a_single_small" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 31 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 122.163, 10.2888, -56.4317 )
-
-[node name="fairylights_b_1" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109.869, 22.5536, -59.258 )
-
-[node name="fairylights_b_2" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( -0.310958, 0, -0.950424, 0, 1, 0, 0.950424, 0, -0.310958, 133.832, 22.563, -45.5081 )
-
-[node name="fairylights_b_3" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 32 )]
-transform = Transform( 0.840131, 0, -0.542383, 0, 1, 0, 0.542383, 0, 0.840131, 134.343, 22.5603, -54.7832 )
-
-[node name="fairylights_b_4" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.3307, 10.5342, -51.0878 )
-
-[node name="fairylights_b_5" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 27 )]
-transform = Transform( 0.992031, 0, 0.125991, 0, 1, 0, -0.125991, 0, 0.992031, 102.517, 10.5342, -51.676 )
-
-[node name="fairylights_b_6" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( -0.422491, -0.0246627, -0.906032, -0.191629, 0.979463, 0.0626969, 0.885878, 0.200111, -0.41854, 129.084, 10.6519, -38.7433 )
-
-[node name="fairylights_a_arch_big2" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 30 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 111.299, 22.5743, -71.4606 )
-
-[node name="fairylights_a_arch_half2" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 26 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 120.092, 22.5503, -72.0064 )
-
-[node name="fairylights_a_single_long2" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 25 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 115.753, 22.5758, -72.4023 )
-
-[node name="fairylights_b_7" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 32 )]
-transform = Transform( -0.825359, 0, 0.564607, 0, 1, 0, -0.564607, 0, -0.825359, 99.031, 22.5603, -65.3747 )
-
-[node name="fairylights_b_8" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 32 )]
-transform = Transform( -0.212092, 0, 0.977249, 0, 1, 0, -0.977249, 0, -0.212092, 102.773, 22.5603, -69.1375 )
-
-[node name="fairylights_a_arch_big3" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 30 )]
-transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 78.7946, 10.3374, -40.4306 )
-
-[node name="fairylights_a_arch_half3" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 26 )]
-transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 79.0447, 10.3134, -31.624 )
-
-[node name="fairylights_a_single_long3" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 25 )]
-transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 79.5861, 10.3389, -35.9473 )
-
-[node name="fairylights_b_9" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 10.5508, -44.7317 )
-
-[node name="fairylights_b_10" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 10.5508, -32.5196 )
-
-[node name="fairylights_b_11" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 22.5561, -44.7317 )
-
-[node name="fairylights_b_12" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 22.5561, -32.5196 )
-
-[node name="fairylights_b_13" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 122.115, 22.5561, -44.7317 )
-
-[node name="fairylights_b_14" parent="Lighting/Lights_3/fairylights" instance=ExtResource( 29 )]
-transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 122.115, 22.5561, -32.5196 )
-
-[node name="OmniLight7" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.345, 8.33509, -35.6671 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.1399, 6.85329, -47.6663 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight2" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99.1323, 6.85329, -47.6663 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight3" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107.496, 6.85329, -47.6663 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight4" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.153, 5.78805, -40.1225 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight5" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.006, 5.78805, -40.1225 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight6" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.345, 10.2733, -17.7348 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
-[node name="OmniLight8" type="OmniLight" parent="Lighting/Lights_3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117.053, 4.71864, -27.854 )
-light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
-omni_range = 8.07
-
 [node name="Props" type="Spatial" parent="."]
 
 [node name="Static" type="Spatial" parent="Props"]
-
-[node name="flux_plant_pot" parent="Props/Static" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.9476, 12, -54.0387 )
-
-[node name="flux_plant_pot2" parent="Props/Static" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 104.094, 12, -54.2609 )
-
-[node name="flux_plant_pot3" parent="Props/Static" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 114.208, 12, -54.0842 )
 
 [node name="Flux_0" type="Spatial" parent="Props/Static"]
 
@@ -451,25 +150,267 @@ transform = Transform( -9.61651e-08, 0, 2, 0, 3, 0, -2.2, 0, -8.74228e-08, 123.7
 [node name="flux_0_stairs2" parent="Props/Static/Flux_0" instance=ExtResource( 19 )]
 transform = Transform( -9.61651e-08, 0, -2, 0, 3, 0, 2.2, 0, -8.74228e-08, 44.4113, 0, 10.1527 )
 
-[node name="Orbs" type="Spatial" parent="."]
+[node name="flux_0_lounge_chair_block_type2" parent="Props/Static/Flux_0" instance=ExtResource( 10 )]
+transform = Transform( -0.793332, 0, 0.608789, 0, 1, 0, -0.608789, 0, -0.793332, 134.999, 0, -43.2141 )
+
+[node name="Flux_1" type="Spatial" parent="Props/Static"]
+
+[node name="flux_plant_pot" parent="Props/Static/Flux_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.9476, 12, -54.0387 )
+
+[node name="flux_plant_pot2" parent="Props/Static/Flux_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 104.094, 12, -54.2609 )
+
+[node name="flux_plant_pot3" parent="Props/Static/Flux_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 114.208, 12, -54.0842 )
+
+[node name="flux_0_lounge_chair_block_type" parent="Props/Static/Flux_1" instance=ExtResource( 10 )]
+transform = Transform( 0.531679, 0, 0.846945, 0, 1, 0, -0.846945, 0, 0.531679, 131.575, 12.0027, -66.6387 )
+
+[node name="flux_0_lounge_chair_block_type2" parent="Props/Static/Flux_1" instance=ExtResource( 10 )]
+transform = Transform( -0.827414, 0, 0.561592, 0, 1, 0, -0.561592, 0, -0.827414, 131.215, 12.0027, -72.8233 )
+
+[node name="ToggleGroups" type="Spatial" parent="."]
+
+[node name="Group0_only" type="Spatial" parent="ToggleGroups"]
+
+[node name="Orbs0" type="Spatial" parent="ToggleGroups/Group0_only"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
 
-[node name="animated_orb" parent="Orbs" instance=ExtResource( 22 )]
+[node name="Limit_coliders0" type="Spatial" parent="ToggleGroups/Group0_only"]
 
-[node name="animated_orb2" parent="Orbs" instance=ExtResource( 20 )]
-transform = Transform( 0.89661, 0, -1.78776, 0, 2, 0, 1.78776, 0, 0.89661, 0, 0, 9.53674e-07 )
+[node name="group0collider" parent="ToggleGroups/Group0_only/Limit_coliders0" instance=ExtResource( 21 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
-[node name="animated_orb3" parent="Orbs" instance=ExtResource( 21 )]
-transform = Transform( -0.85809, 0, -1.23032, 0, 1.5, 0, 1.23032, 0, -0.85809, -1.90735e-06, 0, 0 )
+[node name="Group0" type="Spatial" parent="ToggleGroups"]
 
-[node name="animated_orb4" parent="Orbs" instance=ExtResource( 22 )]
-transform = Transform( 0.403449, 0, -0.915002, 0, 1, 0, 0.915002, 0, 0.403449, 0.257627, 0.0965557, 0.645164 )
+[node name="Lights_0" type="Spatial" parent="ToggleGroups/Group0"]
 
-[node name="animated_orb5" parent="Orbs" instance=ExtResource( 20 )]
-transform = Transform( -1.27407, 0, -1.54167, 0, 2, 0, 1.54167, 0, -1.27407, 0.257627, 0.0965557, 0.645164 )
+[node name="3Dsounds0" type="Spatial" parent="ToggleGroups/Group0"]
 
-[node name="animated_orb6" parent="Orbs" instance=ExtResource( 21 )]
-transform = Transform( -1.47194, 0, 0.288783, 0, 1.5, 0, -0.288783, 0, -1.47194, 0.257627, 0.0965557, 0.645163 )
+[node name="Group1_only" type="Spatial" parent="ToggleGroups"]
+
+[node name="Orbs1" type="Spatial" parent="ToggleGroups/Group1_only"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
+
+[node name="Limit_coliders1" type="Spatial" parent="ToggleGroups/Group1_only"]
+
+[node name="group1collider" parent="ToggleGroups/Group1_only/Limit_coliders1" instance=ExtResource( 20 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+
+[node name="Group1" type="Spatial" parent="ToggleGroups"]
+
+[node name="Lights_1" type="Spatial" parent="ToggleGroups/Group1"]
+
+[node name="3Dsounds1" type="Spatial" parent="ToggleGroups/Group1"]
+
+[node name="Group2_only" type="Spatial" parent="ToggleGroups"]
+
+[node name="Orbs2" type="Spatial" parent="ToggleGroups/Group2_only"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
+
+[node name="Group2" type="Spatial" parent="ToggleGroups"]
+
+[node name="Lights_2" type="Spatial" parent="ToggleGroups/Group2"]
+
+[node name="cylinder_lamp2" parent="ToggleGroups/Group2/Lights_2" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117.119, 25.3427, -74.1441 )
+
+[node name="cylinder_lamp11" parent="ToggleGroups/Group2/Lights_2" instance=ExtResource( 9 )]
+transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 113.901, 79.7759, -43.4334 )
+
+[node name="cylinder_lamp15" parent="ToggleGroups/Group2/Lights_2" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 123.121, 28.9927, -13.7093 )
+
+[node name="cylinder_lamp17" parent="ToggleGroups/Group2/Lights_2" instance=ExtResource( 9 )]
+transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 91.9857, 23.6059, -45.9588 )
+
+[node name="3Dsounds2" type="Spatial" parent="ToggleGroups/Group2"]
+
+[node name="Group3" type="Spatial" parent="ToggleGroups"]
+
+[node name="Lights_3" type="Spatial" parent="ToggleGroups/Group3"]
+
+[node name="Cylinderlamps" type="Spatial" parent="ToggleGroups/Group3/Lights_3"]
+
+[node name="cylinder_lamp" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.729, 31.1152, -74.5433 )
+
+[node name="cylinder_lamp3" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131.653, 26.7474, -72.4183 )
+
+[node name="cylinder_lamp4" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 118.792, 39.9518, -41.9212 )
+
+[node name="cylinder_lamp5" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 112.93, 34.1794, -48.2408 )
+
+[node name="cylinder_lamp6" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.645391, 0, -0.763852, 0, 1, 0, 0.763852, 0, 0.645391, 120.992, 35.5841, -36.0247 )
+
+[node name="cylinder_lamp7" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 128.204, 76.1334, -40.4592 )
+
+[node name="cylinder_lamp8" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 130.549, 70.361, -48.7539 )
+
+[node name="cylinder_lamp9" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( -0.316345, 0, -0.948644, 0, 1, 0, 0.948644, 0, -0.316345, 124.314, 71.7657, -35.5116 )
+
+[node name="cylinder_lamp10" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 106.049, 85.5484, -39.8758 )
+
+[node name="cylinder_lamp12" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( -0.928997, 0, -0.370087, 0, 1, 0, 0.370087, 0, -0.928997, 99.7593, 81.1806, -39.6575 )
+
+[node name="cylinder_lamp13" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 119.939, 33.3605, -19.1395 )
+
+[node name="cylinder_lamp14" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 113.077, 27.588, -24.3566 )
+
+[node name="cylinder_lamp16" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 95.8414, 29.3784, -38.2494 )
+
+[node name="cylinder_lamp18" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.405413, 0, -0.914134, 0, 1, 0, 0.914134, 0, 0.405413, 96.3007, 25.0106, -31.9726 )
+
+[node name="cylinder_lamp19" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 119.939, 22.7171, -36.676 )
+
+[node name="cylinder_lamp20" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 113.077, 16.9447, -41.8931 )
+
+[node name="cylinder_lamp21" parent="ToggleGroups/Group3/Lights_3/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 0.767154, 0, -0.641463, 0, 1, 0, 0.641463, 0, 0.767154, 123.121, 18.3494, -31.2458 )
+
+[node name="fairylights" type="Spatial" parent="ToggleGroups/Group3/Lights_3"]
+
+[node name="fairylights_a_arch_big" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 30 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 88.9017, 22.5743, -59.4188 )
+
+[node name="fairylights_a_arch_half" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 26 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 97.695, 22.5503, -59.9646 )
+
+[node name="fairylights_a_arch_small" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 23 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 110.568, 10.2888, -56.4317 )
+
+[node name="fairylights_a_hills" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 24 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 127.36, 8.82624, -43.7804 )
+
+[node name="fairylights_a_single_long" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 25 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 93.3559, 22.5758, -60.3605 )
+
+[node name="fairylights_a_single_medium" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 28 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 112.716, 10.2888, -56.4317 )
+
+[node name="fairylights_a_single_small" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 31 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 122.163, 10.2888, -56.4317 )
+
+[node name="fairylights_b_1" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 109.869, 22.5536, -59.258 )
+
+[node name="fairylights_b_2" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( -0.310958, 0, -0.950424, 0, 1, 0, 0.950424, 0, -0.310958, 133.832, 22.563, -45.5081 )
+
+[node name="fairylights_b_3" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 32 )]
+transform = Transform( 0.840131, 0, -0.542383, 0, 1, 0, 0.542383, 0, 0.840131, 134.343, 22.5603, -54.7832 )
+
+[node name="fairylights_b_4" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.3307, 10.5342, -51.0878 )
+
+[node name="fairylights_b_5" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 27 )]
+transform = Transform( 0.992031, 0, 0.125991, 0, 1, 0, -0.125991, 0, 0.992031, 102.517, 10.5342, -51.676 )
+
+[node name="fairylights_b_6" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( -0.422491, -0.0246627, -0.906032, -0.191629, 0.979463, 0.0626969, 0.885878, 0.200111, -0.41854, 129.084, 10.6519, -38.7433 )
+
+[node name="fairylights_a_arch_big2" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 30 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 111.299, 22.5743, -71.4606 )
+
+[node name="fairylights_a_arch_half2" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 26 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 120.092, 22.5503, -72.0064 )
+
+[node name="fairylights_a_single_long2" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 25 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 115.753, 22.5758, -72.4023 )
+
+[node name="fairylights_b_7" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 32 )]
+transform = Transform( -0.825359, 0, 0.564607, 0, 1, 0, -0.564607, 0, -0.825359, 99.031, 22.5603, -65.3747 )
+
+[node name="fairylights_b_8" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 32 )]
+transform = Transform( -0.212092, 0, 0.977249, 0, 1, 0, -0.977249, 0, -0.212092, 102.773, 22.5603, -69.1375 )
+
+[node name="fairylights_a_arch_big3" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 30 )]
+transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 78.7946, 10.3374, -40.4306 )
+
+[node name="fairylights_a_arch_half3" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 26 )]
+transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 79.0447, 10.3134, -31.624 )
+
+[node name="fairylights_a_single_long3" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 25 )]
+transform = Transform( -0.0100774, 0, -0.299831, 0, 0.3, 0, 0.299831, 0, -0.0100774, 79.5861, 10.3389, -35.9473 )
+
+[node name="fairylights_b_9" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 10.5508, -44.7317 )
+
+[node name="fairylights_b_10" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 10.5508, -32.5196 )
+
+[node name="fairylights_b_11" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 22.5561, -44.7317 )
+
+[node name="fairylights_b_12" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 84.4364, 22.5561, -32.5196 )
+
+[node name="fairylights_b_13" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 122.115, 22.5561, -44.7317 )
+
+[node name="fairylights_b_14" parent="ToggleGroups/Group3/Lights_3/fairylights" instance=ExtResource( 29 )]
+transform = Transform( 0.0234033, 0, -0.999726, 0, 1, 0, 0.999726, 0, 0.0234033, 122.115, 22.5561, -32.5196 )
+
+[node name="OmniLight7" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.345, 8.33509, -35.6671 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.1399, 6.85329, -47.6663 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight2" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 99.1323, 6.85329, -47.6663 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight3" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 107.496, 6.85329, -47.6663 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight4" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.153, 5.78805, -40.1225 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight5" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.006, 5.78805, -40.1225 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight6" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.345, 10.2733, -17.7348 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="OmniLight8" type="OmniLight" parent="ToggleGroups/Group3/Lights_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117.053, 4.71864, -27.854 )
+light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
+omni_range = 8.07
+
+[node name="Orbs3" type="Spatial" parent="ToggleGroups/Group3"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
+
+[node name="3Dsounds3" type="Spatial" parent="ToggleGroups/Group3"]
 
 [connection signal="interact" from="Puzzle_one_Pedestal" to="Lamp" method="_toggle"]
 [connection signal="interact" from="Puzzle_two_Pedestal" to="Lamp" method="_toggle"]
