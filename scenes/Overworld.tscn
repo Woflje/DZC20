@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Models/Static/Props/flux_plant_pot/flux_plant_pot.dae" type="PackedScene" id=3]
 [ext_resource path="res://components/TestBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://components/Lamp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://components/UI/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Models/Static/Props/flux_0_booth/flux_0_booth.dae" type="PackedScene" id=7]
+[ext_resource path="res://assets/Models/Static/Props/flux_0_tree/flux_0_tree.dae" type="PackedScene" id=8]
+[ext_resource path="res://assets/Models/Static/Props/flux_cylinder_lamp/flux_cylinder_lamp.dae" type="PackedScene" id=9]
+[ext_resource path="res://assets/Models/Static/Props/flux_0_lounge_chair_block_type/flux_0_lounge_chair_block_type.dae" type="PackedScene" id=10]
+[ext_resource path="res://assets/Models/Static/Props/flux_lounge_chair/flux_lounge_chair_blue.dae" type="PackedScene" id=11]
+[ext_resource path="res://assets/Models/Static/Props/flux_lounge_chair/flux_lounge_chair.dae" type="PackedScene" id=12]
+[ext_resource path="res://assets/Models/Static/Props/card_reader_wall_mount/card_reader_wall_mount.dae" type="PackedScene" id=13]
+[ext_resource path="res://assets/Models/Static/Props/flux_0_couches/flux_0_couches.dae" type="PackedScene" id=14]
+[ext_resource path="res://assets/Models/Static/Props/poof/poof.dae" type="PackedScene" id=15]
+[ext_resource path="res://assets/Models/Static/Props/poof/poof_blue.dae" type="PackedScene" id=16]
+[ext_resource path="res://assets/Models/Static/Props/flux_square_table/flux_square_table.dae" type="PackedScene" id=17]
+[ext_resource path="res://assets/Models/Static/Props/flux_bin/flux_bin.dae" type="PackedScene" id=18]
+[ext_resource path="res://assets/Models/Static/Props/flux_0_stairs/flux_0_stairs.dae" type="PackedScene" id=19]
 
 [node name="Overworld" type="Node"]
 
@@ -36,12 +50,223 @@ shadow_enabled = true
 omni_range = 10.982
 omni_attenuation = 4.14105
 
-[node name="Lights_1" type="Node" parent="Lighting"]
+[node name="Lights_1" type="Spatial" parent="Lighting"]
 
-[node name="Lights_2" type="Node" parent="Lighting"]
+[node name="Lights_2" type="Spatial" parent="Lighting"]
 
-[node name="Lights_3_all" type="Node" parent="Lighting"]
+[node name="Lights_3_all" type="Spatial" parent="Lighting"]
 
-[node name="Props" type="Node" parent="."]
+[node name="Cylinderlamps" type="Spatial" parent="Lighting/Lights_3_all"]
+
+[node name="flux_cylinder_lamp" parent="Lighting/Lights_3_all/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118.486, 24.1574, -42.6956 )
+
+[node name="light" type="OmniLight" parent="Lighting/Lights_3_all/Cylinderlamps/flux_cylinder_lamp"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12294, -0.0680504 )
+light_color = Color( 0.94902, 0.913725, 0.894118, 1 )
+light_energy = 4.675
+light_specular = 0.078
+light_bake_mode = 2
+omni_range = 8.0
+omni_attenuation = 2.82842
+
+[node name="flux_cylinder_lamp2" parent="Lighting/Lights_3_all/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 118.486, 29.1561, -35.3624 )
+
+[node name="light" type="OmniLight" parent="Lighting/Lights_3_all/Cylinderlamps/flux_cylinder_lamp2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12294, -0.0680504 )
+light_color = Color( 0.94902, 0.913725, 0.894118, 1 )
+light_energy = 4.675
+light_specular = 0.078
+light_bake_mode = 2
+omni_range = 8.0
+omni_attenuation = 2.82842
+
+[node name="flux_cylinder_lamp3" parent="Lighting/Lights_3_all/Cylinderlamps" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.145, 28.492, -42.6956 )
+
+[node name="light" type="OmniLight" parent="Lighting/Lights_3_all/Cylinderlamps/flux_cylinder_lamp3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12294, -0.0680504 )
+light_color = Color( 0.94902, 0.913725, 0.894118, 1 )
+light_energy = 4.675
+light_specular = 0.078
+light_bake_mode = 2
+omni_range = 8.0
+omni_attenuation = 2.82842
+
+[node name="Boothlights" type="Spatial" parent="Lighting/Lights_3_all"]
+
+[node name="BoothLight1" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 87.9789, 0.166207, -20.7829 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight2" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.5326, 0.166207, -11.2088 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight3" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.1676, 0.166207, -13.2253 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight4" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.879, 0.166207, -17.9565 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight5" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.0436, 0.166207, -19.6243 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight6" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86.2672, 0.166207, -20.7829 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight7" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.0188, 0.166207, -16.392 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight8" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85.0435, 0.166207, -20.5894 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="BoothLight9" type="OmniLight" parent="Lighting/Lights_3_all/Boothlights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.6101, 0.166207, -20.2052 )
+light_color = Color( 0.94902, 0.670588, 0.501961, 1 )
+light_energy = 0.686
+light_specular = 0.078
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 4.308
+omni_attenuation = 4.14105
+
+[node name="Props" type="Spatial" parent="."]
+
+[node name="Static" type="Spatial" parent="Props"]
+
+[node name="flux_plant_pot" parent="Props/Static" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.9476, 12, -54.0387 )
+
+[node name="flux_plant_pot2" parent="Props/Static" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 104.094, 12, -54.2609 )
+
+[node name="flux_plant_pot3" parent="Props/Static" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 114.208, 12, -54.0842 )
+
+[node name="Flux_0" type="Spatial" parent="Props/Static"]
+
+[node name="Lounge" type="Spatial" parent="Props/Static/Flux_0"]
+
+[node name="flux_0_couches" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 14 )]
+transform = Transform( 1.3, 0, 0, 0, 1, 0, 0, 0, 1.2, 89.9635, 0, -50.9189 )
+
+[node name="flux_0_couches2" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 14 )]
+transform = Transform( 1.3, 0, 0, 0, 1, 0, 0, 0, 1.2, 99.3228, 0, -50.9189 )
+
+[node name="flux_0_couches3" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 14 )]
+transform = Transform( 1.3, 0, 0, 0, 1, 0, 0, 0, 1.2, 108.668, 0, -50.9189 )
+
+[node name="flux_lounge_chair" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 12 )]
+transform = Transform( 0.946063, 0, -0.323983, 0, 1, 0, 0.323983, 0, 0.946063, 107.485, 1.19209e-07, -42.9208 )
+
+[node name="flux_lounge_chair_blue" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 11 )]
+transform = Transform( 0.981289, 0, 0.192539, 0, 1, 0, -0.192539, 0, 0.981289, 111.229, 0, -43.0994 )
+
+[node name="poof" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 15 )]
+transform = Transform( 0.899359, 0, -0.43721, 0, 1, 0, 0.43721, 0, 0.899359, 98.9479, 4.76837e-07, -43.2425 )
+
+[node name="poof_blue" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 91.5187, 4.76837e-07, -41.6639 )
+
+[node name="flux_square_table" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.8722, 0.0305747, -46.9774 )
+
+[node name="flux_square_table2" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.468, 0.0305747, -46.9774 )
+
+[node name="flux_square_table3" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.569, 0.0305747, -46.9774 )
+
+[node name="flux_square_table4" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 88.6522, 0.0305747, -46.9774 )
+
+[node name="flux_square_table5" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100.534, 0.0305747, -46.9774 )
+
+[node name="flux_lounge_chair2" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 12 )]
+transform = Transform( 0.998191, 0, 0.0601252, 0, 1, 0, -0.0601252, 0, 0.998191, 102.473, 0.0381266, -43.1553 )
+
+[node name="flux_lounge_chair_blue2" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 11 )]
+transform = Transform( 0.993546, 0, -0.113429, 0, 1, 0, 0.113429, 0, 0.993546, 95.5698, 0, -43.0994 )
+
+[node name="flux_lounge_chair_blue3" parent="Props/Static/Flux_0/Lounge" instance=ExtResource( 11 )]
+transform = Transform( 0.627637, 0, -0.778506, 0, 1, 0, 0.778506, 0, 0.627637, 86.6694, 0, -43.0994 )
+
+[node name="flux_0_booth" parent="Props/Static/Flux_0" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 87.7168, 0, -20.665 )
+
+[node name="flux_0_tree" parent="Props/Static/Flux_0" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 126.113, 0, -18.8011 )
+
+[node name="flux_0_lounge_chair_block_type" parent="Props/Static/Flux_0" instance=ExtResource( 10 )]
+transform = Transform( 0.580063, 0, 0.814571, 0, 1, 0, -0.814571, 0, 0.580063, 134.999, 0, -37.019 )
+
+[node name="card_reader_wall_mount" parent="Props/Static/Flux_0" instance=ExtResource( 13 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 76.9701, 3.53502, -51.0893 )
+
+[node name="flux_bin" parent="Props/Static/Flux_0" instance=ExtResource( 18 )]
+transform = Transform( -0.0232469, 0, -1.49982, 0, 1.5, 0, 1.49982, 0, -0.0232469, 75.2884, 4.76837e-07, -30.8621 )
+
+[node name="flux_0_stairs" parent="Props/Static/Flux_0" instance=ExtResource( 19 )]
+transform = Transform( -9.61651e-08, 0, 2, 0, 3, 0, -2.2, 0, -8.74228e-08, 123.776, 0, -55.9674 )
+
+[node name="flux_0_stairs2" parent="Props/Static/Flux_0" instance=ExtResource( 19 )]
+transform = Transform( -9.61651e-08, 0, -2, 0, 3, 0, 2.2, 0, -8.74228e-08, 44.4113, 0, 10.1527 )
 
 [connection signal="interact" from="TestBlock" to="Lamp" method="_toggle"]
