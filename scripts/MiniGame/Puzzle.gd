@@ -21,7 +21,7 @@ func _ready():
 	# Testing things
 	var validator_ids = []
 	include_validators(validator_ids)
-	hint_label.text = help_text_nom
+	hint_label.bbcode_text = help_text_nom
 	
 	
 func _input(_event):
@@ -50,6 +50,10 @@ func include_validator(validator_id: String):
 		validators.append(AtLeastOneLEDPresentValidator.new())
 	if validator_id == "at_most_one_led_present":
 		validators.append(AtMostOneLEDPresentValidator.new())
+	if validator_id == "led_is_off":
+		validators.append(LEDIsOffValidator.new())
+	if validator_id == "led_is_on":
+		validators.append(LEDIsOnValidator.new())
 	if validator_id == "led_is_in_safe_circuit":
 		validators.append(LEDIsInSafeCircuitValidator.new())
 	if validator_id == "at_least_two_breaker_switcheds":
@@ -66,11 +70,11 @@ func include_validator(validator_id: String):
 func _toggle_simulate_mode():
 	edit_mode = !edit_mode
 	if edit_mode:
-		hint_label.text = help_text_nom
+		hint_label.bbcode_text = help_text_nom
 		reset_simulation(true)
 		# sfx stop sim
 	else:
-		hint_label.text = help_text_sim
+		hint_label.bbcode_text = help_text_sim
 		simulate_flow()
 		# sfx run sim
 	emit_signal("toggle_simulation", !edit_mode)
@@ -649,7 +653,6 @@ class LampsAreOffValidator:
 					return false
 		return true
 
-
 class LampsAreOnValidator:
 	extends Validator
 
@@ -697,6 +700,38 @@ class AtMostOneLEDPresentValidator:
 				LED_count += 1
 		
 		return LED_count <= 1
+
+class LEDIsOnValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "The LED has been on"
+		self.display_text_failed = "The LED needs to be on"
+		self.display_text_working_on_it = "The LED can be on"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for component in puzzle.grid_components.values():
+			if component is LED:
+				if component.powered:
+					return true
+		return false
+
+class LEDIsOffValidator:
+	extends Validator
+
+	func _init():
+		self.is_hidden = false
+		self.display_text_achieved = "The LED has been off"
+		self.display_text_failed = "The LED needs to be off"
+		self.display_text_working_on_it = "The LED can be off"
+
+	func verify_completed(puzzle: Puzzle) -> bool:
+		for component in puzzle.grid_components.values():
+			if component is LED:
+				if not component.powered:
+					return true
+		return false
 
 class LEDIsInSafeCircuitValidator:
 	extends Validator
@@ -753,7 +788,6 @@ class AtMostTwoBreakerSwitchedsValidator:
 				breaker_count += 1
 		
 		return breaker_count <= 2
-
 
 class AllBreakersInTheSameCircuitValidator:
 	extends Validator

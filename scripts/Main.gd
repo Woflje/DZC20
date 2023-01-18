@@ -23,14 +23,14 @@ onready var groupe_disable = ["./Overworld/ToggleGroups/Group0_only", "./Overwor
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	blank_puzzle_1.include_validators(["at_least_one_lamp_present", "at_most_one_lamp_present", "lamps_are_off", "lamps_are_on"])
-	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_in_safe_circuit"])
-	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present",  "	led_is_in_safe_circuit", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition"])
-	blank_puzzle_1.help_text_nom = "You can left click on a empty tile to create a wire"
-	blank_puzzle_2.help_text_nom = "SECOND HINT NOR"
-	blank_puzzle_3.help_text_nom = "A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
+	blank_puzzle_2.include_validators(["at_least_one_led_present", "at_most_one_led_present", "led_is_on", "led_is_in_safe_circuit"])
+	blank_puzzle_3.include_validators([ "at_least_one_led_present", "at_most_one_led_present", "at_least_two_breaker_switcheds", "at_most_two_breaker_switcheds", "all_breakers_in_the_same_circuit", "pressing_either_breaker_changes_condition", "led_is_off", "led_is_on",  "led_is_in_safe_circuit",])
+	blank_puzzle_1.help_text_nom = "TASK: Create a circuit that turns on the lamp with a switch. \nTIP: Click 'simulate' to see if the circuit is correct."
+	blank_puzzle_2.help_text_nom = "TASK: Wire an LED to light up permanently. Make sure that it does not short curcuit. \nTIP: You can left click on an empty tile to create a wire, and click on a wire to delete it."
+	blank_puzzle_3.help_text_nom = "TASK: A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
 	blank_puzzle_1.help_text_sim = "Left click on a switch to change it state"
-	blank_puzzle_2.help_text_sim = "SECOND HINT SIM "
-	blank_puzzle_3.help_text_sim = "THIRD HINT SIM"
+	blank_puzzle_2.help_text_sim = "HINT: LED's have little internal resistance, so you need another way to limit the current."
+	blank_puzzle_3.help_text_sim = "HINT: Both breakers need to be able to turn the light on and off. Independendly of each other."
 	self.add_child(intro_scene)
 	
 		

@@ -30,6 +30,7 @@ margin_bottom = 1080.0
 [node name="Background" type="TextureRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 18.0
 texture = ExtResource( 10 )
 expand = true
 
@@ -49,55 +50,56 @@ margin_top = 25.0
 margin_right = 2455.0
 margin_bottom = 2130.0
 
-[node name="VFlow" type="HFlowContainer" parent="Control/Margin/HFlow"]
-margin_right = 510.0
-margin_bottom = 916.0
+[node name="Control" type="Control" parent="Control/Margin/HFlow"]
+margin_right = 523.574
+margin_bottom = 4.0
+rect_min_size = Vector2( 523.574, 0 )
 
-[node name="Components" type="MarginContainer" parent="Control/Margin/HFlow/VFlow"]
-margin_right = 510.0
-margin_bottom = 650.0
-size_flags_horizontal = 0
-size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="Control/Margin/HFlow/VFlow/Components"]
+[node name="TextureRect" type="TextureRect" parent="Control/Margin/HFlow/Control"]
 modulate = Color( 1, 1, 1, 0.996078 )
-margin_right = 510.0
+margin_left = 4.0
+margin_right = 514.0
 margin_bottom = 650.0
-rect_min_size = Vector2( 510, 650 )
+rect_min_size = Vector2( 510, 1024 )
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 
-[node name="Margin" type="MarginContainer" parent="Control/Margin/HFlow/VFlow/Components"]
+[node name="VFlow" type="VBoxContainer" parent="Control/Margin/HFlow/Control"]
+margin_left = 4.0
+margin_right = 514.0
+margin_bottom = 916.0
+
+[node name="Components" type="MarginContainer" parent="Control/Margin/HFlow/Control/VFlow"]
 margin_right = 510.0
 margin_bottom = 650.0
-custom_constants/margin_right = 30
-custom_constants/margin_top = 170
-custom_constants/margin_left = 50
-custom_constants/margin_bottom = 25
+size_flags_vertical = 3
+custom_constants/margin_right = 25
+custom_constants/margin_top = 175
+custom_constants/margin_left = 40
 
-[node name="Inventory" type="GridContainer" parent="Control/Margin/HFlow/VFlow/Components/Margin"]
-margin_left = 50.0
-margin_top = 170.0
-margin_right = 480.0
-margin_bottom = 625.0
+[node name="Inventory" type="GridContainer" parent="Control/Margin/HFlow/Control/VFlow/Components"]
+margin_left = 40.0
+margin_top = 175.0
+margin_right = 485.0
+margin_bottom = 650.0
 custom_constants/vseparation = 30
 custom_constants/hseparation = 30
 columns = 3
 script = ExtResource( 6 )
 
-[node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/VFlow"]
+[node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/Control/VFlow"]
 margin_top = 654.0
 margin_right = 510.0
 margin_bottom = 916.0
 rect_min_size = Vector2( 478, 0 )
 
-[node name="Spacer" type="Control" parent="Control/Margin/HFlow/VFlow/Run"]
+[node name="Spacer" type="Control" parent="Control/Margin/HFlow/Control/VFlow/Run"]
 margin_right = 510.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Simulate Button" type="TextureRect" parent="Control/Margin/HFlow/VFlow/Run"]
+[node name="Simulate Button" type="TextureRect" parent="Control/Margin/HFlow/Control/VFlow/Run"]
 margin_top = 29.0
 margin_right = 510.0
 margin_bottom = 129.0
@@ -106,13 +108,13 @@ texture = ExtResource( 3 )
 stretch_mode = 6
 script = ExtResource( 4 )
 
-[node name="Spacer2" type="Control" parent="Control/Margin/HFlow/VFlow/Run"]
+[node name="Spacer2" type="Control" parent="Control/Margin/HFlow/Control/VFlow/Run"]
 margin_top = 133.0
 margin_right = 510.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Button" type="TextureRect" parent="Control/Margin/HFlow/VFlow/Run"]
+[node name="Button" type="TextureRect" parent="Control/Margin/HFlow/Control/VFlow/Run"]
 margin_top = 162.0
 margin_right = 510.0
 margin_bottom = 262.0
@@ -122,9 +124,9 @@ stretch_mode = 6
 script = ExtResource( 9 )
 
 [node name="Second" type="VBoxContainer" parent="Control/Margin/HFlow"]
-margin_left = 514.0
-margin_right = 514.0
-margin_bottom = 916.0
+margin_left = 527.0
+margin_right = 527.0
+margin_bottom = 4.0
 
 [node name="Run Panel" type="Control" parent="Control/Margin/HFlow/Second"]
 
@@ -211,9 +213,10 @@ text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
 
 [node name="Editor" type="AudioStreamPlayer" parent="."]
 
-[connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_puzzle_completed"]
-[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Components/Margin/Inventory" method="_on_toggle_simulation"]
-[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_toggle_simulation"]
+[connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/Control/VFlow/Run/Button" method="_on_puzzle_completed"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Control/VFlow/Components/Inventory" method="_on_toggle_simulation"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Control/VFlow/Run/Simulate Button" method="_on_toggle_simulation"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Control/VFlow/Run/Button" method="_on_toggle_simulation"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/RequirementsList" method="_on_toggle_simulation"]
 [connection signal="validators_updated" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/RequirementsList" method="_on_validators_updated"]
-[connection signal="clicked" from="Control/Margin/HFlow/VFlow/Run/Simulate Button" to="." method="_toggle_simulate_mode"]
+[connection signal="clicked" from="Control/Margin/HFlow/Control/VFlow/Run/Simulate Button" to="." method="_toggle_simulate_mode"]

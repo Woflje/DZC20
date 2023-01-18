@@ -28,7 +28,8 @@ func _ready():
 
 	for item in inv_item_list:
 		add_child(create_item(item[0], item[1], size))
-	pass
+
+	print("Got %s children" % get_child_count())
 
 
 func create_item(name: String, icon: String, size: float):
