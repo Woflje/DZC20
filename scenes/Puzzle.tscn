@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/MiniGame/Puzzle.gd" type="Script" id=1]
 [ext_resource path="res://assets/Textures/Overlay_components/close_button.png" type="Texture" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/Requirement.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/MiniGame/RequirementsList.gd" type="Script" id=12]
 [ext_resource path="res://assets/Fonts/Comfortaa-Bold.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/Audio/sfx/circuit_editor_simulation_running.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/Audio/sfx/menu_button_off.wav" type="AudioStream" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -123,6 +125,9 @@ texture = ExtResource( 2 )
 stretch_mode = 6
 script = ExtResource( 9 )
 
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="Control/Margin/HFlow/VFlow/Run/Button"]
+stream = ExtResource( 15 )
+
 [node name="Second" type="VBoxContainer" parent="Control/Margin/HFlow"]
 margin_left = 527.0
 margin_right = 527.0
@@ -209,9 +214,20 @@ bbcode_enabled = true
 bbcode_text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
 text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
 
-[node name="Validator" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="Node" parent="."]
 
-[node name="Editor" type="AudioStreamPlayer" parent="."]
+[node name="Validator" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Channel1" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Channel2" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Channel3" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Channel4" type="AudioStreamPlayer" parent="SFX"]
+
+[node name="Background" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 14 )
 
 [connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/Control/VFlow/Run/Button" method="_on_puzzle_completed"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Control/VFlow/Components/Inventory" method="_on_toggle_simulation"]

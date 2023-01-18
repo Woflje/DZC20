@@ -14,6 +14,9 @@ var item_tags = []  # a empty array is used for empty slots
 # neighbor pointers are update after creation
 # they are left at null if no neighbor exists at that direction
 
+onready var sfx_c1 = $SFX/Channel1
+onready var sfx_c2 = $SFX/Channel2
+onready var sfx_dict = {}
 
 func _panel_components():
 	panel_type = PanelType.Components
@@ -81,9 +84,9 @@ func _update_tooltip():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	puzzle = get_tree().get_root().find_node("Puzzle", true, false)
-
 	add_to_group("DRAGGABLE")
-
+	sfx_dict["drag"] = preload("res://assets/Audio/sfx/circuit_editor_drag.wav")
+	sfx_dict["drop"] = preload("res://assets/Audio/sfx/circuit_editor_drop.wav")
 
 func _clear_tile():
 	texture = blank_texture
@@ -134,7 +137,8 @@ func get_drag_data(_pos):
 		control.add_child(drag_texture)
 		drag_texture.rect_position = -0.5 * drag_texture.rect_size
 		set_drag_preview(control)
-		# sfx drag
+		sfx_c1.stream = sfx_dict["drag"]
+		sfx_c1.play()
 		return data
 
 
@@ -159,7 +163,8 @@ func drop_data(_pos, data):
 		self.item_tags = data["item_tags"].duplicate()
 		self._update_texture(data["origin_texture"])
 	_update_tooltip()
-	# sfx drop
+	sfx_c1.stream = sfx_dict["drop"]
+	sfx_c1.play()
 
 
 func _gui_input(event):
@@ -184,9 +189,11 @@ func handle_edit_mode_input(event):
 		if item_tags.empty():
 			_add_tag("wire")
 			_update_texture("res://assets/Textures/Overlay_components/wire.png")
-			# sfx drop
+			sfx_c1.stream = sfx_dict["drop"]
+			sfx_c1.play()
 		elif _has_tag("wire"):
-			# sfx pop
+			sfx_c2.stream = sfx_dict["drag"]
+			sfx_c2.play()
 			_clear_tile()
 
 

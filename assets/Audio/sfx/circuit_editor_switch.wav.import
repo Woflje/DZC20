@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/circuit_editor_switch.wav-c2fda4ee478df97ae7c5e5498d4f7242.sample"
+
+[deps]
+
+source_file="res://assets/Audio/sfx/circuit_editor_switch.wav"
+dest_files=[ "res://.import/circuit_editor_switch.wav-c2fda4ee478df97ae7c5e5498d4f7242.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
