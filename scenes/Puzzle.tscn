@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/MiniGame/Puzzle.gd" type="Script" id=1]
 [ext_resource path="res://assets/Textures/Overlay_components/close_button.png" type="Texture" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://assets/Textures/Overlay_components/background_dark.png" type="Texture" id=10]
 [ext_resource path="res://scenes/Requirement.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/MiniGame/RequirementsList.gd" type="Script" id=12]
+[ext_resource path="res://assets/Fonts/Comfortaa-Bold.ttf" type="DynamicFontData" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+font_data = ExtResource( 13 )
 
 [node name="Puzzle" type="Control"]
 script = ExtResource( 1 )
@@ -46,7 +51,7 @@ margin_bottom = 2130.0
 
 [node name="VFlow" type="HFlowContainer" parent="Control/Margin/HFlow"]
 margin_right = 510.0
-margin_bottom = 779.0
+margin_bottom = 916.0
 
 [node name="Components" type="MarginContainer" parent="Control/Margin/HFlow/VFlow"]
 margin_right = 510.0
@@ -81,25 +86,45 @@ custom_constants/hseparation = 30
 columns = 3
 script = ExtResource( 6 )
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Margin/HFlow/VFlow"]
+[node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/VFlow"]
 margin_top = 654.0
 margin_right = 510.0
-margin_bottom = 779.0
-custom_constants/margin_top = 25
+margin_bottom = 916.0
+rect_min_size = Vector2( 478, 0 )
 
-[node name="Button" type="TextureRect" parent="Control/Margin/HFlow/VFlow/MarginContainer"]
-margin_top = 25.0
+[node name="Spacer" type="Control" parent="Control/Margin/HFlow/VFlow/Run"]
 margin_right = 510.0
-margin_bottom = 125.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Simulate Button" type="TextureRect" parent="Control/Margin/HFlow/VFlow/Run"]
+margin_top = 29.0
+margin_right = 510.0
+margin_bottom = 129.0
+rect_min_size = Vector2( 0, 100 )
+texture = ExtResource( 3 )
+stretch_mode = 6
+script = ExtResource( 4 )
+
+[node name="Spacer2" type="Control" parent="Control/Margin/HFlow/VFlow/Run"]
+margin_top = 133.0
+margin_right = 510.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Button" type="TextureRect" parent="Control/Margin/HFlow/VFlow/Run"]
+margin_top = 162.0
+margin_right = 510.0
+margin_bottom = 262.0
 rect_min_size = Vector2( 510, 100 )
 texture = ExtResource( 2 )
 stretch_mode = 6
 script = ExtResource( 9 )
 
-[node name="Second" type="VFlowContainer" parent="Control/Margin/HFlow"]
+[node name="Second" type="VBoxContainer" parent="Control/Margin/HFlow"]
 margin_left = 514.0
 margin_right = 514.0
-margin_bottom = 779.0
+margin_bottom = 916.0
 
 [node name="Run Panel" type="Control" parent="Control/Margin/HFlow/Second"]
 
@@ -125,37 +150,24 @@ margin_right = 1290.0
 margin_bottom = 843.0
 custom_constants/separation = 0
 
-[node name="Run" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
-margin_right = 478.0
+[node name="MarginContainer" type="MarginContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer"]
+margin_right = 478.346
 margin_bottom = 786.0
-rect_min_size = Vector2( 478, 0 )
-
-[node name="TextureRect" type="TextureRect" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run"]
-margin_right = 478.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
-texture = ExtResource( 3 )
-stretch_mode = 6
-script = ExtResource( 4 )
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run"]
-margin_top = 104.0
-margin_right = 478.0
-margin_bottom = 754.0
+rect_min_size = Vector2( 478.346, 0 )
 custom_constants/margin_right = 25
 custom_constants/margin_top = 25
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 25
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 453.0
-margin_bottom = 625.0
+margin_bottom = 761.0
 rect_min_size = Vector2( 0, 600 )
 scroll_horizontal_enabled = false
 
-[node name="RequirementsList" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer"]
+[node name="RequirementsList" type="VBoxContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer"]
 margin_right = 428.0
 margin_bottom = 140.0
 rect_pivot_offset = Vector2( -313, 190 )
@@ -163,7 +175,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource( 12 )
 
-[node name="Requirement" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" instance=ExtResource( 11 )]
+[node name="Requirement" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/RequirementsList" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 428.0
@@ -179,9 +191,25 @@ custom_constants/hseparation = 0
 columns = 8
 script = ExtResource( 8 )
 
-[connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/VFlow/MarginContainer/Button" method="_on_puzzle_completed"]
+[node name="Hint Panel" type="Control" parent="Control/Margin/HFlow/Second"]
+margin_top = 4.0
+margin_bottom = 4.0
+
+[node name="HintLabel" type="RichTextLabel" parent="Control/Margin/HFlow/Second/Hint Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 911.0
+margin_right = 1345.0
+margin_bottom = 1020.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
+text = "Heyouioaisd aoisduaoi joaijsdoaijsd"
+
+[connection signal="puzzle_completed" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_puzzle_completed"]
 [connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Components/Margin/Inventory" method="_on_toggle_simulation"]
-[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/MarginContainer/Button" method="_on_toggle_simulation"]
-[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" method="_on_toggle_simulation"]
-[connection signal="validators_updated" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/MarginContainer/ScrollContainer/RequirementsList" method="_on_validators_updated"]
-[connection signal="clicked" from="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/Run/TextureRect" to="." method="_toggle_simulate_mode"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/VFlow/Run/Button" method="_on_toggle_simulation"]
+[connection signal="toggle_simulation" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/RequirementsList" method="_on_toggle_simulation"]
+[connection signal="validators_updated" from="." to="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/RequirementsList" method="_on_validators_updated"]
+[connection signal="clicked" from="Control/Margin/HFlow/VFlow/Run/Simulate Button" to="." method="_toggle_simulate_mode"]
