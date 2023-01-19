@@ -162,13 +162,13 @@ margin_right = 478.346
 margin_bottom = 786.0
 rect_min_size = Vector2( 478.346, 0 )
 custom_constants/margin_right = 25
-custom_constants/margin_top = 25
+custom_constants/margin_top = 100
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 25
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Margin/HFlow/Second/Run Panel/MarginContainer/HBoxContainer/MarginContainer"]
 margin_left = 25.0
-margin_top = 25.0
+margin_top = 100.0
 margin_right = 453.0
 margin_bottom = 761.0
 rect_min_size = Vector2( 0, 600 )

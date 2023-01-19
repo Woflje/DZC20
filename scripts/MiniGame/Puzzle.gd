@@ -3,10 +3,10 @@ extends Node
 class_name Puzzle
 
 signal toggle_simulation(is_simulating)
-signal validators_updated()
-signal puzzle_completed()
+signal validators_updated
+signal puzzle_completed
 
-var edit_mode:bool = true
+var edit_mode: bool = true
 
 var grid_components = {}
 var valid_paths = []
@@ -25,12 +25,13 @@ onready var sfx_c2 = $SFX/Channel2
 onready var sfx_c3 = $SFX/Channel3
 onready var sfx_c4 = $SFX/Channel4
 
+
 func _ready():
 	# Testing things
 	var validator_ids = []
 	include_validators(validator_ids)
 	hint_label.bbcode_text = help_text_nom
-	
+
 	sfx_dict["short_circuit"] = preload("res://assets/Audio/sfx/circuit_editor_short_circuit.wav")
 	sfx_dict["sim_start"] = preload("res://assets/Audio/sfx/circuit_editor_simulation_start.wav")
 	sfx_dict["button_on"] = preload("res://assets/Audio/sfx/menu_button_on.wav")
@@ -39,15 +40,18 @@ func _ready():
 	sfx_dict["validated_all"] = preload("res://assets/Audio/sfx/circuit_editor_validated_all.wav")
 	sfx_dict["validated_all2"] = preload("res://assets/Audio/sfx/circuit_editor_validated_all2.wav")
 	sfx_dict["switch"] = preload("res://assets/Audio/sfx/circuit_editor_switch.wav")
-	
-func _input(_event):
-	if Input.is_action_pressed("ui_cancel"):
-		get_tree().quit()  # quit the game with a single key press
+
+
+# func _input(_event):
+# if Input.is_action_pressed("ui_cancel"):
+# 	get_tree().quit()  # quit the game with a single key press
+
 
 func include_validators(validator_ids: Array):
 	for validator_id in validator_ids:
 		include_validator(validator_id)
 	emit_signal("validators_updated")
+
 
 func include_validator(validator_id: String):
 	if validator_id == "safe_circuit":
@@ -80,8 +84,7 @@ func include_validator(validator_id: String):
 		validators.append(AllBreakersInTheSameCircuitValidator.new())
 	if validator_id == "pressing_either_breaker_changes_condition":
 		validators.append(PressingEitherBreakerChangesConditionValidator.new())
-	
-		
+
 
 func _toggle_simulate_mode():
 	edit_mode = !edit_mode
@@ -119,6 +122,7 @@ func simulate_flow():
 		update_components()
 	validate()
 
+
 func has_short_circuit():
 	var negative_power_source_pos = Vector2(0, 5)
 	var negative_power_source = get_component(negative_power_source_pos)
@@ -126,12 +130,14 @@ func has_short_circuit():
 		return false
 	return negative_power_source.positive_current
 
+
 func display_short_circuit():
 	for component in grid_components.values():
 		component.display_short_circuit()
 	sfx_c3.stream = sfx_dict["short_circuit"]
 	sfx_c3.play()
-	
+
+
 func discover_nodes(current: Component):
 	var directions = current.get_possible_neighbour_directions()
 	for direction in directions:
@@ -140,7 +146,7 @@ func discover_nodes(current: Component):
 		if component == null:
 			continue
 		if component.get_possible_neighbour_directions().find(opisite_direction(direction)) == -1:
-			remove_component(pos) # Allow for re-indexing
+			remove_component(pos)  # Allow for re-indexing
 			continue
 		current.update_neighbour(component)
 		discover_nodes(component)
@@ -166,7 +172,8 @@ func simulate_power(path: Array = []):
 			complete_path(new_path)
 			continue
 		simulate_power(new_path)
-		
+
+
 func complete_path(path: Array):
 	for component_pos in path:
 		var component = get_component(component_pos)
@@ -178,6 +185,7 @@ func update_components():
 	for component in grid_components.values():
 		component.update_self(self)
 
+
 func validate():
 	var one_validated = false
 	for validator in validators:
@@ -185,7 +193,7 @@ func validate():
 			one_validated = true
 
 	emit_signal("validators_updated")
-	
+
 	# If all validators are completed, we can complete the puzzle
 	for validator in validators:
 		if not validator.has_completed:
@@ -198,12 +206,13 @@ func validate():
 	if one_validated:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		if rng.randi_range(0,1) == 0:
+		if rng.randi_range(0, 1) == 0:
 			sfx_val.stream = sfx_dict["validated_all"]
 		else:
 			sfx_val.stream = sfx_dict["validated_all2"]
 		sfx_val.play()
 	emit_signal("puzzle_completed")
+
 
 func reset_simulation(close: bool = false):
 	for component in grid_components.values():
@@ -320,9 +329,9 @@ class Component:
 	func update_self(_puzzle: Puzzle):
 		node.hint_tooltip = "Powered: %s" % powered
 		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
+			node.modulate = Color(0.51, 0.51, 0.51)
 		else:
-			node.modulate = Color(0.52,0.77,0.83)
+			node.modulate = Color(0.52, 0.77, 0.83)
 
 	func display_short_circuit():
 		node.modulate = Color(1, 0.41, 0.42)
@@ -333,7 +342,7 @@ class Component:
 			component.positive_current = positive_current
 
 	func get_possible_neighbour_directions() -> Array:
-		return [3,0,1,2] # First down, then left, right, up
+		return [3, 0, 1, 2]  # First down, then left, right, up
 
 	func get_flow_directions() -> Array:
 		return get_possible_neighbour_directions()
@@ -369,11 +378,13 @@ class NegativePowerSource:
 	func can_connect_from(direction: int) -> bool:
 		return true
 
+
 class Wire:
 	extends Component
 
 	func _init(pos: Vector2, node: TextureRect).(pos, node):
 		pass
+
 
 class Resistor:
 	extends Component
@@ -384,7 +395,7 @@ class Resistor:
 	func update_neighbour(component: Component):
 		.update_neighbour(component)
 		component.positive_current = false
-			
+
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
 
@@ -401,8 +412,8 @@ class Lamp:
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
 		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		else: 
+			node.modulate = Color(0.51, 0.51, 0.51)
+		else:
 			node.modulate = Color(0.98, 1, 0.41)
 
 	func update_neighbour(component: Component):
@@ -411,7 +422,8 @@ class Lamp:
 
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
-		
+
+
 class LED:
 	extends Component
 
@@ -421,15 +433,16 @@ class LED:
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
 		if not powered:
-			node.modulate = Color(0.51,0.51,0.51)
-		else: 
+			node.modulate = Color(0.51, 0.51, 0.51)
+		else:
 			node.modulate = Color(0.98, 1, 0.41)
 
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
-		
+
 	func get_flow_directions() -> Array:
 		return [3]
+
 
 class Diode:
 	extends Component
@@ -443,7 +456,7 @@ class Diode:
 
 	func get_possible_neighbour_directions() -> Array:
 		return [2, 3]
-		
+
 	func get_flow_directions() -> Array:
 		return [3]
 
@@ -488,7 +501,8 @@ class Switch:
 			node._remove_tag("closed")
 		node.texture = load("res://assets/Textures/Overlay_components/switch_open.png")
 		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
-		
+
+
 class Double_Switch_L:
 	extends Component
 
@@ -499,11 +513,15 @@ class Double_Switch_L:
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
-		
+
 		if is_down:
-			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png")
+			node.texture = load(
+				"res://assets/Textures/Overlay_components/double_breaker_switch_left_flipped.png"
+			)
 		else:
-			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
+			node.texture = load(
+				"res://assets/Textures/Overlay_components/double_breaker_switch_left.png"
+			)
 		puzzle.sfx_c1.stream = puzzle.sfx_dict["switch"]
 		puzzle.sfx_c1.play()
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
@@ -522,8 +540,8 @@ class Double_Switch_L:
 		if is_down:
 			return [0, 3]
 		else:
-			return [0, 2]	
-		
+			return [0, 2]
+
 	func can_connect_from(direction: int) -> bool:
 		return direction in get_flow_directions()
 
@@ -531,8 +549,11 @@ class Double_Switch_L:
 		.reset(close)
 		if close:
 			node._remove_tag("is_down")
-		node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_left.png")
+		node.texture = load(
+			"res://assets/Textures/Overlay_components/double_breaker_switch_left.png"
+		)
 		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
+
 
 class Double_Switch_R:
 	extends Component
@@ -544,14 +565,18 @@ class Double_Switch_R:
 
 	func update_self(puzzle: Puzzle):
 		.update_self(puzzle)
-		
+
 		if is_down:
-			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png")
+			node.texture = load(
+				"res://assets/Textures/Overlay_components/double_breaker_switch_right_flipped.png"
+			)
 		else:
-			node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
+			node.texture = load(
+				"res://assets/Textures/Overlay_components/double_breaker_switch_right.png"
+			)
 		puzzle.sfx_c1.stream = puzzle.sfx_dict["switch"]
 		puzzle.sfx_c1.play()
-		
+
 		node.connect("simulated_item_clicked", self, "on_simulated_item_clicked", [puzzle])
 
 	func on_simulated_item_clicked(puzzle: Puzzle):
@@ -569,7 +594,7 @@ class Double_Switch_R:
 			return [1, 3]
 		else:
 			return [1, 2]
-			
+
 	func can_connect_from(direction: int) -> bool:
 		return direction in get_flow_directions()
 
@@ -577,9 +602,10 @@ class Double_Switch_R:
 		.reset(close)
 		if close:
 			node._remove_tag("is_down")
-		node.texture = load("res://assets/Textures/Overlay_components/double_breaker_switch_right.png")
+		node.texture = load(
+			"res://assets/Textures/Overlay_components/double_breaker_switch_right.png"
+		)
 		node.disconnect("simulated_item_clicked", self, "on_simulated_item_clicked")
-
 
 
 class Validator:
@@ -588,7 +614,7 @@ class Validator:
 
 	var display_text_achieved: String
 	var display_text_failed: String
-	var display_text_working_on_it:String
+	var display_text_working_on_it: String
 
 	func get_label(simulating):
 		if has_completed:
@@ -610,10 +636,11 @@ class Validator:
 	func reset():
 		has_completed = false
 
+
 class SafeCiruitValidator:
 	extends Validator
 
-	func _init(): 
+	func _init():
 		self.is_hidden = true
 		# If it is hidden no completed messag is needed.
 		self.display_text_failed = "This circuit has a short circuit"
@@ -626,7 +653,8 @@ class SafeCiruitValidator:
 		if negative_power_source == null:
 			return true
 		return not negative_power_source.positive_current
-	
+
+
 class HasACompleteCircuitValidator:
 	extends Validator
 
@@ -634,13 +662,13 @@ class HasACompleteCircuitValidator:
 		self.is_hidden = true
 		# If it is hidden no completed messag is needed.
 		self.display_text_failed = "This circuit is not complete"
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var negative_power_source_pos = Vector2(0, 5)
 		var negative_power_source = puzzle.get_component(negative_power_source_pos)
 		return negative_power_source != null
-	
-		
+
+
 class AtLeastOneLampPresentValidator:
 	extends Validator
 
@@ -656,23 +684,24 @@ class AtLeastOneLampPresentValidator:
 			if component is Lamp:
 				return true
 		return false
-		
+
+
 class AtMostOneLampPresentValidator:
 	extends Validator
 
 	func _init():
 		self.is_hidden = true
 		self.display_text_failed = "This circuit has to many any lamps"
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var lamp_count: int = 0
 		for component in puzzle.grid_components.values():
 			if component is Lamp:
 				lamp_count += 1
-		
+
 		return lamp_count <= 1
 
-		
+
 class LampsAreOffValidator:
 	extends Validator
 
@@ -680,14 +709,14 @@ class LampsAreOffValidator:
 		self.display_text_working_on_it = "The lamp can be turned off"
 		self.display_text_achieved = "The lamp has been turned off"
 		self.display_text_failed = "The lamp needs to be turned off"
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
-		
 		for component in puzzle.grid_components.values():
 			if component is Lamp:
 				if component.powered:
 					return false
 		return true
+
 
 class LampsAreOnValidator:
 	extends Validator
@@ -696,14 +725,14 @@ class LampsAreOnValidator:
 		self.display_text_working_on_it = "The lamp can be turned on"
 		self.display_text_achieved = "The lamp has been turned on"
 		self.display_text_failed = "The lamp needs to be turned on"
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
-		
 		for component in puzzle.grid_components.values():
 			if component is Lamp:
 				if not component.powered:
 					return false
 		return true
+
 
 class AtLeastOneLEDPresentValidator:
 	extends Validator
@@ -720,6 +749,7 @@ class AtLeastOneLEDPresentValidator:
 				return true
 		return false
 
+
 class AtMostOneLEDPresentValidator:
 	extends Validator
 
@@ -727,15 +757,15 @@ class AtMostOneLEDPresentValidator:
 		self.is_hidden = true
 		#self.display_text_achieved = "There is a LED present in the circuit"
 		self.display_text_failed = "There are too many LEDs present in the circuit"
-		
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var LED_count: int = 0
 		for component in puzzle.grid_components.values():
 			if component is LED:
 				LED_count += 1
-		
+
 		return LED_count <= 1
+
 
 class LEDIsOnValidator:
 	extends Validator
@@ -753,6 +783,7 @@ class LEDIsOnValidator:
 					return true
 		return false
 
+
 class LEDIsOffValidator:
 	extends Validator
 
@@ -769,13 +800,14 @@ class LEDIsOffValidator:
 					return true
 		return false
 
+
 class LEDIsInSafeCircuitValidator:
 	extends Validator
 
 	func _init():
 		self.is_hidden = false
 		self.display_text_achieved = "The Circuit is safe"
-		self.display_text_failed ="The Circuit is not safe (try adding a ristor before the LED)"
+		self.display_text_failed = "The Circuit is not safe (try adding a ristor before the LED)"
 		self.display_text_working_on_it = "The Circuit needs to be safe"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
@@ -784,13 +816,14 @@ class LEDIsInSafeCircuitValidator:
 			var has_LED = false
 			for component_pos in path:
 				var component = puzzle.get_component(component_pos)
-				if component is LED :
+				if component is LED:
 					has_LED = true
 				if component is Resistor or component is Lamp:
 					has_resistor = true
 			if has_LED and not has_resistor:
 				return false
 		return true
+
 
 class AtLeastTwoBreakerSwitchedsValidator:
 	extends Validator
@@ -800,14 +833,15 @@ class AtLeastTwoBreakerSwitchedsValidator:
 		self.display_text_achieved = "Two breaker switches are present in the circuit"
 		self.display_text_failed = "There are less than two breakers switches present in the circuit"
 		self.display_text_working_on_it = "This circuit requires two breakers"
-	
+
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var breaker_count: int = 0
 		for component in puzzle.grid_components.values():
 			if (component is Double_Switch_L) or (component is Double_Switch_R):
 				breaker_count += 1
-		
+
 		return breaker_count >= 2
+
 
 class AtMostTwoBreakerSwitchedsValidator:
 	extends Validator
@@ -822,8 +856,9 @@ class AtMostTwoBreakerSwitchedsValidator:
 		for component in puzzle.grid_components.values():
 			if (component is Double_Switch_L) or (component is Double_Switch_R):
 				breaker_count += 1
-		
+
 		return breaker_count <= 2
+
 
 class AllBreakersInTheSameCircuitValidator:
 	extends Validator
@@ -844,6 +879,7 @@ class AllBreakersInTheSameCircuitValidator:
 				return true
 		return false
 
+
 class PressingEitherBreakerChangesConditionValidator:
 	extends Validator
 
@@ -855,7 +891,6 @@ class PressingEitherBreakerChangesConditionValidator:
 		self.display_text_failed = "Press both breakers to proof that they effect the LED"
 		self.display_text_working_on_it = "Each breaker must influance the LED"
 
-
 	func verify_completed(puzzle: Puzzle) -> bool:
 		for path in puzzle.valid_paths:
 			var states = []
@@ -864,14 +899,13 @@ class PressingEitherBreakerChangesConditionValidator:
 				var component = puzzle.get_component(component_pos)
 				if (component is Double_Switch_L) or (component is Double_Switch_R):
 					states.append(component.is_down)
-			
+
 			if states.size() > 0:
 				if not states in functioning_loops:
 					functioning_loops.append(states)
 
 		return functioning_loops.size() >= 2
-	
+
 	func reset():
 		.reset()
 		functioning_loops = []
-

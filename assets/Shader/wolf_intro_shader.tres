@@ -38,3 +38,5 @@ glow_bloom = 0.82
 glow_hdr_scale = 3.05
 glow_bicubic_upscale = true
 glow_high_quality = true
+adjustment_enabled = true
+adjustment_brightness = 1.45
