@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://assets/Audio/ambience/whisper.wav" type="AudioStream" id=37]
 [ext_resource path="res://assets/Audio/ambience/chatting.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/Audio/ambience/hall.wav" type="AudioStream" id=39]
+[ext_resource path="res://assets/Models/Static/Props/flux_glass_railing/flux-glass-railing.dae" type="PackedScene" id=40]
 
 [node name="Overworld" type="Node"]
 
@@ -147,6 +148,122 @@ transform = Transform( 0.531679, 0, 0.846945, 0, 1, 0, -0.846945, 0, 0.531679, 1
 
 [node name="flux_0_lounge_chair_block_type2" parent="Props/Static/Flux_1" instance=ExtResource( 10 )]
 transform = Transform( -0.827414, 0, 0.561592, 0, 1, 0, -0.561592, 0, -0.827414, 131.215, 12.0027, -72.8233 )
+
+[node name="railing" type="Spatial" parent="Props/Static"]
+
+[node name="flux-glass-railing" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 118.722, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing2" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 112.71, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing3" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 106.695, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing4" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 100.682, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing5" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 94.6307, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing6" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3.3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 88.2463, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing7" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -49.1316 )
+
+[node name="flux-glass-railing8" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -43.0326 )
+
+[node name="flux-glass-railing9" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -36.9341 )
+
+[node name="flux-glass-railing10" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -30.8351 )
+
+[node name="flux-glass-railing11" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -24.8012 )
+
+[node name="flux-glass-railing12" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -18.7022 )
+
+[node name="flux-glass-railing13" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 84.8484, 11.9979, -12.6892 )
+
+[node name="flux-glass-railing14" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 2.1, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 137.931, 11.9979, -52.4429 )
+
+[node name="flux-glass-railing15" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -49.1316 )
+
+[node name="flux-glass-railing16" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -43.0326 )
+
+[node name="flux-glass-railing17" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -36.9341 )
+
+[node name="flux-glass-railing18" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -30.8351 )
+
+[node name="flux-glass-railing19" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -24.8012 )
+
+[node name="flux-glass-railing20" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -18.7022 )
+
+[node name="flux-glass-railing21" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 140.233, 11.9979, -12.6892 )
+
+[node name="flux-glass-railing22" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -5.24537e-08, 0, 2.5, 0, 2.5, 0, -1.2, 0, -1.09278e-07, 54.258, 11.9979, -30.9613 )
+
+[node name="flux-glass-railing23" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, -26.7017 )
+
+[node name="flux-glass-railing24" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, -20.6032 )
+
+[node name="flux-glass-railing25" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, -14.5042 )
+
+[node name="flux-glass-railing26" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, -8.47028 )
+
+[node name="flux-glass-railing27" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, -2.37125 )
+
+[node name="flux-glass-railing28" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 54.258, 11.9979, 3.64176 )
+
+[node name="flux-glass-railing29" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -5.24537e-08, 0, 2.5, 0, 2.5, 0, -1.2, 0, -1.09278e-07, 31.3292, 11.9979, -30.9613 )
+
+[node name="flux-glass-railing30" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, -26.7017 )
+
+[node name="flux-glass-railing31" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, -20.6032 )
+
+[node name="flux-glass-railing32" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, -14.5042 )
+
+[node name="flux-glass-railing33" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, -8.47028 )
+
+[node name="flux-glass-railing34" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, -2.37125 )
+
+[node name="flux-glass-railing35" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( -1.31134e-07, 0, 2.5, 0, 2.5, 0, -3, 0, -1.09278e-07, 31.3292, 11.9979, 3.64176 )
+
+[node name="flux-glass-railing37" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 1, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 47.2454, 11.9979, 6.74701 )
+
+[node name="flux-glass-railing38" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 3, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 51.2817, 11.9979, 6.74701 )
+
+[node name="flux-glass-railing39" parent="Props/Static/railing" instance=ExtResource( 40 )]
+transform = Transform( 0.6, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 31.9596, 11.9979, 6.74701 )
 
 [node name="ToggleGroups" type="Spatial" parent="."]
 
