@@ -58,11 +58,11 @@ func _ready():
 			"led_is_in_safe_circuit",
 		]
 	)
-	blank_puzzle_1.help_text_nom = "TASK: Create a circuit that turns on the lamp with a switch. \nTIP: Click 'simulate' to see if the circuit is correct."
+	blank_puzzle_1.help_text_nom = "TASK: Create a circuit that turns on a lamp with a switch. \nTIP: Click 'simulate' to see if the circuit is correct."
 	blank_puzzle_2.help_text_nom = "TASK: Wire an LED to light up permanently. Make sure that it does not short curcuit. \nTIP: You can left click on an empty tile to create a wire, and click on a wire to delete it."
-	blank_puzzle_3.help_text_nom = "TASK: A hotel switch is a type of circuit that changes the light on / off regadles of what switch (breaker) is pushed"
-	blank_puzzle_1.help_text_sim = "Left click on a switch to change it state"
-	blank_puzzle_2.help_text_sim = "HINT: LED's have little internal resistance, so you need another way to limit the current."
+	blank_puzzle_3.help_text_nom = "TASK: A hotel switch is a type of circuit that changes the light on / off regardles of what switch (breaker) is pushed."
+	blank_puzzle_1.help_text_sim = "Left click on a switch to change its state."
+	blank_puzzle_2.help_text_sim = "HINT: LEDs have little internal resistance, so you need another way to limit the current."
 	blank_puzzle_3.help_text_sim = "HINT: Both breakers need to be able to turn the light on and off. Independendly of each other."
 	self.add_child(intro_scene)
 
