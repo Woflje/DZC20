@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://assets/Audio/ambience/chatting.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/Audio/ambience/hall.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/Models/Static/Props/flux_glass_railing/flux-glass-railing.dae" type="PackedScene" id=40]
+[ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=41]
 
 [node name="Overworld" type="Node"]
 
@@ -275,7 +276,7 @@ transform = Transform( 0.6, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 31.9596, 11.9979, 6.7470
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
 [node name="Puzzle_one_Pedestal" parent="ToggleGroups/Group0_only" instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 37.6769, 13.0431, 74.295 )
+transform = Transform( 0.93258, 0, -1.04417, 0, 1.4, 0, 1.04417, 0, 0.93258, 37.6769, 12.9424, 74.295 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToggleGroups/Group0_only/Puzzle_one_Pedestal"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72408, 0 )
@@ -284,7 +285,7 @@ unit_db = 8.951
 autoplay = true
 
 [node name="orb_hint" parent="ToggleGroups/Group0_only/Puzzle_one_Pedestal" instance=ExtResource( 22 )]
-transform = Transform( 1.33226, 0, 1.49167, 0, 2, 0, -1.49167, 0, 1.33226, -0.107269, 1.4626, 0.365984 )
+transform = Transform( 0.66613, 0, 0.745835, 0, 1, 0, -0.745835, 0, 0.66613, -0.107269, 1.4626, 0.365984 )
 
 [node name="Group0" type="Spatial" parent="ToggleGroups"]
 
@@ -313,7 +314,7 @@ transform = Transform( 0.86162, -0.507553, 0, 0.507553, 0.86162, 0, 0, 0, 1, -3.
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
 [node name="Puzzle_two_Pedestal" parent="ToggleGroups/Group1_only" instance=ExtResource( 4 )]
-transform = Transform( 0.913276, 0, -0.407343, 0, 1, 0, 0.407343, 0, 0.913276, 49.0654, 13.0431, 8.39653 )
+transform = Transform( 1.27859, 0, -0.57028, 0, 1.4, 0, 0.57028, 0, 1.27859, 49.0654, 12.9102, 9.67485 )
 puzzle_to_load = 1
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToggleGroups/Group1_only/Puzzle_two_Pedestal"]
@@ -322,7 +323,7 @@ stream = ExtResource( 33 )
 autoplay = true
 
 [node name="orb_hint" parent="ToggleGroups/Group1_only/Puzzle_two_Pedestal" instance=ExtResource( 22 )]
-transform = Transform( 1.82655, 0, 0.814685, 0, 2, 0, -0.814685, 0, 1.82655, 0.172134, 1.4626, -0.0659237 )
+transform = Transform( 0.913275, 0, 0.407343, 0, 1, 0, -0.407343, 0, 0.913275, 0.172134, 1.4626, -0.0659237 )
 
 [node name="Group1" type="Spatial" parent="ToggleGroups"]
 
@@ -381,7 +382,7 @@ transform = Transform( 0.251546, -0.967845, 0, 0.967845, 0.251546, 0, 0, 0, 1, 1
 transform = Transform( 0.86162, -0.507553, 0, 0.507553, 0.86162, 0, 0, 0, 1, 22.5234, -6.64772, -22.8157 )
 
 [node name="Puzzle_three_Pedestal" parent="ToggleGroups/Group2_only" instance=ExtResource( 4 )]
-transform = Transform( 0.666129, 0, -0.745837, 0, 1, 0, 0.745837, 0, 0.666129, 103.337, 0.961171, -25.0142 )
+transform = Transform( 0.93258, 0, -1.04417, 0, 1.4, 0, 1.04417, 0, 0.93258, 103.337, 0.818024, -24.5817 )
 puzzle_to_load = 2
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2_only/Puzzle_three_Pedestal"]
@@ -390,7 +391,7 @@ stream = ExtResource( 33 )
 autoplay = true
 
 [node name="orb_hint" parent="ToggleGroups/Group2_only/Puzzle_three_Pedestal" instance=ExtResource( 22 )]
-transform = Transform( 1.82655, 0, 0.814685, 0, 2, 0, -0.814685, 0, 1.82655, 0.172134, 1.4626, -0.0659237 )
+transform = Transform( 0.913275, 0, 0.407343, 0, 1, 0, -0.407343, 0, 0.913275, 0.172134, 1.4626, -0.0659237 )
 
 [node name="Group2" type="Spatial" parent="ToggleGroups"]
 
@@ -835,6 +836,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 121.835, 16.1587, -54.7085 )
 stream = ExtResource( 38 )
 unit_db = 3.357
 unit_size = 12.9
+
+[node name="EndTable" parent="ToggleGroups/Group3" instance=ExtResource( 41 )]
+transform = Transform( 1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 115.446, 13.141, -69.7988 )
+
+[node name="orb_hint" parent="ToggleGroups/Group3/EndTable" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194454, 1.3836, 0 )
+
+[node name="Label3D" type="Label3D" parent="ToggleGroups/Group3/EndTable"]
+transform = Transform( 0.981627, -0.190809, -8.34052e-09, 0, -4.37113e-08, 1, -0.190809, -0.981627, -4.29082e-08, -0.6241, 1.06514, 0.643116 )
+pixel_size = 0.005
+text = "Welcome
+to
+Electrical Engineering
+at
+TU/e"
 
 [node name="Group3_only" type="Spatial" parent="ToggleGroups"]
 

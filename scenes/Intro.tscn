@@ -1,10 +1,56 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/lights/orbs/orb_hint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Shader/wolf_intro_shader.tres" type="Environment" id=3]
 
 [sub_resource type="Theme" id=1]
 
 [node name="Intro" type="Node2D"]
 
 [node name="Spatial" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="Spatial"]
+transform = Transform( 0.992556, -0.069988, 0.0996705, -0.00333245, 0.802474, 0.596678, -0.121743, -0.592568, 0.796267, 0.369206, 1.91387, 1.23844 )
+environment = ExtResource( 3 )
+
+[node name="Spatial" parent="Spatial" instance=ExtResource( 1 )]
+
+[node name="Orbs" type="Spatial" parent="Spatial"]
+
+[node name="orb_hint" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.538554, 1.03465, -0.0593352 )
+
+[node name="orb_hint2" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( 0.0170964, 0.279248, -0.108297, -0.0435444, 0.109639, 0.275832, 0.29633, 0, 0.0467804, 0.722857, 1.14284, -0.0593352 )
+
+[node name="orb_hint3" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( -0.248992, 0, -0.167341, 0, 0.3, 0, 0.167341, 0, -0.248992, -0.217405, 1.11633, -0.0593352 )
+
+[node name="orb_hint4" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( 0.104994, -9.17883e-09, -0.281027, -2.62268e-08, -0.3, 0, -0.281027, 2.45682e-08, -0.104994, -0.59224, 1.44012, 0.562407 )
+
+[node name="orb_hint5" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( 0.19436, 0, -0.228526, 0, 0.3, 0, 0.228526, 0, 0.19436, 0.0650437, 1.30973, 0.326413 )
+
+[node name="orb_hint6" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( -0.288786, 0, 0.0812557, 0, 0.3, 0, -0.0812557, 0, -0.288786, 0.841788, 1.26949, 0.571049 )
+
+[node name="orb_hint7" parent="Spatial/Orbs" instance=ExtResource( 2 )]
+transform = Transform( -0.282095, 0, -0.102089, 0, 0.3, 0, 0.102089, 0, -0.282095, 0.105538, 1.18781, 0.781176 )
+
+[node name="SpotLight" type="SpotLight" parent="Spatial"]
+transform = Transform( 0.967259, 0.178871, 0.180043, -0.2023, 0.115039, 0.972543, 0.153248, -0.977124, 0.147458, 0.456402, 2.19985, 0.103368 )
+light_color = Color( 0.960784, 0.976471, 0.862745, 1 )
+light_energy = 1.691
+spot_range = 5.002
+spot_angle = 53.43
+
+[node name="Label3D" type="Label3D" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.150557, 1.03826, 0.668513 )
+modulate = Color( 0.666667, 0.666667, 0.666667, 1 )
+text = "Press
+Space"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
