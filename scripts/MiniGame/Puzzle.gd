@@ -37,6 +37,7 @@ func _ready():
 	sfx_dict["button_off"] = preload("res://assets/Audio/sfx/menu_button_off.wav")
 	sfx_dict["validated_one"] = preload("res://assets/Audio/sfx/circuit_editor_validated_one.wav")
 	sfx_dict["validated_all"] = preload("res://assets/Audio/sfx/circuit_editor_validated_all.wav")
+	sfx_dict["validated_all2"] = preload("res://assets/Audio/sfx/circuit_editor_validated_all2.wav")
 	sfx_dict["switch"] = preload("res://assets/Audio/sfx/circuit_editor_switch.wav")
 	
 func _input(_event):
@@ -195,7 +196,12 @@ func validate():
 			return
 	print("All validators completed")
 	if one_validated:
-		sfx_val.stream = sfx_dict["validated_all"]
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		if rng.randi_range(0,1) == 0:
+			sfx_val.stream = sfx_dict["validated_all"]
+		else:
+			sfx_val.stream = sfx_dict["validated_all2"]
 		sfx_val.play()
 	emit_signal("puzzle_completed")
 

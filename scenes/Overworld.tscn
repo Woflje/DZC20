@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -36,6 +36,9 @@
 [ext_resource path="res://scenes/lights/orbs/animated_orb_1.tscn" type="PackedScene" id=34]
 [ext_resource path="res://scenes/lights/orbs/animated_orb_3.tscn" type="PackedScene" id=35]
 [ext_resource path="res://scenes/lights/orbs/animated_orb_2.tscn" type="PackedScene" id=36]
+[ext_resource path="res://assets/Audio/ambience/whisper.wav" type="AudioStream" id=37]
+[ext_resource path="res://assets/Audio/ambience/chatting.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/Audio/ambience/hall.wav" type="AudioStream" id=39]
 
 [node name="Overworld" type="Node"]
 
@@ -166,14 +169,9 @@ autoplay = true
 [node name="orb_hint" parent="ToggleGroups/Group0_only/Puzzle_one_Pedestal" instance=ExtResource( 22 )]
 transform = Transform( 1.33226, 0, 1.49167, 0, 2, 0, -1.49167, 0, 1.33226, -0.107269, 1.4626, 0.365984 )
 
-[node name="Orbs0" type="Spatial" parent="ToggleGroups/Group0_only"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
-
 [node name="Group0" type="Spatial" parent="ToggleGroups"]
 
 [node name="Lights_0" type="Spatial" parent="ToggleGroups/Group0"]
-
-[node name="3Dsounds0" type="Spatial" parent="ToggleGroups/Group0"]
 
 [node name="Group1_only" type="Spatial" parent="ToggleGroups"]
 
@@ -233,6 +231,14 @@ transform = Transform( -0.310958, 0, -0.950424, 0, 1, 0, 0.950424, 0, -0.310958,
 
 [node name="fairylights_b_3" parent="ToggleGroups/Group1/Lights_1" instance=ExtResource( 29 )]
 transform = Transform( 0.0716896, 0, -0.997427, 0, 1, 0, 0.997427, 0, 0.0716896, 27.6005, 22.562, 60.2916 )
+
+[node name="Audio" type="Spatial" parent="ToggleGroups/Group1"]
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ToggleGroups/Group1/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.7124, 18.4259, 58.0962 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
 
 [node name="Group2_only" type="Spatial" parent="ToggleGroups"]
 
@@ -377,6 +383,93 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.3055, 13.9811, -27.5991 )
 
 [node name="cylinder_lamp6" parent="ToggleGroups/Group2/Lights_2" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.9882, 12.0537, -27.5991 )
+
+[node name="Audio" type="Spatial" parent="ToggleGroups/Group2"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2973, 16.47, 20.0489 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 0.9
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5392, 16.47, 25.5823 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2973, 16.47, 78.3029 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5392, 16.47, 0.737198 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2973, 1.69934, -34.9468 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 0.9
+
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5392, 1.69934, -29.4134 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2973, 1.69934, 23.3072 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5392, 1.69934, -54.2585 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D9" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.8027, 1.69934, -34.9468 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 0.9
+
+[node name="AudioStreamPlayer3D10" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 1.69934, -29.4134 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D11" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.8027, 1.69934, 23.3072 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+
+[node name="AudioStreamPlayer3D12" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 1.69934, -54.2585 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D13" type="AudioStreamPlayer3D" parent="ToggleGroups/Group2/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 1.69934, -54.2585 )
+stream = ExtResource( 37 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
 
 [node name="Group3" type="Spatial" parent="ToggleGroups"]
 
@@ -558,12 +651,83 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 117.053, 4.71864, -27.854 )
 light_color = Color( 0.976471, 0.921569, 0.901961, 1 )
 omni_range = 8.07
 
-[node name="Orbs3" type="Spatial" parent="ToggleGroups/Group3"]
+[node name="Orbs3" type="Spatial" parent="ToggleGroups/Group3/Lights_3"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 49.1908, 14.4588, 16.7448 )
 
-[node name="3Dsounds3" type="Spatial" parent="ToggleGroups/Group3"]
+[node name="animated_orb" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 34 )]
+transform = Transform( -0.234958, -0.386396, 0.21329, -0.365882, 0.305658, 0.150678, -0.246831, -0.0852719, -0.426384, 38.178, -1.57411, -27.7956 )
+
+[node name="animated_orb2" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( 0.231194, -0.38866, 0.21329, -0.441497, -0.179934, 0.150678, -0.0403687, -0.258006, -0.426384, 39.1857, -1.18157, -29.9658 )
+
+[node name="animated_orb3" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 35 )]
+transform = Transform( -0.442703, -0.0923104, 0.21329, -0.02666, 0.47601, 0.150678, -0.230875, 0.122039, -0.426384, 36.3369, -3.1894, -25.3844 )
+
+[node name="animated_orb4" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( -0.248227, -0.378009, 0.21329, -0.355053, 0.318172, 0.150678, -0.249641, -0.0766537, -0.426384, 35.1176, -5.11677, -22.8225 )
+
+[node name="animated_orb5" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 34 )]
+transform = Transform( -0.0622644, 0.0494719, 0.493635, -0.378209, 0.317235, -0.0794984, -0.321062, -0.383294, -0.00208351, 33.972, 1.70527, -39.9498 )
+
+[node name="animated_orb6" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( -0.0728852, -0.0318129, 0.493635, -0.457502, -0.185397, -0.0794984, 0.188095, -0.463266, -0.00208351, 36.2849, 0.981952, -40.0299 )
+
+[node name="animated_orb7" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 35 )]
+transform = Transform( -0.00639494, 0.0792681, 0.493635, -0.0266243, 0.492921, -0.0794984, -0.49925, -0.0273021, -0.00208351, 30.5816, 1.60166, -40.5046 )
+
+[node name="animated_orb8" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( -0.0605099, 0.0516031, 0.493635, -0.366971, 0.33017, -0.0794984, -0.334172, -0.37192, -0.00208351, 27.1818, 1.15354, -40.4366 )
+
+[node name="animated_orb9" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 34 )]
+transform = Transform( 0.0633344, -0.0481939, -0.493625, -0.378209, 0.317235, -0.0794984, 0.320853, 0.383457, 0.00372902, 29.4938, 1.70527, -36.5743 )
+
+[node name="animated_orb10" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( 0.0722578, 0.0333571, -0.493625, -0.457502, -0.185397, -0.0794984, -0.188337, 0.463158, 0.00372902, 27.1811, 0.981952, -36.4865 )
+
+[node name="animated_orb11" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 35 )]
+transform = Transform( 0.00805914, -0.0791766, -0.493625, -0.0266243, 0.492921, -0.0794984, 0.499225, 0.0275662, 0.00372902, 32.886, 1.60166, -36.0308 )
+
+[node name="animated_orb12" parent="ToggleGroups/Group3/Lights_3/Orbs3" instance=ExtResource( 36 )]
+transform = Transform( 0.0616235, -0.050363, -0.493625, -0.366971, 0.33017, -0.0794984, 0.333968, 0.37209, 0.00372902, 36.2856, 1.15354, -36.1102 )
+
+[node name="Audio" type="Spatial" parent="ToggleGroups/Group3"]
+
+[node name="AudioStreamPlayer3D13" type="AudioStreamPlayer3D" parent="ToggleGroups/Group3/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 5.51191, -48.445 )
+stream = ExtResource( 38 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D14" type="AudioStreamPlayer3D" parent="ToggleGroups/Group3/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 6.80381, -17.083 )
+stream = ExtResource( 38 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D15" type="AudioStreamPlayer3D" parent="ToggleGroups/Group3/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 16.7005, -69.8743 )
+stream = ExtResource( 38 )
+unit_db = 3.357
+unit_size = 12.9
+pitch_scale = 1.1
+
+[node name="AudioStreamPlayer3D16" type="AudioStreamPlayer3D" parent="ToggleGroups/Group3/Audio"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 121.835, 16.1587, -54.7085 )
+stream = ExtResource( 38 )
+unit_db = 3.357
+unit_size = 12.9
 
 [node name="Group3_only" type="Spatial" parent="ToggleGroups"]
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103.044, 10.8203, -35.7657 )
+stream = ExtResource( 39 )
+unit_db = 80.0
+unit_size = 25.2
+max_db = 6.0
+autoplay = true
 
 [connection signal="interact" from="ToggleGroups/Group0_only/Puzzle_one_Pedestal" to="Lamp" method="_toggle"]
 [connection signal="interact" from="ToggleGroups/Group1_only/Puzzle_two_Pedestal" to="Lamp" method="_toggle"]
