@@ -1,6 +1,5 @@
 extends Node
 
-
 onready var audio_bgm_players = []
 var bgm_stage = 1
 var bgm_fade_iterator = 0
@@ -22,17 +21,19 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if next_bgm:
-		if bgm_fade_step > 80+bgm_fade_offset-1:
+		if bgm_fade_step > 80 + bgm_fade_offset - 1:
 			next_bgm = false
 			bgm_stage += 1
 			miles = 0
 			bgm_fade_step = 0
 			bgm_fade_iterator = 0
 		else:
-			audio_bgm_players[bgm_stage].volume_db = max(min(-bgm_fade_step+bgm_fade_offset,db),-80)
-			audio_bgm_players[bgm_stage+1].volume_db = min(max(bgm_fade_step-80,-80),db)
+			audio_bgm_players[bgm_stage].volume_db = max(
+				min(-bgm_fade_step + bgm_fade_offset, db), -80
+			)
+			audio_bgm_players[bgm_stage + 1].volume_db = min(max(bgm_fade_step - 80, -80), db)
 			bgm_fade_iterator += 1
 			if bgm_fade_iterator > bgm_fade_steps:
 				bgm_fade_step += 1
