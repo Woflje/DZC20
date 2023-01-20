@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Flux_Level.tscn" type="PackedScene" id=2]
@@ -41,8 +41,10 @@
 [ext_resource path="res://assets/Audio/ambience/hall.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/Models/Static/Props/flux_glass_railing/flux-glass-railing.dae" type="PackedScene" id=40]
 [ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=41]
+[ext_resource path="res://scripts/Overworld.gd" type="Script" id=42]
 
 [node name="Overworld" type="Node"]
+script = ExtResource( 42 )
 
 [node name="Flux_Level" parent="." instance=ExtResource( 2 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )

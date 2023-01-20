@@ -5,20 +5,18 @@ var complete_button_off_texture = "res://assets/Textures/Overlay_components/comp
 var complete_button_on_texture = "res://assets/Textures/Overlay_components/complete_button_on.png"
 var is_level_complete = false
 
-func _on_toggle_simulation(is_simulating: bool):
-	pass
-#	if is_level_complete:
-#		texture = load(complete_button_on_texture)	
-#	elif is_simulating:
-#		texture = load(complete_button_off_texture)
-#	else:
-#		texture = load(close_button_texture)
+func _input(_event):
+	if Input.is_action_pressed("ui_cancel"):
+		close()
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == BUTTON_LEFT:
-		$ButtonSFX.play()
-		var main = get_tree().get_root().find_node("Main", true, false)
-		main._load_overworld(true, is_level_complete)
+		close()
+
+func close():
+	$ButtonSFX.play()
+	var main = get_tree().get_root().find_node("Main", true, false)
+	main._load_overworld(true, is_level_complete)
 
 
 
