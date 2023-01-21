@@ -40,8 +40,8 @@ spot_angle = 30.76
 transform = Transform( 0.806049, 0.14906, 0.150035, -0.168583, 0.0958655, 0.810453, 0.127707, -0.81427, 0.122881, 0.456402, 3.93677, 0.103368 )
 light_color = Color( 0.639216, 0.505882, 0.294118, 1 )
 light_energy = 1.931
-spot_range = 3.71
-spot_attenuation = 0.25
+spot_range = 9.665
+spot_attenuation = 3.36359
 spot_angle = 30.76
 
 [connection signal="interact" from="Interactable" to="." method="_interact"]
