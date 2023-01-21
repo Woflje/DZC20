@@ -643,7 +643,7 @@ class SafeCiruitValidator:
 	func _init():
 		self.is_hidden = true
 		# If it is hidden no completed messag is needed.
-		self.display_text_failed = "This circuit has a short circuit"
+		self.display_text_failed = "This circuit has a short circuit, or can short circuit"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		if puzzle.has_short_circuit():
@@ -691,7 +691,7 @@ class AtMostOneLampPresentValidator:
 
 	func _init():
 		self.is_hidden = true
-		self.display_text_failed = "This circuit has to many any lamps"
+		self.display_text_failed = "This circuit has too many lamps"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var lamp_count: int = 0
@@ -739,8 +739,8 @@ class AtLeastOneLEDPresentValidator:
 
 	func _init():
 		self.is_hidden = false
-		self.display_text_achieved = "There is a LED present in the circuit"
-		self.display_text_failed = "There are no LED present in the circuit"
+		self.display_text_achieved = "There is an LED present in the circuit"
+		self.display_text_failed = "There are no LEDs present in the circuit"
 		self.display_text_working_on_it = "The circuit requires one LED"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
@@ -806,9 +806,9 @@ class LEDIsInSafeCircuitValidator:
 
 	func _init():
 		self.is_hidden = false
-		self.display_text_achieved = "The Circuit is safe"
-		self.display_text_failed = "The Circuit is not safe (try adding a ristor before the LED)"
-		self.display_text_working_on_it = "The Circuit needs to be safe"
+		self.display_text_achieved = "The circuit is safe"
+		self.display_text_failed = "The circuit is not safe (Try adding a resistor in series with the LED)"
+		self.display_text_working_on_it = "The circuit needs to be safe"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		for path in puzzle.valid_paths:
@@ -849,7 +849,7 @@ class AtMostTwoBreakerSwitchedsValidator:
 	func _init():
 		self.is_hidden = true
 		#self.display_text_achieved = "The Circuit is safe"
-		self.display_text_failed = "There are to many Breakers switches present in the circuit"
+		self.display_text_failed = "There are too many breaker switches present in the circuit"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		var breaker_count: int = 0
@@ -887,9 +887,9 @@ class PressingEitherBreakerChangesConditionValidator:
 
 	func _init():
 		self.is_hidden = false
-		self.display_text_achieved = "You have made a hotel Switch!"
-		self.display_text_failed = "Press both breakers to proof that they effect the LED"
-		self.display_text_working_on_it = "Each breaker must influance the LED"
+		self.display_text_achieved = "You have made a hotel switch!"
+		self.display_text_failed = "Press both breakers to proof that they affect the LED"
+		self.display_text_working_on_it = "Each breaker must influence the LED"
 
 	func verify_completed(puzzle: Puzzle) -> bool:
 		for path in puzzle.valid_paths:

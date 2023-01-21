@@ -1,29 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://components/Interactable.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/Entities/TestBlock.gd" type="Script" id=2]
+[ext_resource path="res://components/Interactable_end.tscn" type="PackedScene" id=1]
+[ext_resource path="res://components/TestBlock_end.gd" type="Script" id=2]
 [ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/lights/orbs/orb_hint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Fadescreen.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.8362, 1.05024, 1 )
 
 [sub_resource type="CubeMesh" id=2]
 
-[node name="TestBlock" type="StaticBody"]
+[node name="TestBlock_end" type="StaticBody"]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.251081, 0 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0931573, 0.447314, 0 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 visible = false
 mesh = SubResource( 2 )
-
-[node name="Interactable" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.69836, 0.041039, 1.79387e-09, 0, -2.62268e-08, 0.6, 0.0478788, -0.598595, -2.61654e-08, -0.378702, 1.05745, 0.407269 )
 
 [node name="Spatial" parent="." instance=ExtResource( 3 )]
 
@@ -44,4 +43,10 @@ spot_range = 3.71
 spot_attenuation = 0.25
 spot_angle = 30.76
 
+[node name="Interactable" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.491271, 0.0930221, 4.06612e-09, 0, -2.18557e-08, 0.5, 0.0930221, -0.491271, -2.14741e-08, 0, 1.04655, 0.680262 )
+
+[node name="Fadescreenend" parent="." instance=ExtResource( 5 )]
+
 [connection signal="interact" from="Interactable" to="." method="_interact"]
+[connection signal="faded_to_black" from="Fadescreenend" to="." method="_quit_game"]

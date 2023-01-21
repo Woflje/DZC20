@@ -17,6 +17,9 @@ func close():
 	$ButtonSFX.play()
 	var main = get_tree().get_root().find_node("Main", true, false)
 	main._load_overworld(true, is_level_complete)
+	
+func _on_toggle_simulation(a):
+	pass
 
 
 

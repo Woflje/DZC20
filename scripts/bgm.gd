@@ -9,7 +9,7 @@ var next_bgm = false
 var db = 0
 export var bgm_fade_steps = 9
 var bgm_fade_offset = 70
-
+export var fadeout = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,9 +19,10 @@ func _ready():
 	audio_bgm_players.append($AudioStreamPlayer_BGM4)
 	audio_bgm_players.append($AudioStreamPlayer_BGM5)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if fadeout:
+		audio_bgm_players[bgm_stage].volume_db -= 0.25
 	if next_bgm:
 		if bgm_fade_step > 80 + bgm_fade_offset - 1:
 			next_bgm = false

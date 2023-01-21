@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/bgm.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Audio/sfx/reveal.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/Fadescreen.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -13,3 +14,7 @@ bgm_fade_steps = 2
 [node name="SFX_Channel1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -4.413
+
+[node name="Fadescreen" parent="." instance=ExtResource( 4 )]
+
+[connection signal="faded_to_black" from="Fadescreen" to="." method="to_overworld"]

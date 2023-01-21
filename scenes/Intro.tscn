@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/lights/orbs/orb_hint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Shader/wolf_intro_shader.tres" type="Environment" id=3]
+[ext_resource path="res://assets/Fonts/Comfortaa-Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=1]
 
@@ -47,10 +53,11 @@ spot_range = 5.002
 spot_angle = 53.43
 
 [node name="Label3D" type="Label3D" parent="Spatial"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.150557, 1.03826, 0.668513 )
-modulate = Color( 0.666667, 0.666667, 0.666667, 1 )
+transform = Transform( 0.993528, -0.113585, -4.96495e-09, 0, -4.37114e-08, 1, -0.113585, -0.993528, -4.34285e-08, -0.150557, 1.03826, 0.6147 )
+modulate = Color( 0, 0, 0, 1 )
 text = "Press
 Space"
+font = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

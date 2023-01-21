@@ -40,7 +40,7 @@
 [ext_resource path="res://assets/Audio/ambience/chatting.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/Audio/ambience/hall.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/Models/Static/Props/flux_glass_railing/flux-glass-railing.dae" type="PackedScene" id=40]
-[ext_resource path="res://scenes/worktable.tscn" type="PackedScene" id=41]
+[ext_resource path="res://components/TestBlock_end.tscn" type="PackedScene" id=41]
 [ext_resource path="res://scripts/Overworld.gd" type="Script" id=42]
 
 [node name="Overworld" type="Node"]
@@ -50,7 +50,7 @@ script = ExtResource( 42 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 13.0273, 85.7865 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4905, 12.2025, 85.7865 )
 
 [node name="Lamp" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.8852, 16.0726, 6.27578 )
@@ -839,14 +839,14 @@ stream = ExtResource( 38 )
 unit_db = 3.357
 unit_size = 12.9
 
-[node name="EndTable" parent="ToggleGroups/Group3" instance=ExtResource( 41 )]
-transform = Transform( 1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 115.446, 13.141, -69.7988 )
+[node name="TestBlock_end" parent="ToggleGroups/Group3" instance=ExtResource( 41 )]
+transform = Transform( 1.38387, 0, -0.21191, 0, 1.4, 0, 0.21191, 0, 1.38387, 113.097, 12.8904, -69.7018 )
 
-[node name="orb_hint" parent="ToggleGroups/Group3/EndTable" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194454, 1.3836, 0 )
+[node name="orb_hint2" parent="ToggleGroups/Group3/TestBlock_end" instance=ExtResource( 22 )]
+transform = Transform( 1.20029, 0, 0.183799, 0, 1.21429, 0, -0.183799, 0, 1.20029, 0.2145, 1.12376, -0.102928 )
 
-[node name="Label3D" type="Label3D" parent="ToggleGroups/Group3/EndTable"]
-transform = Transform( 0.981627, -0.190809, -8.34052e-09, 0, -4.37113e-08, 1, -0.190809, -0.981627, -4.29082e-08, -0.6241, 1.06514, 0.643116 )
+[node name="Label3D" type="Label3D" parent="ToggleGroups/Group3/TestBlock_end"]
+transform = Transform( 1.14317, -0.409449, -1.78976e-08, 0, -5.3078e-08, 1.21429, -0.409449, -1.14317, -4.99696e-08, -0.824402, 1.03436, 0.629921 )
 pixel_size = 0.005
 text = "Welcome
 to

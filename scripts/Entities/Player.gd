@@ -2,10 +2,10 @@ extends KinematicBody
 
 # STATIC VARIABLES
 # How fast the player moves in meters per second.
-export var speed: float = 8
+export var speed: float = 6
 onready var run = 1
 # The downward acceleration when in the air, in meters per second squared.
-export var fall_acceleration: float = 75
+export var fall_acceleration: float = 60
 
 export var jump_impulse: float = 20
 # there is no max fall speed at this point in time
@@ -109,7 +109,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("run"):
 		step_interval += 0.5
-		run = 1.3
+		run = 1.5
 	else:
 		run = 1
 
